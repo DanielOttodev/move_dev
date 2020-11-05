@@ -1,0 +1,18 @@
+.mStage {
+  border: blueviolet 1px solid;
+}
+.img {
+  position: absolute;
+  z-index: 1;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+#overlay {
+  display: inline-block;
+  width: 1200px;
+  height: 600px;
+  margin: 0 auto;
+  box-sizing: content-box;
+  background: url(../imgs/court.png);
+  background-size: cover;
+}

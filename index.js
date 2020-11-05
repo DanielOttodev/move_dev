@@ -1,0 +1,15 @@
+const express = require("express");
+const app = express();
+const port = 3000;
+
+//static folders
+app.use(express.static("client/src"));
+app.use(express.static("client/views"));
+
+app.get("/", (req, res) => {
+  res.sendFile(__dirname + "/index.html");
+});
+
+app.listen(port, () => {
+  console.log(`Example app listening at http://localhost:${port}`);
+});
