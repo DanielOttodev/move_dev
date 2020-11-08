@@ -1,12 +1,10 @@
+body {
+  background-color: #faf7f6;
+}
 .mStage {
   border: blueviolet 1px solid;
 }
-.img {
-  position: absolute;
-  z-index: 1;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
+
 #overlay {
   display: inline-block;
   width: 1200px;
@@ -15,4 +13,18 @@
   box-sizing: content-box;
   background: url(../imgs/court.png);
   background-size: cover;
+}
+h5 {
+  color: #354c67;
+}
+
+table {
+  background-color: #212121;
+  color: white;
+}
+td {
+  color: white;
+}
+.scene-canvas {
+  border: white 3px solid;
 }

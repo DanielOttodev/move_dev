@@ -36,7 +36,6 @@ newBtn.onclick = function() {
   label.textAlign = "center";
   label.y -= 0;
   label.x = 5;
-
   dragger.x = dragger.y = 100;
   dragger.addChild(circle, label);
   dragger.setBounds(100, 100, dragRadius, dragRadius);
@@ -105,17 +104,19 @@ workBtn.onclick = function() {
 };
 // Init the array of positions
 let savedPositions = [];
+let allScenes = [];
 // Populate when save button clicked
 saveBtn.onclick = function() {
   for (i = 0; i < stage.children.length; i++) {
-    this.shape = {
+    this.formation = {
       name: stage.children[i].name,
       x: stage.children[i].x,
       y: stage.children[i].y,
       id: stage.children[i].id
     };
     console.log(i);
-    savedPositions.push(this.shape);
+    savedPositions.push(this.formation);
+    allScenes.push(savedPositions);
     console.log(savedPositions[i]);
   }
 };
@@ -146,8 +147,8 @@ tempBtn.onclick = () => {
   let copyCanvas = document.createElement("canvas");
   let sourceCanvas = document.getElementById("demoCanvas");
   copyCanvas.setAttribute("id", "dynamic");
-  copyCanvas.height = 50;
-  copyCanvas.width = 50;
+  copyCanvas.height = 70;
+  copyCanvas.width = 70;
   copyCanvas.style = "display:inline";
   copyCtx = copyCanvas.getContext("2d");
   copyCtx.drawImage(
@@ -165,9 +166,13 @@ tempBtn.onclick = () => {
   let sceneCount = document.getElementById("sceneInfo");
   let sceneTable = document.getElementById("scenes");
   let newTd = document.createElement("td");
-  newTd.innerHTML = 2;
+  newTd.innerHTML = sceneCount.childElementCount + 1;
+  newTd.classList.add("border");
+  newTd.classList.add("rounded");
   sceneCount.appendChild(newTd);
   let newTd2 = document.createElement("td");
+  newTd2.classList.add("border");
+  newTd2.classList.add("rounded");
   newTd2.appendChild(copyCanvas);
   sceneTable.appendChild(newTd2);
 
