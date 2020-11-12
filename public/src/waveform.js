@@ -14,7 +14,7 @@ var btn = {
 var Spectrum = WaveSurfer.create({
   container: "#audio-spectrum",
   progressColor: "#0277bd  ",
-  height: 80,
+  height: 60,
   color: "DeepSkyBlue"
 });
 
