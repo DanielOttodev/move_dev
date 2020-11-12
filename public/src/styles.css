@@ -1,15 +1,26 @@
 body {
-  background-color: #faf7f6;
+  background-image: linear-gradient(to top, #fddb92 0%, #d1fdff 100%);
+  background-size: cover;
+  min-height: 100vh;
+  /* background: rgb(174, 225, 238);
+  background: radial-gradient(
+    circle,
+    rgba(174, 225, 238, 1) 0%,
+    rgba(148, 187, 233, 0.09287464985994398) 100%
+  );*/
 }
+
 .mStage {
   /*border: grey 5px solid;*/
   background-color: #212121;
 }
+
 .grid {
   background-size: 40px 40px;
   background-image: linear-gradient(to right, grey 1px, transparent 1px),
     linear-gradient(to bottom, grey 1px, transparent 1px);
 }
+
 /*
 #overlay {
   display: inline-block;
@@ -26,16 +37,20 @@ table {
   background-color: #212121;
   color: white;
 }
+
 td {
   color: white;
 }
+
 #speedValue {
   font: bold;
 }
+
 .alert {
   align-content: center;
   position: fixed;
 }
+
 .bgCourt {
   background: url(../imgs/bcourt.png);
   background-size: 1200px, 600px;
@@ -43,7 +58,27 @@ td {
   background-position: center;
   overflow: hidden;
 }
+
 #demoCanvas {
   width: 100%;
   height: auto;
+}
+
+.cardStyle {
+  background: rgba(238, 174, 202, 0.192);
+  background: radial-gradient(circle,
+      rgba(238, 174, 202, 1) 0%,
+      rgba(148, 188, 233, 0) 100%);
+}
+
+.cardStyle2 {
+  background-image: linear-gradient(120deg, #89f7fe 0%, #66a6ff 100%);
+}
+
+.card {
+  max-width: 100%;
+}
+
+table {
+  background-color: rgba(148, 188, 233, 0.37);
 }

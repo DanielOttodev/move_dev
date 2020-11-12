@@ -13,7 +13,7 @@ var btn = {
 // Create an instance of wave surfer with its configuration
 var Spectrum = WaveSurfer.create({
   container: "#audio-spectrum",
-  progressColor: "#0277bd  ",
+  progressColor: "white",
   height: 60,
   color: "DeepSkyBlue"
 });
