@@ -1,6 +1,7 @@
 // Globals
 createjs.MotionGuidePlugin.install();
 var stage = new createjs.Stage("demoCanvas");
+createjs.Touch.enable(stage);
 let primSelect;
 //Unselect
 var stageElem = document.getElementById("demoCanvas");
