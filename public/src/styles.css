@@ -11,8 +11,10 @@ body {
 }
 
 .mStage {
-  /*border: grey 5px solid;*/
-  background-color: #212121;
+  /* border-style: groove;
+  border: 1px deepskyblue solid;*/
+  background-color: rgba(0, 0, 0, 0.322);
+
 }
 
 .grid {
@@ -21,14 +23,6 @@ body {
     linear-gradient(to bottom, grey 1px, transparent 1px);
 }
 
-/*
-#overlay {
-  display: inline-block;
-  max-width: 1200;
-  margin: 0 auto;
-  box-sizing: content-box;
-}
-*/
 h5 {
   color: #354c67;
 }
@@ -80,5 +74,9 @@ td {
 }
 
 table {
-  background-color: rgba(148, 188, 233, 0.37);
+  background-color: rgba(0, 0, 0, 0.322);
+}
+
+td:hover {
+  scale: 20%;
 }

@@ -15,7 +15,7 @@ stageElem.addEventListener("click", e => {
     padlock.classList.add("fa-lock-open");
     padlock.classList.remove("fa-lock");
     $(".alert").show();
-    window.setTimeout(function() {
+    window.setTimeout(function () {
       $(".alert").alert("close");
     }, 3000);
   }
@@ -38,7 +38,7 @@ function init() {}
 
 // Add New Shape Button
 const newBtn = document.getElementById("new");
-newBtn.onclick = function() {
+newBtn.onclick = function () {
   var circle = new createjs.Shape();
   //VARIABLES
   //Drag Object Size
@@ -65,7 +65,7 @@ newBtn.onclick = function() {
 
   //DRAG Functionality ============
 
-  dragger.on("pressmove", function(evt) {
+  dragger.on("pressmove", function (evt) {
     evt.currentTarget.x = evt.stageX;
     evt.currentTarget.y = evt.stageY;
     stage.update(); //much smoother because it refreshes the screen every pixel movement instead of the FPS set on the Ticker
@@ -87,7 +87,7 @@ newBtn.onclick = function() {
       let padlock = document.getElementById("padlock");
       document.getElementById("selectedName2").innerHTML = selectedObjs[0].name;
       document.getElementById("selectedName2").appendChild(padlock);
-      addList = function(name, color) {
+      addList = function (name, color) {
         if (name != selectedObjs[0].name) {
           let list = document.getElementById("selectedNodes");
           let newLi = document.createElement("li");
@@ -117,6 +117,7 @@ newBtn.onclick = function() {
   }
 
   circle.addEventListener("mousedown", handlePress);
+
   function handlePress(event) {
     document.getElementById("selectedName").innerHTML =
       event.currentTarget.name;
@@ -129,6 +130,7 @@ newBtn.onclick = function() {
     // Listen for mouse move while the mouse is down:
     //  event.addEventListener("mousemove", handleMove);
   }
+
   function handleMove(event) {
     // Check out the DragAndDrop example in GitHub for more
   }
@@ -144,7 +146,7 @@ const saveBtn = document.getElementById("save");
 const playBtn = document.getElementById("playBtn");
 const scrapBtn = document.getElementById("scrapBtn");
 const selectBtn = document.getElementById("selectBtn");
-workBtn.onclick = function() {
+workBtn.onclick = function () {
   for (i = 0; i < stage.children.length; i++) {
     console.log(stage.children[i]);
     console.log(stage.children[i].name);
@@ -156,11 +158,14 @@ workBtn.onclick = function() {
     document.getElementById("infoSection").appendChild(infoNode);
   }
 };
+
+
 // Init the array of positions
 let savedPositions = [];
 let allScenes = [];
 // Populate when save button clicked
-saveBtn.onclick = function() {
+saveBtn.onclick = function () {
+  let notes = document.getElementById("formationNotes").value
   let savedPositions = [];
   for (i = 0; i < stage.children.length; i++) {
     this.formation = {
@@ -174,7 +179,16 @@ saveBtn.onclick = function() {
 
     console.log(savedPositions[i]);
   }
+  let id = allScenes.length
+  let details = {
+    notes,
+    id
+  }
+  savedPositions.notes = notes;
+  document.getElementById("formationNotes").value = ""
+  //savedPositions.push(details)
   allScenes.push(savedPositions);
+  console.log(allScenes)
   timeLine();
 };
 
@@ -200,8 +214,10 @@ playBtn.onclick = () => {
     for (z = 0; z < thisVal.length; z++) {
       console.log(id);
       if (z <= 0) {
-        myTween.to(
-          { x: thisVal[z].x, y: thisVal[z].y }
+        myTween.to({
+            x: thisVal[z].x,
+            y: thisVal[z].y
+          }
 
           // createjs.Ease.getPowInOut(4)
         );
@@ -209,9 +225,12 @@ playBtn.onclick = () => {
         goTween(myTween, thisVal[z]);
         console.log("in other positions");
       }
+
       function goTween(myTween, positions) {
-        myTween.to(
-          { x: positions.x, y: positions.y },
+        myTween.to({
+            x: positions.x,
+            y: positions.y
+          },
           getSpeed() //,
           // createjs.Ease.getPowInOut(4)
         );
@@ -238,7 +257,7 @@ scrapBtn.onclick = () => {
   padlock.classList.add("fa-lock-open");
   padlock.classList.remove("fa-lock");
   $(".alert").show();
-  window.setTimeout(function() {
+  window.setTimeout(function () {
     $(".alert").alert("close");
   }, 3000);
 };
@@ -252,6 +271,7 @@ function timeLine() {
   copyCanvas.style = "display:inline";
   copyCanvas.classList.add("border");
   copyCanvas.classList.add("border-primary");
+  copyCanvas.classList.add("details");
   copyCtx = copyCanvas.getContext("2d");
   copyCtx.drawImage(
     document.getElementById("demoCanvas"),
@@ -346,6 +366,7 @@ function getIds() {
 
   return result;
 }
+
 function getSpeed() {
   let sp = document.getElementById("formControlRange").value;
   sp = sp * 1000;
@@ -362,6 +383,7 @@ function alignY() {
     stage.update();
   }
 }
+
 function alignX() {
   let x = selectedObjs[0].x;
 
