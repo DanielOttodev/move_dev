@@ -336,12 +336,12 @@ selectBtn.onclick = () => {
   let selBtn = document.getElementById("selectBtn");
   console.log(selectActive);
   if (selectActive === false) {
-    console.log("should go here");
+
     selectActive = true;
     selBtn.classList.add("text-danger");
     document.getElementById("demoCanvas").style.cursor = "pointer";
   } else {
-    console.log("hey");
+
     selectActive = false;
     selBtn.classList.remove("text-danger");
     document.getElementById("demoCanvas").style.cursor = "auto";
