@@ -113,3 +113,13 @@ table {
 .liStyle {
   background-color: rgba(240, 240, 240, 0.021);
 }
+
+#namechange {
+  background-color: rgba(240, 240, 240, 0.548);
+  border: none;
+}
+
+.initialLi {
+  background-color: rgba(240, 240, 240, 0.548);
+  border: none;
+}
