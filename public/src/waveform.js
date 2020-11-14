@@ -21,7 +21,7 @@ var Spectrum = WaveSurfer.create({
 // Handle Play button
 buttons.play.addEventListener(
   "click",
-  function() {
+  function () {
     Spectrum.play();
 
     // Enable/Disable respectively buttons
@@ -35,7 +35,7 @@ buttons.play.addEventListener(
 // Handle Pause button
 buttons.pause.addEventListener(
   "click",
-  function() {
+  function () {
     Spectrum.pause();
 
     // Enable/Disable respectively buttons
@@ -48,7 +48,7 @@ buttons.pause.addEventListener(
 // Handle Stop button
 buttons.stop.addEventListener(
   "click",
-  function() {
+  function () {
     Spectrum.stop();
 
     // Enable/Disable respectively buttons
@@ -60,7 +60,7 @@ buttons.stop.addEventListener(
 );
 
 // Add a listener to enable the play button once it's ready
-Spectrum.on("ready", function() {
+Spectrum.on("ready", function () {
   console.log("ready");
   btn.play.disabled = false;
   btn.stop.classList.add("btn-secondary");
@@ -73,7 +73,7 @@ Spectrum.on("ready", function() {
 // the spectrum will be still playable
 window.addEventListener(
   "resize",
-  function() {
+  function () {
     // Get the current progress according to the cursor position
     var currentProgress = Spectrum.getCurrentTime() / Spectrum.getDuration();
 
@@ -92,6 +92,13 @@ window.addEventListener(
 
   false
 );
+var volumeInput = document.querySelector('#volumeRange');
+var onChangeVolume = function (e) {
+  Spectrum.setVolume(e.target.value);
+  console.log(e.target.value);
+};
+volumeInput.addEventListener('input', onChangeVolume);
+volumeInput.addEventListener('change', onChangeVolume);
 
 // Load the audio file from your domain !
 Spectrum.load("../audio/mySong.mp3");

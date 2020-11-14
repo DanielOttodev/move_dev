@@ -59,7 +59,8 @@ newBtn.onclick = function () {
   label.textAlign = "center";
   label.y -= 0;
   label.x = 5;
-  dragger.x = dragger.y = 100;
+  dragger.x = randomWithinRange(5, 600);
+  dragger.y = randomWithinRange(5, 450);
   dragger.addChild(circle, label);
   dragger.setBounds(100, 100, dragRadius, dragRadius);
   //DragRadius * 2 because 2*r = width of the bounding box
@@ -80,40 +81,62 @@ newBtn.onclick = function () {
 
   function handleClick(event) {
     // Action on selected
-
+    // If stage.child ID ()
     if (event.nativeEvent.shiftKey || selectActive === true) {
-      console.log(selectActive);
-      selectedObjs.push(event.currentTarget.parent);
+      let result = selectedObjs.map(a => a.id);
 
-      let padlock = document.getElementById("padlock");
-      document.getElementById("selectedName2").innerHTML = selectedObjs[0].name;
-      document.getElementById("selectedName2").appendChild(padlock);
-      addList = function (name, color) {
-        if (name != selectedObjs[0].name) {
-          let list = document.getElementById("selectedNodes");
-          let newLi = document.createElement("li");
-          newLi.classList.add("list-group-item");
-          newLi.classList.add("bg-light");
-          newLi.classList.add("border-info");
-          newLi.style.color = color;
+      if (result.includes(event.currentTarget.parent.id)) {
+        console.log("true, it is in here.");
+      } else {
+        selectedObjs.push(event.currentTarget.parent);
 
-          newLi.innerHTML = name;
-          list.appendChild(newLi);
+        let padlock = document.getElementById("padlock");
+        document.getElementById("selectedName2").innerHTML =
+          selectedObjs[0].name;
+        document.getElementById("selectedName2").appendChild(padlock);
+        addList = function (name, color, id) {
+          if (name != selectedObjs[0].name) {
+            let list = document.getElementById("selectedNodes");
+            let newLi = document.createElement("li");
+            newLi.classList.add("list-group-item");
+            newLi.classList.add("liStyle")
+            newLi.classList.add("border-info");
+            newLi.style.color = color;
+            newLi.setAttribute("id", id);
+
+            newLi.innerHTML = name;
+            list.appendChild(newLi);
+          } else {
+            let list = document.getElementById("selectedNodes");
+            let newLi = document.createElement("li");
+            newLi.classList.add("list-group-item");
+            newLi.classList.add("liStyle")
+            newLi.classList.add("border-info");
+            newLi.style.color = color;
+            newLi.setAttribute("id", id);
+
+            newLi.innerHTML = name;
+            newLi.style.display = "none";
+            list.appendChild(newLi);
+          }
+        };
+        console.log(selectedObjs);
+        if (
+          selectedObjs.some(e => e.Name === event.currentTarget.parent.name)
+        ) {
+          //Stop same element being added to select list twice
+          console.log("found");
         }
-      };
-      console.log(selectedObjs);
-      if (selectedObjs.some(e => e.Name === event.currentTarget.parent.name)) {
-        //Stop same element being added to select list twice
-        console.log("found");
-      }
-      addList(
-        event.currentTarget.name,
-        event.currentTarget.graphics._fill.style
-      );
+        addList(
+          event.currentTarget.name,
+          event.currentTarget.graphics._fill.style,
+          event.currentTarget.parent.id
+        );
 
-      console.log(selectedObjs);
-      padlock.classList.remove("fa-lock-open");
-      padlock.classList.add("fa-lock");
+        console.log(selectedObjs);
+        padlock.classList.remove("fa-lock-open");
+        padlock.classList.add("fa-lock");
+      }
     }
   }
 
@@ -147,7 +170,7 @@ const saveBtn = document.getElementById("save");
 const playBtn = document.getElementById("playBtn");
 const scrapBtn = document.getElementById("scrapBtn");
 const selectBtn = document.getElementById("selectBtn");
-workBtn.onclick = function () {
+/*workBtn.onclick = function () {
   for (i = 0; i < stage.children.length; i++) {
     console.log(stage.children[i]);
     console.log(stage.children[i].name);
@@ -158,15 +181,14 @@ workBtn.onclick = function () {
     infoNode.appendChild(text);
     document.getElementById("infoSection").appendChild(infoNode);
   }
-};
-
+};*/
 
 // Init the array of positions
 let savedPositions = [];
 let allScenes = [];
 // Populate when save button clicked
 saveBtn.onclick = function () {
-  let notes = document.getElementById("formationNotes").value
+  let notes = document.getElementById("formationNotes").value;
   let savedPositions = [];
   for (i = 0; i < stage.children.length; i++) {
     this.formation = {
@@ -180,17 +202,13 @@ saveBtn.onclick = function () {
 
     console.log(savedPositions[i]);
   }
-  let id = allScenes.length
-  let details = {
-    notes,
-    id
-  }
   savedPositions.notes = notes;
-  document.getElementById("formationNotes").value = ""
+
   //savedPositions.push(details)
   allScenes.push(savedPositions);
-  console.log(allScenes)
+  console.log(allScenes);
   timeLine();
+  document.getElementById("formationNotes").value = "";
 };
 
 playBtn.onclick = () => {
@@ -266,12 +284,15 @@ scrapBtn.onclick = () => {
 function timeLine() {
   let copyCanvas = document.createElement("canvas");
   let sourceCanvas = document.getElementById("demoCanvas");
-  copyCanvas.setAttribute("id", "dynamic");
+  let canvasId = allScenes.length - 1 + "_scene";
+  console.log(canvasId);
+  copyCanvas.setAttribute("id", canvasId);
+  copyCanvas.classList.add("savedScene");
   copyCanvas.height = 70;
   copyCanvas.width = 70;
   copyCanvas.style = "display:inline";
   copyCanvas.classList.add("border");
-  copyCanvas.classList.add("border-primary");
+  copyCanvas.classList.add("border-secondary");
   copyCanvas.classList.add("details");
   copyCtx = copyCanvas.getContext("2d");
   copyCtx.drawImage(
@@ -285,7 +306,9 @@ function timeLine() {
     copyCanvas.width,
     copyCanvas.height
   );
-
+  let canvasWrap = document.createElement("div");
+  canvasWrap.classList.add("canvasCopys");
+  canvasWrap.appendChild(copyCanvas);
   let sceneCount = document.getElementById("sceneInfo");
   let sceneTable = document.getElementById("scenes");
   let newTd = document.createElement("td");
@@ -296,7 +319,11 @@ function timeLine() {
   let newTd2 = document.createElement("td");
   newTd2.classList.add("border");
   newTd2.classList.add("rounded");
-  newTd2.appendChild(copyCanvas);
+  newTd2.appendChild(canvasWrap);
+  let notes = document.createElement("p");
+  notes.classList.add("text-dark");
+  notes.textContent = document.getElementById("formationNotes").value;
+  newTd2.appendChild(notes);
   sceneTable.appendChild(newTd2);
 
   console.log("clicked it");
@@ -316,6 +343,8 @@ inputField.onkeypress = e => {
     selectedObj.children[0].name = inputField.value; //Update the name of the circle/shape to stop [selected] from retracing
     selectedObj.children[1].text = inputField.value; //Update the label to reflect on the actual shape
     document.getElementById("selectedName").innerHTML = inputField.value;
+    document.getElementById(selectedObj.id).innerHTML = inputField.value;
+
     stage.update(); // Update stage so takes place immediately instead of after moving the shape
   }
 };
@@ -336,16 +365,20 @@ selectBtn.onclick = () => {
   let selBtn = document.getElementById("selectBtn");
   console.log(selectActive);
   if (selectActive === false) {
-
     selectActive = true;
     selBtn.classList.add("text-danger");
     document.getElementById("demoCanvas").style.cursor = "pointer";
   } else {
-
     selectActive = false;
     selBtn.classList.remove("text-danger");
     document.getElementById("demoCanvas").style.cursor = "auto";
   }
+};
+
+const savedScenes = document.querySelectorAll(".savedScene");
+savedScenes.onclick = e => {
+  console.log("made it here");
+  console.log(e);
 };
 
 function findPositions(id) {
@@ -439,4 +472,8 @@ function spaceX() {
     increment = increment + incrementO;
     stage.update();
   }
+}
+
+function randomWithinRange(min, max) {
+  return Math.random() * (max - min) + min;
 }

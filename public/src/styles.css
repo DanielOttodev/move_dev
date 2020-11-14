@@ -1,10 +1,8 @@
 body {
+  background-color: #344955
+    /*background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);*/
 
-  background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
-  /*background-image: linear-gradient(to top, #fddb92 0%, #d1fdff 100%);
-  background-size: cover;
-  min-height: 100vh;*/
-  /* background: rgb(174, 225, 238);
+    /* background: rgb(174, 225, 238);
   background: radial-gradient(
     circle,
     rgba(174, 225, 238, 1) 0%,
@@ -25,9 +23,7 @@ body {
     linear-gradient(to bottom, grey 1px, transparent 1px);
 }
 
-h5 {
-  color: #354c67;
-}
+
 
 table {
   background-color: #212121;
@@ -36,6 +32,10 @@ table {
 
 td {
   color: white;
+}
+
+.canvasCopys :hover {
+  background-color: white;
 }
 
 #speedValue {
@@ -77,12 +77,39 @@ td {
 
 .card {
   max-width: 100%;
+  background-color: #F9AA33
 }
 
 table {
   background-color: rgba(0, 0, 0, 0.322);
 }
 
-td:hover {
-  scale: 20%;
+
+#splashScreen {
+  background-image: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
+  background-size: cover;
+  height: 100vh;
+  width: 100vw;
+  display: none;
+}
+
+#mainContent {
+  /*display: none;*/
+}
+
+.vertical-center {
+  min-height: 100%;
+  /* Fallback for browsers do NOT support vh unit */
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+}
+
+.form-control {
+  background-color: rgba(240, 240, 240, 0.178);
+  color: white
+}
+
+.liStyle {
+  background-color: rgba(240, 240, 240, 0.021);
 }
