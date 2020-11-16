@@ -75,9 +75,12 @@ td {
   text-decoration: none;
 }
 
+
+
 .card {
   max-width: 100%;
-  background-color: #F9AA33
+  background-color: #F9AA33;
+
 }
 
 table {
@@ -93,9 +96,7 @@ table {
   display: none;
 }
 
-#mainContent {
-  /*display: none;*/
-}
+
 
 .vertical-center {
   min-height: 100%;
@@ -117,9 +118,14 @@ table {
 #namechange {
   background-color: rgba(240, 240, 240, 0.548);
   border: none;
+  max-width: 100%;
 }
 
 .initialLi {
   background-color: rgba(240, 240, 240, 0.548);
   border: none;
+}
+
+.canvasCol {
+  vertical-align: middle;
 }
