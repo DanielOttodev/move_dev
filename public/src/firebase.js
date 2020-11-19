@@ -52,7 +52,7 @@ var ui = new firebaseui.auth.AuthUI(firebase.auth());
 ui.start('#firebaseui-auth-container', uiConfig);
 // Get Cookie
 
-const submitBtn = document.getElementsByClassName('firebaseui-id-submit')
+const submitBtn = document.getElementById('firebaseui-auth-container')
 console.log(submitBtn)
 
 submitBtn.addEventListener("submit", (event) => {
@@ -67,6 +67,7 @@ submitBtn.addEventListener("submit", (event) => {
         .then(({
             user
         }) => {
+            console.log('made it')
             return user.getIdToken().then((idToken) => {
                 return fetch("/sessionLogin", {
                     method: "POST",
