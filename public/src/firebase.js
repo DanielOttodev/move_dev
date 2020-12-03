@@ -12,81 +12,34 @@ var firebaseConfig = {
 };
 var uiConfig = {
     callbacks: {
-        signInSuccessWithAuthResult: function (authResult, redirectUrl) {
-            // User successfully signed in.
-            // Return type determines whether we continue the redirect automatically
-            // or whether we leave that to developer to handle.
-            return true;
-        },
+
+
         uiShown: function () {
-            // The widget is rendered.
-            // Hide the loader.
             document.getElementById('loader').style.display = 'none';
         }
     },
-    // Will use popup for IDP Providers sign-in flow instead of the default, redirect.
+
     signInFlow: 'popup',
     signInSuccessUrl: '/home',
     signInOptions: [
-        // Leave the lines as is for the providers you want to offer your users.
-        firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-        firebase.auth.FacebookAuthProvider.PROVIDER_ID,
-        firebase.auth.TwitterAuthProvider.PROVIDER_ID,
-        firebase.auth.GithubAuthProvider.PROVIDER_ID,
-        firebase.auth.EmailAuthProvider.PROVIDER_ID,
-        firebase.auth.PhoneAuthProvider.PROVIDER_ID
-    ],
-    // Terms of service url.
-    tosUrl: '<your-tos-url>',
-    // Privacy policy url.
-    privacyPolicyUrl: '<your-privacy-policy-url>'
+        firebase.auth.EmailAuthProvider.PROVIDER_ID
+    ]
 };
 
-// Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 firebase.analytics();
 firebase.auth().setPersistence(firebase.auth.Auth.Persistence.NONE);
 
-// Initialize the FirebaseUI Widget using Firebase.
 var ui = new firebaseui.auth.AuthUI(firebase.auth());
 ui.start('#firebaseui-auth-container', uiConfig);
-// Get Cookie
+let myuser = firebase.auth().currentUser;
+firebase.auth().onAuthStateChanged(function (user) {
+    if (user) {
+        console.log(myuser);
+        console.log(user);
+        window.location = "app.html"
 
-const submitBtn = document.getElementById('firebaseui-auth-container')
-console.log(submitBtn)
-
-submitBtn.addEventListener("submit", (event) => {
-    console.log(event)
-    event.preventDefault();
-    const login = event.target.login.value;
-    const password = event.target.password.value;
-
-    firebase
-        .auth()
-        .signInWithEmailAndPassword(login, password)
-        .then(({
-            user
-        }) => {
-            console.log('made it')
-            return user.getIdToken().then((idToken) => {
-                return fetch("/sessionLogin", {
-                    method: "POST",
-                    headers: {
-                        Accept: "application/json",
-                        "Content-Type": "application/json",
-                        "CSRF-Token": Cookies.get("XSRF-TOKEN"),
-                    },
-                    body: JSON.stringify({
-                        idToken
-                    }),
-                });
-            });
-        })
-        .then(() => {
-            return firebase.auth().signOut();
-        })
-        .then(() => {
-            window.location.assign("/profile");
-        });
-    return false;
-});
+    } else {
+        // none
+    }
+})
