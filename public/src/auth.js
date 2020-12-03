@@ -42,16 +42,14 @@ var uiConfig = {
     privacyPolicyUrl: '<your-privacy-policy-url>'
 };
 
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
-firebase.analytics();
-firebase.auth().setPersistence(firebase.auth.Auth.Persistence.NONE);
+
 firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
         // User is signed in.
         console.log('yes user')
         console.log(user);
     } else {
+        console.log(user)
         window.location = "login.html"
     }
 });
