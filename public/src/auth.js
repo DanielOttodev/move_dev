@@ -41,13 +41,13 @@ var uiConfig = {
     // Privacy policy url.
     privacyPolicyUrl: '<your-privacy-policy-url>'
 };
-
+let currUser = document.getElementById('currentUser');
 
 firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
         // User is signed in.
-        console.log('yes user')
-        console.log(user);
+        console.log(user)
+        currUser.textContent = user.displayName
     } else {
         console.log(user)
         window.location = "login.html"

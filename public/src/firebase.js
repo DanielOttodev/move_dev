@@ -22,13 +22,10 @@ ui.start('#firebaseui-auth-container', uiConfig);
 let user1 = firebase.auth().currentUser;
 firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
-        console.log(user1);
-        console.log(user);
-        console.log('made it here')
+        //send to app.html if user authenticates.
         window.location = "app.html"
 
     } else {
-        console.log('i dk')
-        // none
+        //none
     }
 });
