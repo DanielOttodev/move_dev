@@ -23,12 +23,18 @@
             <img src="../imgs/mLogo.png" width="40" height="30" class="d-inline-block align-top" alt="" />
             Movez
         </a>
-        <ul class="navbar-nav  justify-content-end text-light">
-            <li class="nav-item active">
-                <a class="nav-link text-light" id="currentUser" href="#">Home</a>
-            </li>
 
-        </ul>
+        <div class="dropleft show">
+            <a class="btn btn-secondary dropdown-toggle" id="currentUser" href="#" role="button" id="dropdownMenuLink"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            </a>
+
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" href="#">Save</a>
+                <a class="dropdown-item" href="#">Load Routine</a>
+                <a class="dropdown-item" id="signOut" href="#">Sign Out</a>
+            </div>
+        </div>
     </nav>
     <div id="splashScreen">
         <div class="container">

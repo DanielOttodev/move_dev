@@ -53,3 +53,13 @@ firebase.auth().onAuthStateChanged(function (user) {
         window.location = "login.html"
     }
 });
+const signOutBtn = document.getElementById('signOut')
+
+signOutBtn.onclick = () => {
+    firebase.auth().signOut().then(function () {
+        // Sign-out successful.
+        console.log('Sign out success')
+    }).catch(function (error) {
+        // An error happened.
+    });
+}

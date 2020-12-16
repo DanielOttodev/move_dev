@@ -129,3 +129,8 @@ table {
 .canvasCol {
   vertical-align: middle;
 }
+
+.dropdown-item:hover {
+  background-color: rgba(65, 105, 225, 0.11);
+
+}

@@ -1,12 +1,12 @@
 const slider = document.getElementById("formControlRange");
 let output = document.getElementById("speedValue");
-$(document).ready(function() {
+$(document).ready(function () {
   $('[data-toggle="tooltip"]').tooltip();
 
   $(".alert").hide();
 });
 
-slider.oninput = function() {
+slider.oninput = function () {
   console.log("inputed");
   output.innerHTML = this.value;
   slider.value = this.value;
