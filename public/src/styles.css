@@ -1,8 +1,8 @@
 body {
-  background-color: #585a61
-    /*background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);*/
+  background-color: #e8ecf5;
+  /*background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);*/
 
-    /* background: rgb(174, 225, 238);
+  /* background: rgb(174, 225, 238);
   background: radial-gradient(
     circle,
     rgba(174, 225, 238, 1) 0%,
@@ -35,7 +35,7 @@ td {
 }
 
 .canvasCopys :hover {
-  background-color: white;
+  background-color: #5777ba;
 }
 
 #speedValue {
@@ -80,7 +80,8 @@ td {
 
 .card {
   max-width: 100%;
-  background-color: #F9AA33;
+  background-color: #f2f5fa;
+  ;
 
 }
 
