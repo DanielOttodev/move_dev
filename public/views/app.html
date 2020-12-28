@@ -30,7 +30,7 @@
             </a>
 
             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <a class="dropdown-item" href="#">Save</a>
+                <a class="dropdown-item" id="saveAll" href="#">Save</a>
                 <a class="dropdown-item" href="#">Load Routine</a>
                 <a class="dropdown-item" id="signOut" href="#">Sign Out</a>
             </div>
@@ -58,219 +58,221 @@
         </div>
 
     </div>
-    <!----<div id="mainContent"> -->
-    <div class="container-fluid">
-        <div class="row justify-content-center">
-            <div class="col-lg-12 col-xl-2" id="infoSection">
-                <div class="row h-100">
-                    <div class="col-sm-4 col-md-4 col-lg-4 col-xl-12">
-
-
-                        <div class="card shadow rounded" style="width: 18rem;">
-                            <div class="card-body">
-                                <h5 class="card-title text-dark" id="selectedName">[Name]</h5>
-                                <!----  <h6 class="card-subtitle mb-2 text-muted" id="selectedGrpName">[Group Name]</h6>  -->
-                                <p class="card-text">
-                                </p>
-                                <div>
-                                    <label for="favcolor">Select icon color :</label>
-                                    <input type="color" id="selectedColor" name="favcolor" value="#ff0000">
-                                </div>
-                                <label for="namechange">Name:</label>
-                                <input type="text" id="namechange" name="namechange" class="rounded" value=" ">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-4  col-md-4 col-lg-4  col-xl-12 cardWrap">
-                        <div class="card rounded shadow" style="width: 18rem;">
-                            <div class="card-body">
-                                <h5 class="card-title text-dark" id="selectedName">Transition Speed</h5>
-
-                                <p class="card-text"> Change the speed of transition
-                                </p>
-                                <div class="form-group">
-                                    <label for="formControlRange">Speed : <span id="speedValue"
-                                            style="font:bold">2</span> </label>
-                                    <input type="range" min="1" max="10" value="2" step="0.1" class="form-control-range"
-                                        id="formControlRange">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-4 col-md-4 col-lg-4  col-xl-12">
-                        <div class="card shadow rounded" style="width: 18rem;">
-                            <div class="card-body  text-dark">
-                                <h5 class="card-title " id="selectedName">Background</h5>
-
-                                <p class="card-text"> Change the backdrop of the formation area.
-                                </p>
-                                <div class="custom-control custom-switch">
-                                    <input value="" type="checkbox" class="custom-control-input" id="bgtoggle">
-                                    <label class="custom-control-label" for="bgtoggle">Basketball Court</label>
-                                </div>
-                                <div class="custom-control custom-switch">
-                                    <input value="" type="checkbox" class="custom-control-input" id="gridtoggle">
-                                    <label class="custom-control-label" for="gridtoggle">Grid</label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-12 col-xl-8 col-xs-12  ">
-                <div class="alert alert-warning alert-dismissible fade show">
-                    <button type="button" class="close" data-dismiss="alert">&times;</button>
-                    Removed Selection
-                </div>
-                <div id="overlay">
-
-                    <canvas class="mStage " id="demoCanvas" width="1200px" height="600px"></canvas>
-                </div>
-                <div class="container-fluid ">
-                    <div class="row justify-content-center">
-                        <div class="btn-toolbar" role="toolbar">
-                            <div class="btn-group btn-group-justified" role="group">
-                                <div class="btn-group" id="btn-select" value="0" role="group">
-                                    <button id="selectBtn" class="btn btn-info" data-original-title="Refreshr">
-                                        <i class="fas fa-hand-pointer"></i>
-                                    </button>
-                                </div>
-                                <div class="btn-group" id="btn-play" value="Play" disabled="disabled" role="group">
-                                    <button id="playBtn" class="btn btn-primary" data-original-title="Refreshr">
-                                        <i class="fas fa-play"></i>
-                                    </button>
-                                </div>
-
-                                <div class="btn-group" id="btn-pause" value="Pause" disabled="disabled" role="group">
-                                    <button id="pauseBtn" class="btn btn-primary" data-original-title="Refreshr">
-                                        <i class="fas fa-pause"></i>
-
-                                    </button>
-                                </div>
-                                <div class="btn-group" id="btn-stop" value="Stop" disabled="disabled" role="group">
-                                    <button id="stopBtn" class="btn btn-primary" data-original-title="Refreshr">
-                                        <i class="fas fa-stop"></i>
-                                    </button>
-                                </div>
-
-
-                                <div class="btn-group" role="group">
-                                    <button id="new" class="btn btn-primary" data-original-title="New">
-                                        <i class="fa fa-plus fa-lg" aria-hidden="true"></i>
-                                    </button>
-                                </div>
-
-                                <div class="btn-group" role="group">
-                                    <button id="save" class="btn btn-primary" data-original-title="Deactivate">
-                                        <i class="fab fa-buffer"></i>
-                                    </button>
-                                </div>
-
-                                <div class="btn-group" role="group">
-                                    <button type="button" id="scrapBtn" class="btn btn-warning" data-toggle="tooltip"
-                                        data-placement="top" data-original-title="Delete"
-                                        title="Remove saved positions">
-                                        <i class="fa fa-trash-o fa-lg" aria-hidden="true"></i>
-                                    </button>
-                                </div>
-                                <div class="btn-group" role="group">
-                                    <button id="react" class="btn btn-success text-white"
-                                        data-original-title="Activate">
-
-                                        <i class="fas fa-volume-up"></i>
-                                        <input type="range" min="0" max="1" value="10" step="0.1"
-                                            class="form-control-range" id="volumeRange">
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-            <div class="col-xl-2">
-                <div class="row">
-                    <div class="col-xl-12 col-lg-6 col-md-6">
-                        <h5 class="text-dark">Align & Spacing</h5>
-                        <div class="btn-group" role="group" aria-label="...">
-                            <button type="button" id="alignY" data-toggle="tooltip" data-placement="top"
-                                title="Align vertically" class="btn btn-info"><i
-                                    class="fas fa-arrows-alt-v"></i></button>
-                            <button type="button" id="alignX" data-toggle="tooltip" data-placement="top"
-                                title="Align horizontal" class="btn btn-primary"><i
-                                    class="fas fa-arrows-alt-h"></i></button>
-                        </div>
-
-                        <div class="btn-group" role="group" aria-label="...">
-                            <button type="button" id="spaceY" data-toggle="tooltip" data-placement="top"
-                                title="Space vertically" class="btn btn-large btn-success"><i
-                                    class="fas fa-align-justify"></i></button>
-                            <button type="button" data-toggle="tooltip" data-placement="top" title="Space horizontally"
-                                id="spaceX" class="btn btn-danger"><i class="fas fa-exchange-alt"></i></button>
-                        </div>
-                    </div>
-                    <div class="col-xl-12 col-lg-6 col-md-6">
-                        <div class="form-group mt-2 text-dark">
-                            <label for="exampleFormControlTextarea1">Formation Notes</label>
-                            <textarea class="form-control" id="formationNotes" rows="3"></textarea>
-                        </div>
-                        <h6 class="mt-3 text-dark">Group Select</h6>
-                        <div class="card bg-secondary mt-2" style="width: 18rem;">
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item initialLi">
-                                    <h6 class="card-title" id="selectedName2"><i id="padlock"
-                                            class="fas fa-lock-open"></i></h6>
-                                </li>
-                                <div id="selectedNodes">
-
-                                </div>
-
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <!--Stage Button Group-->
-
-
-
-
-    <div class="container-fluid">
-        <div class="row">
-            <table class="table border border-dark">
-                <thead></thead>
-                <tbody>
-                    <tr id="sceneInfo" class="text-dark">
-
-                    </tr>
-                    </th>
-                    <tr id="scenes" class="text-dark">
-
-
-                    </tr>
-                </tbody>
-            </table>
-            <!-- a div where the div will be placed -->
-
-        </div>
-        <div class="container">
+    <div id="mainContent">
+        <div class="container-fluid">
             <div class="row justify-content-center">
-                <h6>Audio</h6>
-            </div>
+                <div class="col-lg-12 col-xl-2" id="infoSection">
+                    <div class="row h-100">
+                        <div class="col-sm-4 col-md-4 col-lg-4 col-xl-12">
 
+
+                            <div class="card shadow rounded" style="width: 18rem;">
+                                <div class="card-body">
+                                    <h5 class="card-title text-dark" id="selectedName">[Name]</h5>
+                                    <!----  <h6 class="card-subtitle mb-2 text-muted" id="selectedGrpName">[Group Name]</h6>  -->
+                                    <p class="card-text">
+                                    </p>
+                                    <div>
+                                        <label for="favcolor">Select icon color :</label>
+                                        <input type="color" id="selectedColor" name="favcolor" value="#ff0000">
+                                    </div>
+                                    <label for="namechange">Name:</label>
+                                    <input type="text" id="namechange" name="namechange" class="rounded" value=" ">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4  col-md-4 col-lg-4  col-xl-12 cardWrap">
+                            <div class="card rounded shadow" style="width: 18rem;">
+                                <div class="card-body">
+                                    <h5 class="card-title text-dark" id="selectedName">Transition Speed</h5>
+
+                                    <p class="card-text"> Change the speed of transition
+                                    </p>
+                                    <div class="form-group">
+                                        <label for="formControlRange">Speed : <span id="speedValue"
+                                                style="font:bold">2</span> </label>
+                                        <input type="range" min="1" max="10" value="2" step="0.1"
+                                            class="form-control-range" id="formControlRange">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4 col-md-4 col-lg-4  col-xl-12">
+                            <div class="card shadow rounded" style="width: 18rem;">
+                                <div class="card-body  text-dark">
+                                    <h5 class="card-title " id="selectedName">Background</h5>
+
+                                    <p class="card-text"> Change the backdrop of the formation area.
+                                    </p>
+                                    <div class="custom-control custom-switch">
+                                        <input value="" type="checkbox" class="custom-control-input" id="bgtoggle">
+                                        <label class="custom-control-label" for="bgtoggle">Basketball Court</label>
+                                    </div>
+                                    <div class="custom-control custom-switch">
+                                        <input value="" type="checkbox" class="custom-control-input" id="gridtoggle">
+                                        <label class="custom-control-label" for="gridtoggle">Grid</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12 col-xl-8 col-xs-12  ">
+                    <div class="alert alert-warning alert-dismissible fade show">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        Removed Selection
+                    </div>
+                    <div id="overlay">
+
+                        <canvas class="mStage " id="demoCanvas" width="1200px" height="600px"></canvas>
+                    </div>
+                    <div class="container-fluid ">
+                        <div class="row justify-content-center">
+                            <div class="btn-toolbar" role="toolbar">
+                                <div class="btn-group btn-group-justified" role="group">
+                                    <div class="btn-group" id="btn-select" value="0" role="group">
+                                        <button id="selectBtn" class="btn btn-info" data-original-title="Refreshr">
+                                            <i class="fas fa-hand-pointer"></i>
+                                        </button>
+                                    </div>
+                                    <div class="btn-group" id="btn-play" value="Play" disabled="disabled" role="group">
+                                        <button id="playBtn" class="btn btn-primary" data-original-title="Refreshr">
+                                            <i class="fas fa-play"></i>
+                                        </button>
+                                    </div>
+
+                                    <div class="btn-group" id="btn-pause" value="Pause" disabled="disabled"
+                                        role="group">
+                                        <button id="pauseBtn" class="btn btn-primary" data-original-title="Refreshr">
+                                            <i class="fas fa-pause"></i>
+
+                                        </button>
+                                    </div>
+                                    <div class="btn-group" id="btn-stop" value="Stop" disabled="disabled" role="group">
+                                        <button id="stopBtn" class="btn btn-primary" data-original-title="Refreshr">
+                                            <i class="fas fa-stop"></i>
+                                        </button>
+                                    </div>
+
+
+                                    <div class="btn-group" role="group">
+                                        <button id="new" class="btn btn-primary" data-original-title="New">
+                                            <i class="fa fa-plus fa-lg" aria-hidden="true"></i>
+                                        </button>
+                                    </div>
+
+                                    <div class="btn-group" role="group">
+                                        <button id="save" class="btn btn-primary" data-original-title="Deactivate">
+                                            <i class="fab fa-buffer"></i>
+                                        </button>
+                                    </div>
+
+                                    <div class="btn-group" role="group">
+                                        <button type="button" id="scrapBtn" class="btn btn-warning"
+                                            data-toggle="tooltip" data-placement="top" data-original-title="Delete"
+                                            title="Remove saved positions">
+                                            <i class="fa fa-trash-o fa-lg" aria-hidden="true"></i>
+                                        </button>
+                                    </div>
+                                    <div class="btn-group" role="group">
+                                        <button id="react" class="btn btn-success text-white"
+                                            data-original-title="Activate">
+
+                                            <i class="fas fa-volume-up"></i>
+                                            <input type="range" min="0" max="1" value="10" step="0.1"
+                                                class="form-control-range" id="volumeRange">
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-xl-2">
+                    <div class="row">
+                        <div class="col-xl-12 col-lg-6 col-md-6">
+                            <h5 class="text-dark">Align & Spacing</h5>
+                            <div class="btn-group" role="group" aria-label="...">
+                                <button type="button" id="alignY" data-toggle="tooltip" data-placement="top"
+                                    title="Align vertically" class="btn btn-info"><i
+                                        class="fas fa-arrows-alt-v"></i></button>
+                                <button type="button" id="alignX" data-toggle="tooltip" data-placement="top"
+                                    title="Align horizontal" class="btn btn-primary"><i
+                                        class="fas fa-arrows-alt-h"></i></button>
+                            </div>
+
+                            <div class="btn-group" role="group" aria-label="...">
+                                <button type="button" id="spaceY" data-toggle="tooltip" data-placement="top"
+                                    title="Space vertically" class="btn btn-large btn-success"><i
+                                        class="fas fa-align-justify"></i></button>
+                                <button type="button" data-toggle="tooltip" data-placement="top"
+                                    title="Space horizontally" id="spaceX" class="btn btn-danger"><i
+                                        class="fas fa-exchange-alt"></i></button>
+                            </div>
+                        </div>
+                        <div class="col-xl-12 col-lg-6 col-md-6">
+                            <div class="form-group mt-2 text-dark">
+                                <label for="exampleFormControlTextarea1">Formation Notes</label>
+                                <textarea class="form-control" id="formationNotes" rows="3"></textarea>
+                            </div>
+                            <h6 class="mt-3 text-dark">Group Select</h6>
+                            <div class="card bg-secondary mt-2" style="width: 18rem;">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item initialLi">
+                                        <h6 class="card-title" id="selectedName2"><i id="padlock"
+                                                class="fas fa-lock-open"></i></h6>
+                                    </li>
+                                    <div id="selectedNodes">
+
+                                    </div>
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <div id="audio-spectrum"></div>
+
+        <!--Stage Button Group-->
 
 
 
 
+        <div class="container-fluid">
+            <div class="row">
+                <table class="table border border-dark">
+                    <thead></thead>
+                    <tbody>
+                        <tr id="sceneInfo" class="text-dark">
+
+                        </tr>
+                        </th>
+                        <tr id="scenes" class="text-dark">
+
+
+                        </tr>
+                    </tbody>
+                </table>
+                <!-- a div where the div will be placed -->
+
+            </div>
+            <div class="container">
+                <div class="row justify-content-center">
+                    <h6>Audio</h6>
+                </div>
+
+            </div>
+
+            <div id="audio-spectrum"></div>
+
+
+
+
+        </div>
     </div>
-    <!----</div>  -->
     <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-analytics.js"> </script>

@@ -13,7 +13,8 @@ var uiConfig = {
     signInFlow: 'popup',
     signInSuccessUrl: '/home',
     signInOptions: [
-        firebase.auth.EmailAuthProvider.PROVIDER_ID
+        firebase.auth.EmailAuthProvider.PROVIDER_ID,
+        firebase.auth.FacebookAuthProvider.PROVIDER_ID
     ]
 };
 

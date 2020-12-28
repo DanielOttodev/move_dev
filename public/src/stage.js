@@ -1,4 +1,5 @@
 // Globals
+const db = firebase.firestore();
 createjs.MotionGuidePlugin.install();
 var stage = new createjs.Stage("demoCanvas");
 createjs.Touch.enable(stage);
@@ -220,6 +221,7 @@ playBtn.onclick = () => {
     let thisVal = findPositions(id);
 
     let myTween = getElement();
+    console.log(myTween)
 
     function getElement() {
       for (i = 0; i < stage.children.length; i++) {
@@ -246,6 +248,7 @@ playBtn.onclick = () => {
       }
 
       function goTween(myTween, positions) {
+        console.log(myTween)
         myTween.to({
             x: positions.x,
             y: positions.y
@@ -363,7 +366,6 @@ colorField.oninput = e => {
 
 selectBtn.onclick = () => {
   let selBtn = document.getElementById("selectBtn");
-  console.log(selectActive);
   if (selectActive === false) {
     selectActive = true;
     selBtn.classList.add("text-danger");
@@ -375,11 +377,6 @@ selectBtn.onclick = () => {
   }
 };
 
-const savedScenes = document.querySelectorAll(".savedScene");
-savedScenes.onclick = e => {
-  console.log("made it here");
-  console.log(e);
-};
 
 function findPositions(id) {
   let elemPositions = [];
@@ -477,3 +474,47 @@ function spaceX() {
 function randomWithinRange(min, max) {
   return Math.random() * (max - min) + min;
 }
+
+document.body.onclick = (e) => {
+  let id = e.target.id
+  e = window.event ? event.srcElement : e.target;
+  if (e.className && e.className.indexOf('savedScene') != -1) {
+    createjs.Ticker.setFPS(60);
+    createjs.Ticker.addEventListener("tick", stage);
+    let posIndex = id.substring(0, id.indexOf('_'))
+    for (i = 0; i < allScenes[posIndex].length; i++) {
+      console.log(i)
+      console.log(allScenes[posIndex][i].x)
+      let nodeId = allScenes[posIndex][i].id
+      console.log("NodeID:" + nodeId)
+      let myTween = getNode(nodeId)
+      console.log(myTween)
+      myTween.to({
+          x: allScenes[posIndex][i].x,
+          y: allScenes[posIndex][i].y
+        }
+
+      );
+    }
+  }
+
+}
+
+function getNode(matchId) {
+  for (b = 0; b < stage.children.length; b++) {
+
+    if (stage.children[b].id == matchId) {
+      console.log(stage.children[b])
+      let myTween = createjs.Tween.get(stage.children[b]);
+      return myTween;
+    }
+  }
+}
+
+const saveAll = document.getElementById('saveAll')
+saveAll.addEventListener('click', (e) => {
+  e.preventDefault;
+  let allSceneObj = Object.assign({}, allScenes); // {0:"a", 1:"b", 2:"c"}
+  console.log(allSceneObj)
+  db.collection('UserRoutines').add(allSceneObj);
+})
