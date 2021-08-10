@@ -147,6 +147,10 @@ td {
   margin: 10px;
 
 }
+.btncontainer{
+  display: block;
+  overflow-x: auto;
+}
 
 #formControlRange{
   display:none;
