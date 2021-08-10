@@ -1,20 +1,8 @@
-body {
-  minimum-scale=1
-  background-color: #e8ecf5;
-  /*background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);*/
-
-  /* background: rgb(174, 225, 238);
-  background: radial-gradient(
-    circle,
-    rgba(174, 225, 238, 1) 0%,
-    rgba(148, 187, 233, 0.09287464985994398) 100%
-  );*/
-}
-
 .mStage {
   touch-action: none;
-   border-style: solid;
+  border-style: solid;
   border: 3px deepskyblue solid;
+  border-radius: 7px;
   background-color: white;/*rgba(0, 0, 0, 0.322);*/
 
 }
