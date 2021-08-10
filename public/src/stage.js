@@ -49,10 +49,10 @@ newBtn.onclick = function () {
   var circle = new createjs.Shape();
   //VARIABLES
   //Drag Object Size
-  dragRadius = 40;
+  dragRadius = 50;
 
   //Circle Create
-  circle.graphics.beginFill(getRandomColor()).drawCircle(0, 0, 20);
+  circle.graphics.beginFill(getRandomColor()).drawCircle(0, 0, 25);
   circle.x = 7;
   circle.y = 7;
 
@@ -69,7 +69,7 @@ newBtn.onclick = function () {
   dragger.y = randomWithinRange(5, 450);
   dragger.addChild(circle, label);
   dragger.setBounds(100, 100, dragRadius, dragRadius);
-  
+
   //DragRadius * 2 because 2*r = width of the bounding box
 
   //DRAG Functionality ============
@@ -101,40 +101,40 @@ newBtn.onclick = function () {
       let result = selectedObjs.map(a => a.id);
 
       if (result.includes(event.currentTarget.parent.id)) {
-      
+
       } else {
         selectedObjs.push(event.currentTarget.parent);
 
-       /* let padlock = document.getElementById("padlock");
-        document.getElementById("selectedName2").innerHTML =
-          selectedObjs[0].name;
-        document.getElementById("selectedName2").appendChild(padlock);*/
-       /* addList = function (name, color, id) {
-         /* if (name != selectedObjs[0].name) {
-            let list = document.getElementById("selectedNodes");
-            let newLi = document.createElement("li");
-            newLi.classList.add("list-group-item");
-            newLi.classList.add("liStyle")
-            newLi.classList.add("border-info");
-            newLi.style.color = color;
-            newLi.setAttribute("id", id);
+        /* let padlock = document.getElementById("padlock");
+         document.getElementById("selectedName2").innerHTML =
+           selectedObjs[0].name;
+         document.getElementById("selectedName2").appendChild(padlock);*/
+        /* addList = function (name, color, id) {
+          /* if (name != selectedObjs[0].name) {
+             let list = document.getElementById("selectedNodes");
+             let newLi = document.createElement("li");
+             newLi.classList.add("list-group-item");
+             newLi.classList.add("liStyle")
+             newLi.classList.add("border-info");
+             newLi.style.color = color;
+             newLi.setAttribute("id", id);
 
-            newLi.innerHTML = name;
-            list.appendChild(newLi);
-          } else {
-            let list = document.getElementById("selectedNodes");
-            let newLi = document.createElement("li");
-            newLi.classList.add("list-group-item");
-            newLi.classList.add("liStyle")
-            newLi.classList.add("border-info");
-            newLi.style.color = color;
-            newLi.setAttribute("id", id);
+             newLi.innerHTML = name;
+             list.appendChild(newLi);
+           } else {
+             let list = document.getElementById("selectedNodes");
+             let newLi = document.createElement("li");
+             newLi.classList.add("list-group-item");
+             newLi.classList.add("liStyle")
+             newLi.classList.add("border-info");
+             newLi.style.color = color;
+             newLi.setAttribute("id", id);
 
-            newLi.innerHTML = name;
-            newLi.style.display = "none";
-            list.appendChild(newLi);
-          }
-        };*/
+             newLi.innerHTML = name;
+             newLi.style.display = "none";
+             list.appendChild(newLi);
+           }
+         };*/
         console.log(selectedObjs);
         if (
           selectedObjs.some(e => e.Name === event.currentTarget.parent.name)
@@ -142,12 +142,12 @@ newBtn.onclick = function () {
           //Stop same element being added to select list twice
           console.log("found");
         }
-       /* addList(
-          event.currentTarget.name,
-          event.currentTarget.graphics._fill.style,
-          event.currentTarget.parent.id
-        );*/
-        event.currentTarget.graphics._fill.style ="#7a7a7a"
+        /* addList(
+           event.currentTarget.name,
+           event.currentTarget.graphics._fill.style,
+           event.currentTarget.parent.id
+         );*/
+        event.currentTarget.graphics._fill.style = "#2196f3"
         stage.update();
       }
     }
@@ -158,7 +158,7 @@ newBtn.onclick = function () {
   function handlePress(event) {
     document.getElementById("selectedName").innerHTML =
       event.currentTarget.name;
-      
+
     // Change Color in Card
     document.getElementById("selectedColor").value = event.currentTarget.graphics._fill.style;
     document.getElementById("namechange").value = "";
@@ -277,6 +277,7 @@ const alignXBtn = document.getElementById("alignX");
 const alignYBtn = document.getElementById("alignY");
 const spaceYBtn = document.getElementById("spaceY");
 const spaceXBtn = document.getElementById("spaceX");
+const speedBtn = document.getElementById('speedBtn');
 alignXBtn.addEventListener("click", alignX);
 alignYBtn.addEventListener("click", alignY);
 spaceYBtn.addEventListener("click", spaceY);
@@ -284,7 +285,7 @@ spaceXBtn.addEventListener("click", spaceX);
 //Remove Positions from the current scene
 scrapBtn.onclick = () => {
   console.log("here");
-  for (let i=0; i < selectedObjs.length; i ++){
+  for (let i = 0; i < selectedObjs.length; i++) {
     selectedObjs[i].children[0].graphics._fill.style = '#212121'
   }
   stage.update();
@@ -387,6 +388,21 @@ selectBtn.onclick = () => {
     document.getElementById("demoCanvas").style.cursor = "auto";
   }
 };
+
+let toggleSpeedControl = false;
+speedBtn.onclick = () => {
+  if (toggleSpeedControl === false) {
+    toggleSpeedControl = true;
+    document.getElementById("formControlRange").style.display = "inline";
+    document.getElementById("speedValue").style.display = "inline";
+  } else {
+    toggleSpeedControl = false;
+    document.getElementById("formControlRange").style.display = "none";
+    document.getElementById("speedValue").style.display = "none";
+
+  }
+};
+
 
 
 function findPositions(id) {
@@ -509,6 +525,7 @@ document.body.onclick = (e) => {
     }
   }
 }
+
 function getNode(matchId) {
   for (b = 0; b < stage.children.length; b++) {
 
@@ -528,9 +545,9 @@ saveAll.addEventListener('click', (e) => {
   db.collection('UserRoutines').add(allSceneObj);
 })
 
-function groupSelect(){
+function groupSelect() {
   let container = new createjs.Container();
-  
+
 }
 /*
 new DragSelect({

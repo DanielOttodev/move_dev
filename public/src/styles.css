@@ -147,4 +147,13 @@ td {
   margin: 10px;
 
 }
+#formControlRange{
+  display:none;
+}
+#speedValue{
+  display: none;
+}
+.speedBtn:hover + #formControlRange{
+ display: block;
+}
 .vol{color:#212121;}
