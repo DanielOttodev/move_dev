@@ -345,6 +345,7 @@ function timeLine() {
 }
 
 //Card Input
+/*
 const inputField = document.getElementById("namechange");
 const colorField = document.getElementById("selectedColor");
 
@@ -375,7 +376,7 @@ colorField.oninput = e => {
 
   stage.update(); // Update stage so takes place immediately instead of after moving the shape
 };
-
+*/
 selectBtn.onclick = () => {
   let selBtn = document.getElementById("selectBtn");
   if (selectActive === false) {

@@ -141,12 +141,13 @@ td {
 #mainContent {
  /* display: none;*/
 }
-.btn-toolbar button{
+.btn-group button{
   background-color: rgba(255, 255, 255, 0.212);
   color:#212121;
   margin: 10px;
 
 }
+
 #formControlRange{
   display:none;
 }
