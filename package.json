@@ -4,7 +4,7 @@
   "description": "Moves Backend",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon index.jsm",
+    "dev": "nodemon -e *",
     "start": "node index.js"
   },
   "author": "",
