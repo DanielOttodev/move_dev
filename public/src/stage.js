@@ -1,11 +1,11 @@
 // Globals
 
-
 console.log(DragSelect)
 const db = firebase.firestore();
 createjs.MotionGuidePlugin.install();
 var stage = new createjs.Stage("demoCanvas");
-createjs.Touch.enable(stage);
+createjs.Touch.enable(stage)
+console.log(stage);
 let primSelect;
 //Unselect
 var stageElem = document.getElementById("demoCanvas");
@@ -75,6 +75,14 @@ newBtn.onclick = function () {
   //DRAG Functionality ============
 
   dragger.on("pressmove", function (evt) {
+    evt.currentTarget.x = evt.stageX;
+    evt.currentTarget.y = evt.stageY;
+    stage.update(); //much smoother because it refreshes the screen every pixel movement instead of the FPS set on the Ticker
+    evt.currentTarget.alpha = 1;
+  });
+  dragger.on("pointerdown", function (evt) {
+    console.log('in function')
+    console.log(evt);
     evt.currentTarget.x = evt.stageX;
     evt.currentTarget.y = evt.stageY;
     stage.update(); //much smoother because it refreshes the screen every pixel movement instead of the FPS set on the Ticker
@@ -349,7 +357,7 @@ inputField.onkeypress = e => {
     selectedObj.children[0].name = inputField.value; //Update the name of the circle/shape to stop [selected] from retracing
     selectedObj.children[1].text = inputField.value; //Update the label to reflect on the actual shape
     document.getElementById("selectedName").innerHTML = inputField.value;
-    document.getElementById(selectedObj.id).innerHTML = inputField.value;
+    //document.getElementById(selectedObj.id).innerHTML = inputField.value;
 
     stage.update(); // Update stage so takes place immediately instead of after moving the shape
   }
