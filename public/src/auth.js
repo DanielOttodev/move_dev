@@ -63,3 +63,4 @@ signOutBtn.onclick = () => {
         // An error happened.
     });
 }
+

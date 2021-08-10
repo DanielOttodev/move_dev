@@ -7,5 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Daniel Otto",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "dragselect": "^2.2.2"
+  }
 }

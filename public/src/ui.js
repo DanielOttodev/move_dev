@@ -1,4 +1,11 @@
 const slider = document.getElementById("formControlRange");
+
+
+$('html, body').on('dragstart', function (e)
+{
+  e.preventDefault();
+});
+// const db = firebase.firestore(); -- Not needed?
 let output = document.getElementById("speedValue");
 $(document).ready(function () {
   $('[data-toggle="tooltip"]').tooltip();
@@ -34,3 +41,20 @@ gridtoggle.onclick = () => {
     gridtoggle.value = "unchecked";
   }
 };
+
+function findRoutines(event) {
+  let value = document.getElementById('submitValue').value
+  while (carList.firstChild) {
+    carList.removeChild(carList.firstChild);
+  }
+  event.preventDefault()
+  console.log(event)
+  console.log('submit')
+  console.log(value)
+  db.collection('Cars').where('registration', '==', value).get().then((snapshot) => {
+    snapshot.forEach(doc => {
+      console.log(doc.id, '=>', doc.data());
+      renderDocs(doc)
+    })
+  }, noResult)
+}

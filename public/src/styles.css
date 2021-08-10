@@ -11,16 +11,16 @@ body {
 }
 
 .mStage {
-  /* border-style: groove;
-  border: 1px deepskyblue solid;*/
-  background-color: rgba(0, 0, 0, 0.322);
+   border-style: solid;
+  border: 3px deepskyblue solid;
+  background-color: white;/*rgba(0, 0, 0, 0.322);*/
 
 }
 
 .grid {
   background-size: 40px 40px;
-  background-image: linear-gradient(to right, grey 1px, transparent 1px),
-    linear-gradient(to bottom, grey 1px, transparent 1px);
+  background-image: linear-gradient(to right, rgb(61, 123, 255), transparent 1px),
+    linear-gradient(to bottom, rgb(61, 123, 255), transparent 1px);
 }
 
 
@@ -135,4 +135,8 @@ table {
 .dropdown-item:hover {
   background-color: rgba(65, 105, 225, 0.11);
 
+}
+
+#mainContent {
+ /* display: none;*/
 }

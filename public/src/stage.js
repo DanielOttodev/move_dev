@@ -1,4 +1,7 @@
 // Globals
+
+
+console.log(DragSelect)
 const db = firebase.firestore();
 createjs.MotionGuidePlugin.install();
 var stage = new createjs.Stage("demoCanvas");
@@ -22,6 +25,7 @@ stageElem.addEventListener("click", e => {
     }, 3000);
   }
 });
+
 //inits
 let selectedObjs = [];
 let selectActive = false;
@@ -33,6 +37,7 @@ function getRandomColor() {
   for (var i = 0; i < 6; i++) {
     color += letters[Math.floor(Math.random() * 16)];
   }
+  color = '#212121'
   return color;
 }
 
@@ -55,7 +60,7 @@ newBtn.onclick = function () {
   dragger.name = `New${stage.children.length + 1}`;
   circle.name = dragger.name;
   // Label
-  var label = new createjs.Text(circle.name, "Bold 14px ", "#fff");
+  var label = new createjs.Text(circle.name, "Bold 18px ", "#fff");
 
   label.textAlign = "center";
   label.y -= 0;
@@ -64,6 +69,7 @@ newBtn.onclick = function () {
   dragger.y = randomWithinRange(5, 450);
   dragger.addChild(circle, label);
   dragger.setBounds(100, 100, dragRadius, dragRadius);
+  
   //DragRadius * 2 because 2*r = width of the bounding box
 
   //DRAG Functionality ============
@@ -497,9 +503,7 @@ document.body.onclick = (e) => {
       );
     }
   }
-
 }
-
 function getNode(matchId) {
   for (b = 0; b < stage.children.length; b++) {
 
@@ -518,3 +522,13 @@ saveAll.addEventListener('click', (e) => {
   console.log(allSceneObj)
   db.collection('UserRoutines').add(allSceneObj);
 })
+
+function groupSelect(){
+  let container = new createjs.Container();
+  
+}
+/*
+new DragSelect({
+  selectables: document.getElementsByClassName('mStage'),
+  //area: document.getElementsByClassName('mStage')
+});*/
