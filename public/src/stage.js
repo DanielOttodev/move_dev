@@ -93,16 +93,16 @@ newBtn.onclick = function () {
       let result = selectedObjs.map(a => a.id);
 
       if (result.includes(event.currentTarget.parent.id)) {
-        console.log("true, it is in here.");
+      
       } else {
         selectedObjs.push(event.currentTarget.parent);
 
-        let padlock = document.getElementById("padlock");
+       /* let padlock = document.getElementById("padlock");
         document.getElementById("selectedName2").innerHTML =
           selectedObjs[0].name;
-        document.getElementById("selectedName2").appendChild(padlock);
-        addList = function (name, color, id) {
-          if (name != selectedObjs[0].name) {
+        document.getElementById("selectedName2").appendChild(padlock);*/
+       /* addList = function (name, color, id) {
+         /* if (name != selectedObjs[0].name) {
             let list = document.getElementById("selectedNodes");
             let newLi = document.createElement("li");
             newLi.classList.add("list-group-item");
@@ -126,7 +126,7 @@ newBtn.onclick = function () {
             newLi.style.display = "none";
             list.appendChild(newLi);
           }
-        };
+        };*/
         console.log(selectedObjs);
         if (
           selectedObjs.some(e => e.Name === event.currentTarget.parent.name)
@@ -134,15 +134,13 @@ newBtn.onclick = function () {
           //Stop same element being added to select list twice
           console.log("found");
         }
-        addList(
+       /* addList(
           event.currentTarget.name,
           event.currentTarget.graphics._fill.style,
           event.currentTarget.parent.id
-        );
-
-        console.log(selectedObjs);
-        padlock.classList.remove("fa-lock-open");
-        padlock.classList.add("fa-lock");
+        );*/
+        event.currentTarget.graphics._fill.style ="#7a7a7a"
+        stage.update();
       }
     }
   }
@@ -152,14 +150,15 @@ newBtn.onclick = function () {
   function handlePress(event) {
     document.getElementById("selectedName").innerHTML =
       event.currentTarget.name;
+      
     // Change Color in Card
-    document.getElementById("selectedColor").value =
-      event.currentTarget.graphics._fill.style;
+    document.getElementById("selectedColor").value = event.currentTarget.graphics._fill.style;
     document.getElementById("namechange").value = "";
 
     // A mouse press happened.
     // Listen for mouse move while the mouse is down:
     //  event.addEventListener("mousemove", handleMove);
+
   }
 
   function handleMove(event) {
@@ -277,13 +276,11 @@ spaceXBtn.addEventListener("click", spaceX);
 //Remove Positions from the current scene
 scrapBtn.onclick = () => {
   console.log("here");
+  for (let i=0; i < selectedObjs.length; i ++){
+    selectedObjs[i].children[0].graphics._fill.style = '#212121'
+  }
+  stage.update();
   selectedObjs = [];
-  let padlock = document.getElementById("padlock");
-  document.getElementById("selectedName2").innerHTML = "";
-  document.getElementById("selectedName2").appendChild(padlock);
-  document.getElementById("selectedNodes").innerHTML = "";
-  padlock.classList.add("fa-lock-open");
-  padlock.classList.remove("fa-lock");
   $(".alert").show();
   window.setTimeout(function () {
     $(".alert").alert("close");
