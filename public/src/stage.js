@@ -31,6 +31,8 @@ let selectedObjs = [];
 let selectActive = false;
 let groupedNodes = null; // For group selection
 let groupedOffset = []; // ^ Group selection offsets
+let hasHandle = false;
+
 //Helpers
 // Color Gen
 function getRandomColor() {
@@ -77,8 +79,20 @@ newBtn.onclick = function () {
   //DRAG Functionality ============
 
   dragger.on("pressmove", function (evt) {
+    let match = selectedObjs.map(a => a.id) // Returns an array of all selectedObj id's in the correct index order.
+    // console.log(evt.currentTarget.id)
+
+    
     evt.currentTarget.x = evt.stageX;
     evt.currentTarget.y = evt.stageY;
+    if (selectedObjs.length > 0) {
+      selectedNodeIndex = selectedObjs.findIndex(x => x.id === evt.currentTarget.id)
+      console.log(evt.stageY)
+      selectedObjs[selectedNodeIndex].x = evt.stageX 
+      selectedObjs[selectedNodeIndex].y = evt.stageY
+      groupedOffset[selectedNodeIndex].x = evt.stageX - handler.x
+      groupedOffset[selectedNodeIndex].y = evt.stageY - handler.y
+    }
     stage.update(); //much smoother because it refreshes the screen every pixel movement instead of the FPS set on the Ticker
     evt.currentTarget.alpha = 1;
   });
@@ -95,77 +109,71 @@ newBtn.onclick = function () {
 
   // Event Listeners
   circle.addEventListener("click", handleClick);
+
   function handleClick(event) {
 
     if (event.nativeEvent.shiftKey || selectActive === true) {
       let result = selectedObjs.map(a => a.id);
       if (result.includes(event.currentTarget.parent.id)) {
         // Do nothing, already selected
-      } 
-      else
-       {
+      } else {
         selectedObjs.push(event.currentTarget.parent);
-        if (groupedNodes == null){
+        if (groupedNodes == null) {
           var cross = new createjs.Shape();
-          cross.graphics.ss(3).s("#00f").mt(-10,0).lt(10,0).mt(0,-10).lt(0,10);
-// Add a hitArea to the cross-hair so it is easier to press
-          cross.hitArea = new createjs.Shape(new createjs.Graphics().f("green").dc(0,0,30));
-          dragRadius = 10;
-         
-        //Circle Create
-        //  circle.graphics.beginFill("#ff0000").drawRect(0, 0, 20, 20);
-        console.log("Firing!")
+          cross.graphics.ss(3).s("#00f").mt(-10, 0).lt(10, 0).mt(0, -10).lt(0, 10);
+          // Add a hitArea to the cross-hair so it is easier to press
+          cross.hitArea = new createjs.Shape(new createjs.Graphics().f("green").dc(0, 0, 30));
+          //Circle Create
+          //  circle.graphics.beginFill("#ff0000").drawRect(0, 0, 20, 20);
+          console.log("Firing!")
           handler = new createjs.Container()
+          handler.id = "handle"
           handler.addChild(cross)
           handler.x = event.currentTarget.parent.x - 50
           handler.y = event.currentTarget.parent.y + 50
           groupedNodes = new createjs.Container()
-     //     groupedNodes.addChild(event.currentTarget.parent)
-          groupedNodes.offset = new createjs.Point(event.currentTarget.parent.x-handler.x, event.currentTarget.parent.y-handler.y);
+          //     groupedNodes.addChild(event.currentTarget.parent)
+          groupedNodes.offset = new createjs.Point(event.currentTarget.parent.x - handler.x, event.currentTarget.parent.y - handler.y);
           groupedOffset.push(groupedNodes.offset)
           //groupedNodes.setBounds(0, 0, dragRadius, dragRadius);
           stage.addChild(handler);
-     //     stage.addChild(groupedNodes);
-          stage.update(); 
-        }
-        else{
-         // groupedNodes.addChild(event.currentTarget.parent)
-          groupedNodes.offset = new createjs.Point(event.currentTarget.parent.x-handler.x, event.currentTarget.parent.y-handler.y);
+          hasHandle = true;
+          //     stage.addChild(groupedNodes);
+          stage.update();
+        } else {
+          // groupedNodes.addChild(event.currentTarget.parent)
+          groupedNodes.offset = new createjs.Point(event.currentTarget.parent.x - handler.x, event.currentTarget.parent.y - handler.y);
           groupedOffset.push(groupedNodes.offset)
-          stage.update(); 
+          stage.update();
         }
         handler.on("pressmove", function (evt) {
           evt.currentTarget.x = evt.stageX;
           evt.currentTarget.y = evt.stageY;
-        //  stage.update(); //much smoother because it refreshes the screen every pixel movement instead of the FPS set on the Ticker
+          //  stage.update(); //much smoother because it refreshes the screen every pixel movement instead of the FPS set on the Ticker
           evt.currentTarget.alpha = 1;
-          
-          for (let z = 0; z < selectedObjs.length; z ++){
-//console.log(groupedNodes);
-       //   groupedNodes.offset.x = groupedNodes.children[z].x-handler.x  
-       //   groupedNodes.offset.y = groupedNodes.children[z].y-handler.y
-            console.log(groupedNodes.children.length);
 
+          for (let z = 0; z < selectedObjs.length; z++) {
             selectedObjs[z].x = handler.x + groupedOffset[z].x;
             selectedObjs[z].y = handler.y + groupedOffset[z].y;
-         
-        }
-        stage.update();
-        });       
-       
+          }
+
+          stage.update();
+        });
+
         event.currentTarget.graphics._fill.style = "#2196f3"
         stage.update();
       }
     }
   }
   circle.addEventListener("mousedown", handlePress);
+
   function handlePress(event) {
-  //  document.getElementById("selectedName").innerHTML =
-  //    event.currentTarget.name;
+    //  document.getElementById("selectedName").innerHTML =
+    //    event.currentTarget.name;
 
     // Change Color in Card
-  //  document.getElementById("selectedColor").value = event.currentTarget.graphics._fill.style;
-   // document.getElementById("namechange").value = "";
+    //  document.getElementById("selectedColor").value = event.currentTarget.graphics._fill.style;
+    // document.getElementById("namechange").value = "";
 
     // A mouse press happened.
     // Listen for mouse move while the mouse is down:
@@ -175,6 +183,7 @@ newBtn.onclick = function () {
 
   //Update stage will render next frame
   createjs.Ticker.addEventListener("tick", handleTick);
+
   function handleTick() {}
 };
 
@@ -385,20 +394,26 @@ selectBtn.onclick = () => {
     document.getElementById("demoCanvas").style.cursor = "pointer";
   } else {
     console.log("here");
+
     for (let i = 0; i < selectedObjs.length; i++) {
       selectedObjs[i].children[0].graphics._fill.style = '#212121'
       stage.addChild(selectedObjs[i])
+
     }
-    stage.removeChild(handler);
-  //  stage.removeChild(groupedNodes);
-  console.log(stage.children)
+    console.log(stage.children)
+    if (hasHandle) {
+      stage.removeChild(handler);
+      hasHandle = false;
+    }
+
     selectActive = false;
-    selectedObjs=[]
+    selectedObjs = []
     groupedOffset = [];
     groupedNodes = null;
     stage.update();
     selBtn.classList.remove("text-danger");
     document.getElementById("demoCanvas").style.cursor = "auto";
+
   }
 };
 
