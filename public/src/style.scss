@@ -1,0 +1,263 @@
+:root {
+  --primary-light: #8abdff;
+  --primary: #6d5dfc;
+  --primary-dark: #5b0eeb;
+  
+  --white: #FFFFFF;
+  --greyLight-1: #E4EBF5;
+  --greyLight-2: #c8d0e7;
+  --greyLight-3: #bec8e4;
+  --greyDark: #9baacf;
+}
+$shadow: .3rem .3rem .6rem var(--greyLight-2), 
+-.2rem -.2rem .5rem var(--white);
+$inner-shadow: inset .2rem .2rem .5rem var(--greyLight-2), 
+inset -.2rem -.2rem .5rem var(--white);
+
+body{
+  background: var(--greyLight-1);
+  font-family: 'Poppins', sans-serif;
+}
+#mainContent {
+  display: none;
+  margin-top: 10px;
+}
+
+#splashScreen {
+ background-image: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
+ background-size: cover;
+ height: 100%;
+ width: 100%;
+}
+#extraContent{
+ display:none;
+}
+
+.mStage {
+ touch-action: none;
+ border-style: solid;
+ border: 3px deepskyblue solid;
+ border-radius: 7px;
+ background-color: white;/*rgba(0, 0, 0, 0.322);*/
+
+}
+
+.grid {
+ background-size: 40px 40px;
+ background-image: linear-gradient(to right, rgba(61, 122, 255, 0.418), transparent 1px),
+   linear-gradient(to bottom, rgba(61, 122, 255, 0.541), transparent 1px);
+}
+
+.rubbishBtn{
+ margin-left: 7px;
+ margin-right: 7px;
+ float: right;
+ color:rgba(121, 121, 121, 0.438);
+
+}
+.rubbishBtn:hover{
+ color:rgba(133, 0, 0, 0.87);
+}
+.notesBtn{
+ margin-left: 7px;
+ margin-right: 7px;
+ float: right;
+ color:rgba(104, 104, 104, 0.438);
+}
+.notesBtn:hover{
+ color:rgba(170, 153, 0, 0.534)
+}
+
+.sceneTable{
+   border-radius: 10px;
+   margin-top: 10px;
+   display: block;
+   overflow-x: auto;
+   white-space: nowrap;
+ 
+
+}
+.topRow{
+ background-color: #212121;
+ 
+}
+
+table {
+ background-color: rgba(0, 0, 0, 0.021);
+ color: black;
+ border: #212121 5px solid;
+}
+
+td {
+ border: #212121 5px solid;
+ color: white;
+ overflow-x: auto;
+ font-style: bold;
+ font-weight: 1000;
+
+}
+.canvasCopys{
+ width:200px;
+}
+.canvasCopys :hover {
+ background-color: #6666661e;
+}
+
+#speedValue {
+ font: bold;
+}
+
+.alert {
+ align-content: center;
+ position: fixed;
+}
+
+.bgCourt {
+ background: url(../imgs/bcourt.png);
+ background-size: 1200px, 600px;
+ background-repeat: no-repeat;
+ background-position: center;
+ overflow: hidden;
+}
+
+#demoCanvas {
+ width: 100%;
+ height: auto;
+}
+
+.cardStyle {
+ background-color: #f2f5fa;
+ ;
+ color: #5777ba;
+
+}
+
+.cardStyle2 {
+ background-image: linear-gradient(135deg, #fdfcfb 0%, #e2d1c3 100%);
+ background-position: right center;
+ /* change the direction of the change here */
+ color: gray;
+
+ text-decoration: none;
+}
+
+
+
+.card {
+ max-width: 100%;
+ background-color: #f2f5fa;
+ ;
+
+}
+
+
+.vertical-center {
+ min-height: 100%;
+ /* Fallback for browsers do NOT support vh unit */
+ min-height: 100vh;
+ display: flex;
+ align-items: center;
+}
+
+.form-control {
+ background-color: rgba(240, 240, 240, 0.178);
+ color: white
+}
+
+.liStyle {
+ background-color: rgba(240, 240, 240, 0.021);
+}
+.wrap{
+ background-color: #21212123;
+}
+
+#namechange {
+ background-color: rgba(240, 240, 240, 0.548);
+ border: none;
+ white-space: nowrap;
+ width: 130px;
+}
+
+.initialLi {
+ background-color: rgba(240, 240, 240, 0.548);
+ border: none;
+}
+
+.canvasCol {
+ vertical-align: middle;
+}
+
+.dropdown-item:hover {
+ background-color: rgba(65, 105, 225, 0.11);
+}
+
+
+.btn-group button{
+ background-color: rgba(255, 255, 255, 0.212);
+ color:#212121;
+ margin: 10px;
+ border:none;
+
+}
+.btncontainer{
+ display: block;
+ overflow-x: auto;
+}
+
+#formControlRange{
+ display:none;
+}
+#speedValue{
+ display: none;
+}
+.speedBtn:hover + #formControlRange{
+display: block;
+}
+.vol{color:#212121;}
+
+.savedScene{
+border-radius: 5px;
+}
+
+.btn {
+  width: 5rem;
+  height: 4rem;
+  border-radius: 1rem;
+  box-shadow: $shadow;
+  justify-self: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: .3s ease;
+
+  &__primary {
+    grid-column: 1 / 2;
+    grid-row: 4 / 5;
+    background: var(--primary);
+    box-shadow:inset .2rem .2rem 1rem var(--primary-light), 
+              inset -.2rem -.2rem 1rem var(--primary-dark),
+              $shadow;
+    color: var(--greyLight-1);
+
+    &:hover { color: var(--white); }
+    &:active {
+      box-shadow:inset .2rem .2rem 1rem var(--primary-dark), 
+             inset -.2rem -.2rem 1rem var(--primary-light);
+    }
+  }
+
+  &__secondary {
+    grid-column: 1 / 2;
+    grid-row: 5 / 6;
+    color: var(--greyDark);
+    &:hover { color: var(--primary); }
+    &:active {
+      box-shadow: $inner-shadow;
+    }
+  }
+
+  p { 
+    font-size: 1.6rem;
+  }
+}

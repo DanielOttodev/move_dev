@@ -42,6 +42,14 @@ gridtoggle.onclick = () => {
   }
 };
 
+const splashToggle = document.getElementById("splashtoggle")
+splashToggle.onclick = () =>{
+  let main = document.getElementById("mainContent")
+  main.style.display = "block"
+  let splash = document.getElementById("splashScreen")
+  splash.style.display = "none"
+}
+
 function findRoutines(event) {
   let value = document.getElementById('submitValue').value
   while (carList.firstChild) {
