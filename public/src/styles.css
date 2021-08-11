@@ -135,7 +135,6 @@ td {
 
 .dropdown-item:hover {
   background-color: rgba(65, 105, 225, 0.11);
- background-color: 
 }
 
 #mainContent {
@@ -162,3 +161,7 @@ td {
  display: block;
 }
 .vol{color:#212121;}
+
+.savedScene{
+border-radius: 5px;
+}

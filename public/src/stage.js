@@ -29,6 +29,8 @@ stageElem.addEventListener("click", e => {
 //inits
 let selectedObjs = [];
 let selectActive = false;
+let groupedNodes = null; // For group selection
+let groupedOffset = []; // ^ Group selection offsets
 //Helpers
 // Color Gen
 function getRandomColor() {
@@ -93,75 +95,78 @@ newBtn.onclick = function () {
 
   // Event Listeners
   circle.addEventListener("click", handleClick);
-
   function handleClick(event) {
-    // Action on selected
-    // If stage.child ID ()
+
     if (event.nativeEvent.shiftKey || selectActive === true) {
       let result = selectedObjs.map(a => a.id);
-
       if (result.includes(event.currentTarget.parent.id)) {
-
-      } else {
+        // Do nothing, already selected
+      } 
+      else
+       {
         selectedObjs.push(event.currentTarget.parent);
-
-        /* let padlock = document.getElementById("padlock");
-         document.getElementById("selectedName2").innerHTML =
-           selectedObjs[0].name;
-         document.getElementById("selectedName2").appendChild(padlock);*/
-        /* addList = function (name, color, id) {
-          /* if (name != selectedObjs[0].name) {
-             let list = document.getElementById("selectedNodes");
-             let newLi = document.createElement("li");
-             newLi.classList.add("list-group-item");
-             newLi.classList.add("liStyle")
-             newLi.classList.add("border-info");
-             newLi.style.color = color;
-             newLi.setAttribute("id", id);
-
-             newLi.innerHTML = name;
-             list.appendChild(newLi);
-           } else {
-             let list = document.getElementById("selectedNodes");
-             let newLi = document.createElement("li");
-             newLi.classList.add("list-group-item");
-             newLi.classList.add("liStyle")
-             newLi.classList.add("border-info");
-             newLi.style.color = color;
-             newLi.setAttribute("id", id);
-
-             newLi.innerHTML = name;
-             newLi.style.display = "none";
-             list.appendChild(newLi);
-           }
-         };*/
-        console.log(selectedObjs);
-        if (
-          selectedObjs.some(e => e.Name === event.currentTarget.parent.name)
-        ) {
-          //Stop same element being added to select list twice
-          console.log("found");
+        if (groupedNodes == null){
+          var circle = new createjs.Shape();
+          circle.graphics.ss(3).s("#00f").mt(-10,0).lt(10,0).mt(0,-10).lt(0,10);
+// Add a hitArea to the cross-hair so it is easier to press
+          circle.hitArea = new createjs.Shape(new createjs.Graphics().f("green").dc(0,0,10));
+          dragRadius = 10;
+         
+        //Circle Create
+        //  circle.graphics.beginFill("#ff0000").drawRect(0, 0, 20, 20);
+        console.log("Firing!")
+          handler = new createjs.Container()
+          handler.addChild(circle)
+          handler.x = event.currentTarget.parent.x - 50
+          handler.y = event.currentTarget.parent.y + 50
+          groupedNodes = new createjs.Container()
+     //     groupedNodes.addChild(event.currentTarget.parent)
+          groupedNodes.offset = new createjs.Point(event.currentTarget.parent.x-handler.x, event.currentTarget.parent.y-handler.y);
+          groupedOffset.push(groupedNodes.offset)
+          //groupedNodes.setBounds(0, 0, dragRadius, dragRadius);
+          stage.addChild(handler);
+     //     stage.addChild(groupedNodes);
+          stage.update(); 
         }
-        /* addList(
-           event.currentTarget.name,
-           event.currentTarget.graphics._fill.style,
-           event.currentTarget.parent.id
-         );*/
+        else{
+         // groupedNodes.addChild(event.currentTarget.parent)
+          groupedNodes.offset = new createjs.Point(event.currentTarget.parent.x-handler.x, event.currentTarget.parent.y-handler.y);
+          groupedOffset.push(groupedNodes.offset)
+          stage.update(); 
+        }
+        handler.on("pressmove", function (evt) {
+          evt.currentTarget.x = evt.stageX;
+          evt.currentTarget.y = evt.stageY;
+          stage.update(); //much smoother because it refreshes the screen every pixel movement instead of the FPS set on the Ticker
+          evt.currentTarget.alpha = 1;
+          
+          for (let z = 0; z < selectedObjs.length; z ++){
+
+//console.log(groupedNodes);
+       //   groupedNodes.offset.x = groupedNodes.children[z].x-handler.x  
+       //   groupedNodes.offset.y = groupedNodes.children[z].y-handler.y
+            console.log(groupedNodes.children.length);
+
+            selectedObjs[z].x = handler.x + groupedOffset[z].x;
+            selectedObjs[z].y = handler.y + groupedOffset[z].y;
+        
+          stage.update();
+        }
+        });       
+       
         event.currentTarget.graphics._fill.style = "#2196f3"
         stage.update();
       }
     }
   }
-
   circle.addEventListener("mousedown", handlePress);
-
   function handlePress(event) {
-    document.getElementById("selectedName").innerHTML =
-      event.currentTarget.name;
+  //  document.getElementById("selectedName").innerHTML =
+  //    event.currentTarget.name;
 
     // Change Color in Card
-    document.getElementById("selectedColor").value = event.currentTarget.graphics._fill.style;
-    document.getElementById("namechange").value = "";
+  //  document.getElementById("selectedColor").value = event.currentTarget.graphics._fill.style;
+   // document.getElementById("namechange").value = "";
 
     // A mouse press happened.
     // Listen for mouse move while the mouse is down:
@@ -169,12 +174,8 @@ newBtn.onclick = function () {
 
   }
 
-  function handleMove(event) {
-    // Check out the DragAndDrop example in GitHub for more
-  }
   //Update stage will render next frame
   createjs.Ticker.addEventListener("tick", handleTick);
-
   function handleTick() {}
 };
 
@@ -384,7 +385,19 @@ selectBtn.onclick = () => {
     selBtn.classList.add("text-danger");
     document.getElementById("demoCanvas").style.cursor = "pointer";
   } else {
+    console.log("here");
+    for (let i = 0; i < selectedObjs.length; i++) {
+      selectedObjs[i].children[0].graphics._fill.style = '#212121'
+      stage.addChild(selectedObjs[i])
+    }
+    stage.removeChild(handler);
+  //  stage.removeChild(groupedNodes);
+  console.log(stage.children)
     selectActive = false;
+    selectedObjs=[]
+    groupedOffset = [];
+    groupedNodes = null;
+    stage.update();
     selBtn.classList.remove("text-danger");
     document.getElementById("demoCanvas").style.cursor = "auto";
   }
