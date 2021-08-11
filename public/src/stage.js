@@ -465,7 +465,7 @@ function alignY() {
 
   for (i = 0; i < selectedObjs.length; i++) {
     selectedObjs[i].y = y;
-
+    groupedOffset[i].y = y - handler.y
     stage.update();
   }
 }
@@ -475,7 +475,8 @@ function alignX() {
 
   for (i = 0; i < selectedObjs.length; i++) {
     selectedObjs[i].x = x;
-
+    groupedOffset[i].x = x - handler.x
+  
     stage.update();
   }
 }
@@ -485,42 +486,26 @@ function spaceY() {
   let countNodes = selectedObjs.length;
   countNodes = countNodes + 1;
   let increment = maxY / countNodes;
-  let incrementO = increment;
 
   for (i = 0; i < selectedObjs.length; i++) {
-    x = i;
+    let pos = increment * i+1
 
-    if (x <= 0) {
-      increment++;
-      selectedObjs[i].y = increment;
-
-      stage.update();
-    }
-    selectedObjs[i].y = increment;
-
-    increment = increment + incrementO;
+    selectedObjs[i].y = pos;
+    groupedOffset[i].y = pos - handler.y
     stage.update();
   }
 }
 
-function spaceX() { // Alter offset array so when group selected it will work & move Handler 
+function spaceX() { // 
   let maxX = stage.canvas.clientWidth;
   let countNodes = selectedObjs.length;
   countNodes = countNodes + 1;
   let increment = maxX / countNodes;
-  let incrementO = increment;
 
   for (i = 0; i < selectedObjs.length; i++) {
-    y = i;
-
-    if (y <= 0) {
-      increment++;
-      selectedObjs[i].x = increment;
-      stage.update();
-    }
-    selectedObjs[i].x = increment;
-
-    increment = increment + incrementO;
+    let pos = increment * i+1
+    selectedObjs[i].x = pos
+    groupedOffset[i].x = pos - handler.x
     stage.update();
   }
 }
