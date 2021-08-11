@@ -106,17 +106,17 @@ newBtn.onclick = function () {
        {
         selectedObjs.push(event.currentTarget.parent);
         if (groupedNodes == null){
-          var circle = new createjs.Shape();
-          circle.graphics.ss(3).s("#00f").mt(-10,0).lt(10,0).mt(0,-10).lt(0,10);
+          var cross = new createjs.Shape();
+          cross.graphics.ss(3).s("#00f").mt(-10,0).lt(10,0).mt(0,-10).lt(0,10);
 // Add a hitArea to the cross-hair so it is easier to press
-          circle.hitArea = new createjs.Shape(new createjs.Graphics().f("green").dc(0,0,10));
+          cross.hitArea = new createjs.Shape(new createjs.Graphics().f("green").dc(0,0,30));
           dragRadius = 10;
          
         //Circle Create
         //  circle.graphics.beginFill("#ff0000").drawRect(0, 0, 20, 20);
         console.log("Firing!")
           handler = new createjs.Container()
-          handler.addChild(circle)
+          handler.addChild(cross)
           handler.x = event.currentTarget.parent.x - 50
           handler.y = event.currentTarget.parent.y + 50
           groupedNodes = new createjs.Container()
@@ -137,11 +137,10 @@ newBtn.onclick = function () {
         handler.on("pressmove", function (evt) {
           evt.currentTarget.x = evt.stageX;
           evt.currentTarget.y = evt.stageY;
-          stage.update(); //much smoother because it refreshes the screen every pixel movement instead of the FPS set on the Ticker
+        //  stage.update(); //much smoother because it refreshes the screen every pixel movement instead of the FPS set on the Ticker
           evt.currentTarget.alpha = 1;
           
           for (let z = 0; z < selectedObjs.length; z ++){
-
 //console.log(groupedNodes);
        //   groupedNodes.offset.x = groupedNodes.children[z].x-handler.x  
        //   groupedNodes.offset.y = groupedNodes.children[z].y-handler.y
@@ -149,9 +148,9 @@ newBtn.onclick = function () {
 
             selectedObjs[z].x = handler.x + groupedOffset[z].x;
             selectedObjs[z].y = handler.y + groupedOffset[z].y;
-        
-          stage.update();
+         
         }
+        stage.update();
         });       
        
         event.currentTarget.graphics._fill.style = "#2196f3"
@@ -489,7 +488,7 @@ function spaceY() {
   }
 }
 
-function spaceX() {
+function spaceX() { // Alter offset array so when group selected it will work & move Handler 
   let maxX = stage.canvas.clientWidth;
   let countNodes = selectedObjs.length;
   countNodes = countNodes + 1;
@@ -502,7 +501,6 @@ function spaceX() {
     if (y <= 0) {
       increment++;
       selectedObjs[i].x = increment;
-
       stage.update();
     }
     selectedObjs[i].x = increment;
