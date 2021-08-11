@@ -314,8 +314,8 @@ function timeLine() {
   console.log(canvasId);
   copyCanvas.setAttribute("id", canvasId);
   copyCanvas.classList.add("savedScene");
-  copyCanvas.height = 150;
-  copyCanvas.width = 200;
+  copyCanvas.height = 100
+  copyCanvas.width = 150;
   copyCanvas.style = "display:inline";
   copyCanvas.classList.add("border");
   copyCanvas.classList.add("border-secondary");
@@ -338,7 +338,11 @@ function timeLine() {
   let sceneCount = document.getElementById("sceneInfo");
   let sceneTable = document.getElementById("scenes");
   let newTd = document.createElement("td");
-  newTd.innerHTML = sceneCount.childElementCount + 1;
+  let sceneNum = document.createElement("span")
+
+  sceneNum.classList.add("sceneTdInfo")
+  sceneNum.innerHTML = sceneCount.childElementCount + 1;
+  newTd.appendChild(sceneNum);
   let rubbishButton = document.createElement("i")
   rubbishButton.classList.add("fa-trash-alt");
   rubbishButton.classList.add("fas")
@@ -358,11 +362,15 @@ function timeLine() {
     let rmCanvasId = e.target.id.substr(0, e.target.id.indexOf('-'));
     let rmCanvas = document.getElementById(rmCanvasId);
     if (index > -1) {
-
        allScenes.splice(index, 1);    
       rmCanvas.parentElement.parentElement.remove()
+      let tdinfos = document.getElementsByClassName("sceneTdInfo")
+      e.target.parentElement.remove()
+      for(var x = 0; x < tdinfos.length; x ++){
+        tdinfos[x].innerHTML = x+1;
+      }
     }
-    e.target.parentElement.remove()
+    
   };
   newTd.classList.add("border");
   newTd.classList.add("rounded");
