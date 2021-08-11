@@ -1,5 +1,10 @@
 const slider = document.getElementById("formControlRange");
-
+$('.mytable').dragableColumns({
+  drag: true,
+  dragClass: 'drag',
+  overClass: 'over',
+  movedContainerSelector: '.dnd-moved'
+});
 
 $('html, body').on('dragstart', function (e)
 {

@@ -305,6 +305,7 @@ scrapBtn.onclick = () => {
   }, 3000);
 };
 
+// Create the Timeline of scenes
 function timeLine() {
   let copyCanvas = document.createElement("canvas");
   let sourceCanvas = document.getElementById("demoCanvas");
@@ -312,8 +313,8 @@ function timeLine() {
   console.log(canvasId);
   copyCanvas.setAttribute("id", canvasId);
   copyCanvas.classList.add("savedScene");
-  copyCanvas.height = 70;
-  copyCanvas.width = 70;
+  copyCanvas.height = 100;
+  copyCanvas.width = 100;
   copyCanvas.style = "display:inline";
   copyCanvas.classList.add("border");
   copyCanvas.classList.add("border-secondary");
@@ -341,8 +342,13 @@ function timeLine() {
   rubbishButton.classList.add("fa-trash-alt");
   rubbishButton.classList.add("fas")
   rubbishButton.classList.add("rubbishBtn")
+  let notesBtn = document.createElement("i")
+  notesBtn.classList.add("fa-scroll");
+  notesBtn.classList.add("fas")
+  notesBtn.classList.add("notesBtn")
   newTd.appendChild(rubbishButton);
-  
+  newTd.appendChild(notesBtn);
+  rubbishButton.onclick = (e) => { console.log(e)};
   newTd.classList.add("border");
   newTd.classList.add("rounded");
   sceneCount.appendChild(newTd);
@@ -358,6 +364,7 @@ function timeLine() {
 
   console.log("clicked it");
 }
+
 
 //Card Input
 /*
