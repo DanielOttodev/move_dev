@@ -225,8 +225,9 @@ saveBtn.onclick = function () {
 
     console.log(savedPositions[i]);
   }
-  savedPositions.notes = notes;
 
+  savedPositions.notes = notes;
+  savedPositions.id = allScenes.length
   //savedPositions.push(details)
   allScenes.push(savedPositions);
   console.log(allScenes);
@@ -313,8 +314,8 @@ function timeLine() {
   console.log(canvasId);
   copyCanvas.setAttribute("id", canvasId);
   copyCanvas.classList.add("savedScene");
-  copyCanvas.height = 100;
-  copyCanvas.width = 100;
+  copyCanvas.height = 150;
+  copyCanvas.width = 200;
   copyCanvas.style = "display:inline";
   copyCanvas.classList.add("border");
   copyCanvas.classList.add("border-secondary");
@@ -342,13 +343,27 @@ function timeLine() {
   rubbishButton.classList.add("fa-trash-alt");
   rubbishButton.classList.add("fas")
   rubbishButton.classList.add("rubbishBtn")
+  rubbishButton.setAttribute("id", canvasId+'-RmBtn')
   let notesBtn = document.createElement("i")
   notesBtn.classList.add("fa-scroll");
   notesBtn.classList.add("fas")
   notesBtn.classList.add("notesBtn")
   newTd.appendChild(rubbishButton);
   newTd.appendChild(notesBtn);
-  rubbishButton.onclick = (e) => { console.log(e)};
+  rubbishButton.onclick = (e) => { 
+   // var houseIndex = street.houses.findIndex(h => h.rooms.some(r => r.id === roomId));
+    let id = e.target.id.substr(0, e.target.id.indexOf('_'));  // Id of the scene to remove;
+    let index = allScenes.findIndex(x => x.id == id)
+    console.log(e.target.id)
+    let rmCanvasId = e.target.id.substr(0, e.target.id.indexOf('-'));
+    let rmCanvas = document.getElementById(rmCanvasId);
+    if (index > -1) {
+
+       allScenes.splice(index, 1);    
+      rmCanvas.parentElement.parentElement.remove()
+    }
+    e.target.parentElement.remove()
+  };
   newTd.classList.add("border");
   newTd.classList.add("rounded");
   sceneCount.appendChild(newTd);
@@ -356,10 +371,10 @@ function timeLine() {
   newTd2.classList.add("border");
   newTd2.classList.add("rounded");
   newTd2.appendChild(canvasWrap);
-  let notes = document.createElement("p");
+  /*let notes = document.createElement("p");/// Notes
   notes.classList.add("text-dark");
-  notes.textContent = document.getElementById("formationNotes").value;
-  newTd2.appendChild(notes);
+  notes.textContent = document.getElementById("formationNotes").value;*/ 
+  //newTd2.appendChild(notes);
   sceneTable.appendChild(newTd2);
 
   console.log("clicked it");
