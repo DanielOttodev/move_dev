@@ -339,7 +339,6 @@ function timeLine() {
   let sceneTable = document.getElementById("scenes");
   let newTd = document.createElement("td");
   let sceneNum = document.createElement("span")
-
   sceneNum.classList.add("sceneTdInfo")
   sceneNum.innerHTML = sceneCount.childElementCount + 1;
   newTd.appendChild(sceneNum);
@@ -349,16 +348,26 @@ function timeLine() {
   rubbishButton.classList.add("rubbishBtn")
   rubbishButton.setAttribute("id", canvasId+'-RmBtn')
   let notesBtn = document.createElement("i")
+  notesBtn.setAttribute("id",canvasId+"-noteBtn")
   notesBtn.classList.add("fa-scroll");
   notesBtn.classList.add("fas")
   notesBtn.classList.add("notesBtn")
+  notesBtn.onclick = (e) => {
+    let id = e.target.id.substr(0, e.target.id.indexOf('_'));
+    let index = allScenes.findIndex(x => x.id == id)
+    if(index > -1){
+      let notes = allScenes[index].notes;
+      console.log(notes);
+      buildNoteModal(notes);
+    }
+    }
   newTd.appendChild(rubbishButton);
   newTd.appendChild(notesBtn);
   rubbishButton.onclick = (e) => { 
    // var houseIndex = street.houses.findIndex(h => h.rooms.some(r => r.id === roomId));
     let id = e.target.id.substr(0, e.target.id.indexOf('_'));  // Id of the scene to remove;
     let index = allScenes.findIndex(x => x.id == id)
-    console.log(e.target.id)
+    
     let rmCanvasId = e.target.id.substr(0, e.target.id.indexOf('-'));
     let rmCanvas = document.getElementById(rmCanvasId);
     if (index > -1) {
@@ -595,6 +604,16 @@ saveAll.addEventListener('click', (e) => {
 
 function groupSelect() {
   let container = new createjs.Container();
+
+}
+function buildNoteModal(notes){
+  let modalBody = document.getElementById("modalBody")
+  
+  
+  modalBody.textContent = notes;
+  
+
+  $('#mymodal').modal('toggle');
 
 }
 /*
