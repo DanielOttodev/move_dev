@@ -1,3 +1,16 @@
+#mainContent {
+   display: none;
+ }
+ #splashScreen {
+  background-image: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
+  background-size: cover;
+  height: 100%;
+  width: 100%;
+}
+#extraContent{
+  display:none;
+}
+
 .mStage {
   touch-action: none;
   border-style: solid;
@@ -115,13 +128,7 @@ td {
 
 }
 
-#splashScreen {
-  background-image: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
-  background-size: cover;
-  height: 100vh;
-  width: 100vw;
-  display: none;
-}
+
 
 
 
@@ -165,9 +172,7 @@ td {
   background-color: rgba(65, 105, 225, 0.11);
 }
 
-#mainContent {
- /* display: none;*/
-}
+
 .btn-group button{
   background-color: rgba(255, 255, 255, 0.212);
   color:#212121;

@@ -18,7 +18,7 @@
 <body onload="init();">
 
     <!-- Image and text -->
-    <nav class="navbar navbar-light bg-dark  mb-3">
+    <nav class="navbar navbar-light bg-dark">
         <a class="navbar-brand text-light" href="#">
             <img src="../imgs/mLogo.png" width="40" height="30" class="d-inline-block align-top" alt="" />
             Moves
@@ -67,6 +67,7 @@
 
     </div>
     <div id="mainContent">
+    <div >
         <div class="container">
             <div class="row justify-content-center">                    
                     <!----    <div class="">
@@ -224,7 +225,7 @@
                 <!-- a div where the div will be placed -->
 
             </div>
-        <div class="container">
+        <div class="container" id="extraContent">
             <div class="row">
                 <div class="col">
                     <div class="row">
@@ -252,6 +253,7 @@
                 </div>
             </div>
         </div>
+        <div>
             <div class="container">
                 <div class="row justify-content-center">
                     <h6>Audio</h6>
@@ -259,14 +261,18 @@
 
             </div>
             <div id="audio-spectrum"></div>
+        </div>
+
 
         </div>
+    </div>
+    </div>
     <!-- Modal -->
 <div class="modal fade" id="mymodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Formation Notes</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -276,7 +282,6 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
       </div>
     </div>
   </div>
