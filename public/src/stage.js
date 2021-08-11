@@ -53,7 +53,7 @@ newBtn.onclick = function () {
   var circle = new createjs.Shape();
   //VARIABLES
   //Drag Object Size
-  dragRadius = 40;
+  dragRadius = 60;
 
   //Circle Create
   circle.graphics.beginFill(getRandomColor()).drawCircle(0, 0, 20);
@@ -337,6 +337,12 @@ function timeLine() {
   let sceneTable = document.getElementById("scenes");
   let newTd = document.createElement("td");
   newTd.innerHTML = sceneCount.childElementCount + 1;
+  let rubbishButton = document.createElement("i")
+  rubbishButton.classList.add("fa-trash-alt");
+  rubbishButton.classList.add("fas")
+  rubbishButton.classList.add("rubbishBtn")
+  newTd.appendChild(rubbishButton);
+  
   newTd.classList.add("border");
   newTd.classList.add("rounded");
   sceneCount.appendChild(newTd);

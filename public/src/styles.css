@@ -13,7 +13,11 @@
     linear-gradient(to bottom, rgb(61, 123, 255), transparent 1px);
 }
 
+.rubbishBtn{
+  float: right;
+  color:rgba(255, 0, 0, 0.438);
 
+}
 .sceneTable{
     border-radius: 10px;
     margin-top: 10px;
@@ -34,10 +38,14 @@ td {
   border: #212121 5px solid;
   color: black;
   overflow-x: auto;
+  font-style: bold;
+  font-weight: 1000;
 }
-
+.canvasCopys{
+  width:200px;
+}
 .canvasCopys :hover {
-  background-color: #5777ba;
+  background-color: #6666661e;
 }
 
 #speedValue {
