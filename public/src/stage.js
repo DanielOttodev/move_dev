@@ -31,9 +31,9 @@ async function goMain() {
   let main = document.getElementById("mainContent")
 
   main.style.display = "block"
-  main.classList.add("mainTran")
   extra.style.display = "block"
   splash.style.display = "none"
+  start();
 }
 function plusPerson(){
   var x = parseInt(countP.textContent);
@@ -41,7 +41,7 @@ function plusPerson(){
   countP.textContent = x.toString();
 
 }
-
+function init(){}
 function subPerson(){
   var x = parseInt(countP.textContent)
   if(x > 0){
@@ -58,6 +58,18 @@ newProjectBtn.onclick = (e) => {
 
 // Globals
 //// Main Application 
+
+function start(){
+  console.log('Initialising');
+  var x = parseInt(countP.textContent);
+  for(i=0; i<x; i++){
+  
+  addNodes()
+
+  }
+  
+}
+
 console.log(DragSelect)
 const db = firebase.firestore();
 createjs.MotionGuidePlugin.install();
@@ -103,11 +115,11 @@ function getRandomColor() {
   return color;
 }
 
-function init() {}
+
 
 // Add New Shape Button
 const newBtn = document.getElementById("new");
-newBtn.onclick = function () {
+function addNodes () {
   var circle = new createjs.Shape();
   //VARIABLES
   //Drag Object Size
