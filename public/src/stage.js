@@ -231,7 +231,7 @@ saveBtn.onclick = function () {
   //savedPositions.push(details)
   allScenes.push(savedPositions);
   console.log(allScenes);
-  timeLine();
+  timeLine(notes);
   document.getElementById("formationNotes").value = "";
 };
 
@@ -307,7 +307,7 @@ scrapBtn.onclick = () => {
 };
 
 // Create the Timeline of scenes
-function timeLine() {
+function timeLine(notes) {
   let copyCanvas = document.createElement("canvas");
   let sourceCanvas = document.getElementById("demoCanvas");
   let canvasId = allScenes.length - 1 + "_scene";
@@ -352,6 +352,9 @@ function timeLine() {
   notesBtn.classList.add("fa-scroll");
   notesBtn.classList.add("fas")
   notesBtn.classList.add("notesBtn")
+  if(notes != ""){
+    notesBtn.classList.add("hasNotes");
+  }
   notesBtn.onclick = (e) => {
     let id = e.target.id.substr(0, e.target.id.indexOf('_'));
     let index = allScenes.findIndex(x => x.id == id)

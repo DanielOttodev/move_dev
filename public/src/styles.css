@@ -61,8 +61,7 @@ body {
 
 .mStage {
   touch-action: none;
-  border-style: solid;
-  border: 3px deepskyblue solid;
+  border-style: none;
   border-radius: 7px;
   background-color: white;
   /*rgba(0, 0, 0, 0.322);*/
@@ -448,6 +447,9 @@ path.two {
   100% {
     fill: white;
   }
+}
+.hasNotes{
+  color:rgba(255, 209, 59, 0.733);
 }
 
 /*# sourceMappingURL=styles.css.map */
