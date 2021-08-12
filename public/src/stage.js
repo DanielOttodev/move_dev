@@ -1,5 +1,13 @@
-// Globals
+/// Splash screen
 
+const newProjectBtn = document.getElementById('newProject')
+
+newProjectBtn.onclick = (e) => {
+ alert("lets go!")
+}
+
+// Globals
+//// Main Application 
 console.log(DragSelect)
 const db = firebase.firestore();
 createjs.MotionGuidePlugin.install();
@@ -294,16 +302,8 @@ spaceYBtn.addEventListener("click", spaceY);
 spaceXBtn.addEventListener("click", spaceX);
 //Remove Positions from the current scene
 scrapBtn.onclick = () => {
-  console.log("here");
-  for (let i = 0; i < selectedObjs.length; i++) {
-    selectedObjs[i].children[0].graphics._fill.style = '#212121'
-  }
-  stage.update();
-  selectedObjs = [];
-  $(".alert").show();
-  window.setTimeout(function () {
-    $(".alert").alert("close");
-  }, 3000);
+
+  drawCentre();
 };
 
 // Create the Timeline of scenes
@@ -618,6 +618,13 @@ function buildNoteModal(notes){
 
   $('#mymodal').modal('toggle');
 
+}
+
+function drawCentre(){
+var canvas = document.getElementById("demoCanvas");
+var ctx = canvas.getContext("2d");
+ctx.fillStyle = "#9baacf";
+ctx.fillText("Centre",600, 300);
 }
 /*
 new DragSelect({
