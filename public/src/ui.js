@@ -44,10 +44,13 @@ gridtoggle.onclick = () => {
 
 const splashToggle = document.getElementById("splashtoggle")
 splashToggle.onclick = () =>{
+  let extra = document.getElementById("extraContent")
+  let splash = document.getElementById("splashScreen")
   let main = document.getElementById("mainContent")
   main.style.display = "block"
-  let splash = document.getElementById("splashScreen")
+  extra.style.display = "block"
   splash.style.display = "none"
+
 }
 
 function findRoutines(event) {

@@ -33,18 +33,19 @@
                 <a class="dropdown-item" id="saveAll" href="#">Save</a>
                 <a class="dropdown-item" href="#">Load Routine</a>
                 <a class="dropdown-item" id="signOut" href="#">Sign Out</a>
-                <div class="custom-control custom-switch">
-                    <input value="" type="checkbox" class="custom-control-input" id="bgtoggle">
+                <div class="custom-control custom-switch switch">
+                    <input value="" type="checkbox" class="custom-control-input " id="bgtoggle">
                     <label class="custom-control-label" for="bgtoggle">Basketball Court</label>
                 </div>
                 <div class="custom-control custom-switch">
-                    <input value="" type="checkbox" class="custom-control-input" id="gridtoggle">
+                    <input value="" type="checkbox" class="custom-control-input switch " id="gridtoggle">
                     <label class="custom-control-label" for="gridtoggle">Grid</label>
                 </div>
-                <div class="custom-control custom-switch">
-                    <input value="" type="checkbox" class="custom-control-input" id="splashtoggle">
+                <div class="custom-control custom-switch switch">
+                    <input value="" type="checkbox" class="custom-control-input switch " id="splashtoggle">
                     <label class="custom-control-label" for="splashtoggle">SplashScreen</label>
                 </div>
+
             </div>
         </div>
     </nav>
@@ -52,60 +53,26 @@
         <div class="container">
 
             <div class="row justify-content-center vertical-center">
-           <!----    <div class="col-6">
-                    <div class="card-body">
-                        <h5 class="card-title">Starting a new routine?</h5>
-                        <p class="card-text">Build, share and colloborate!</p>
-                        <a href="#" class="btn btn-primary">Let's Go!</a>
+
+                <div class="card shadow-lg m-3 p-3 splashcard">
+                    <div class="card-body ">
+                        <h1>New Routine</h1>
+
                     </div>
                 </div>
-                <div class="col-6">
-                    <div class="card-body">
-                        <h5 class="card-title">Load an existing one</h5>
-                        <p class="card-text">Go from where you left off or view a shared routine</p>
-                        <a href="#" class="btn btn-primary">Load</a>
+                <div class="card shadow-lg m-3 p-3 splashcard">
+                    <div class="card-body ">
+                        <h1>Load Routine</h1>
                     </div>
-                </div> -->
-                <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-  <div class="carousel-inner p-5">
-    <div class="carousel-item active">
-        <div class="card shadow-lg p-3 splashcard">
-             <div class="card-body ">
-             <h1>New Routine</h1>
- 
-             </div>
-        </div>
-        <div class="card shadow-lg mt-3 p-3 splashcard">
-            <div class="card-body ">
-            <h1>Load Routine</h1>
-
-            </div>
-       </div>
-    </div>
-    <div class="carousel-item">
-      <img class="d-block w-100" src="..." alt="Second slide">
-    </div>
-    <div class="carousel-item">
-      <img class="d-block w-100" src="..." alt="Third slide">
-    </div>
-  </div>
-  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a>
-</div>
+                </div>
             </div>
         </div>
 
     </div>
     <div id="mainContent">
-    <div >
-        <div class="container">
-            <div class="row justify-content-center">                    
+        <div>
+            <div class="container">
+                <div class="row justify-content-center">
                     <!----    <div class="">
 
                             <h5>Selected: <span class="card-title text-dark" id="selectedName"> </span></h5>
@@ -138,116 +105,129 @@
                                 </div>
                             </div>
                         </div>-->
-                    
-                <div class="col-lg-12 col-xl-12 col-xs-12  ">
-                    <div class="alert alert-warning alert-dismissible fade show">
-                        <button type="button" class="close" data-dismiss="alert">&times;</button>
-                        Removed Selection
-                    </div>
-                    <div id="overlay">
 
-                        <canvas class="mStage " id="demoCanvas" width="1200px" height="600px"></canvas>
-                    </div>
-                    <div class="container-fluid ">
-                        <div class="row justify-content-center">
-                            <div class="btncontainer">
-                            <div class="btn-toolbar" role="toolbar">
-                                <div class="btn-group btn-group-justified" role="group">
-                                    <div class="btn-group" id="btn-select" value="0" role="group">
-                                        <button id="selectBtn" class="btn rounded btn-info" data-original-title="Refreshr">
-                                            <i class="fas fa-hand-pointer"></i>
-                                        </button>
-                                    </div>
-                                    <div class="btn-group" id="btn-play" value="Play" disabled="disabled" role="group">
-                                        <button id="playBtn" class="btn rounded btn-primary" data-original-title="Refreshr">
-                                            <i class="fas fa-play"></i>
-                                        </button>
-                                    </div>
+                    <div class="col-lg-12 col-xl-12 col-xs-12  ">
+                        <div class="alert alert-warning alert-dismissible fade show">
+                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                            Removed Selection
+                        </div>
+                        <div id="overlay">
 
-                                    <div class="btn-group" id="btn-pause" value="Pause" disabled="disabled"
-                                        role="group">
-                                        <button id="pauseBtn" class="btn rounded btn-primary" data-original-title="Refreshr">
-                                            <i class="fas fa-pause"></i>
+                            <canvas class="mStage " id="demoCanvas" width="1200px" height="600px"></canvas>
+                        </div>
+                        <div class="container-fluid ">
+                            <div class="row justify-content-center">
+                                <div class="btncontainer">
+                                    <div class="btn-toolbar" role="toolbar">
+                                        <div class="btn-group btn-group-justified" role="group">
+                                            <div class="btn-group" id="btn-select" value="0" role="group">
+                                                <button id="selectBtn" class="btn rounded btn-info"
+                                                    data-original-title="Refreshr">
+                                                    <i class="fas fa-hand-pointer"></i>
+                                                </button>
+                                            </div>
+                                            <div class="btn-group" id="btn-play" value="Play" disabled="disabled"
+                                                role="group">
+                                                <button id="playBtn" class="btn rounded btn-primary"
+                                                    data-original-title="Refreshr">
+                                                    <i class="fas fa-play"></i>
+                                                </button>
+                                            </div>
 
-                                        </button>
-                                    </div>
-                                    <div class="btn-group" id="btn-stop" value="Stop" disabled="disabled" role="group">
-                                        <button id="stopBtn" class="btn rounded btn-primary" data-original-title="Refreshr">
-                                            <i class="fas fa-stop"></i>
-                                        </button>
-                                    </div>
+                                            <div class="btn-group" id="btn-pause" value="Pause" disabled="disabled"
+                                                role="group">
+                                                <button id="pauseBtn" class="btn rounded btn-primary"
+                                                    data-original-title="Refreshr">
+                                                    <i class="fas fa-pause"></i>
+
+                                                </button>
+                                            </div>
+                                            <div class="btn-group" id="btn-stop" value="Stop" disabled="disabled"
+                                                role="group">
+                                                <button id="stopBtn" class="btn rounded btn-primary"
+                                                    data-original-title="Refreshr">
+                                                    <i class="fas fa-stop"></i>
+                                                </button>
+                                            </div>
 
 
-                                    <div class="btn-group" role="group">
-                                        <button id="new" class=" btn btn-primary rounded" data-original-title="New">
-                                            <i class="fa fa-plus fa-lg" aria-hidden="true"></i>
-                                        </button>
-                                    </div>
+                                            <div class="btn-group" role="group">
+                                                <button id="new" class=" btn btn-primary rounded"
+                                                    data-original-title="New">
+                                                    <i class="fa fa-plus fa-lg" aria-hidden="true"></i>
+                                                </button>
+                                            </div>
 
-                                    <div class="btn-group" role="group">
-                                        <button id="save" class="btn btn-primary rounded" data-original-title="Deactivate">
-                                            <i class="fas fa-save"></i>
-                                        </button>
-                                    </div>
+                                            <div class="btn-group" role="group">
+                                                <button id="save" class="btn btn-primary rounded"
+                                                    data-original-title="Deactivate">
+                                                    <i class="fas fa-save"></i>
+                                                </button>
+                                            </div>
 
-                                    <div class="btn-group" role="group">
-                                        <button type="button" id="scrapBtn" class="btn btn-warning rounded"
-                                            data-toggle="tooltip" data-placement="right" data-original-title="Delete"
-                                            title="Remove saved positions">
-                                            <i class="fa fa-trash-o fa-lg" aria-hidden="true"></i>
-                                        </button>
-                                    </div>
-                                    <div class="btn-group" role="group">
-                                        <button id="react" class="btn btn-success text-white rounded"
-                                            data-original-title="Activate">
+                                            <div class="btn-group" role="group">
+                                                <button type="button" id="scrapBtn" class="btn btn-warning rounded"
+                                                    data-toggle="tooltip" data-placement="right"
+                                                    data-original-title="Delete" title="Remove saved positions">
+                                                    <i class="fa fa-trash-o fa-lg" aria-hidden="true"></i>
+                                                </button>
+                                            </div>
+                                            <div class="btn-group" role="group">
+                                                <button id="react" class="btn btn-success text-white rounded"
+                                                    data-original-title="Activate">
 
-                                            <i class="fas fa-volume-up vol"></i>
-                                            <input type="range" min="0" max="1" value="10" step="0.1"
-                                                class="form-control-range" id="volumeRange">
-                                        </button>
+                                                    <i class="fas fa-volume-up vol"></i>
+                                                    <input type="range" min="0" max="1" value="10" step="0.1"
+                                                        class="form-control-range" id="volumeRange">
+                                                </button>
+                                            </div>
+                                            <div class="btn-group" role="group">
+                                                <button type="button" id="speedBtn" class="btn btn-warning rounded"
+                                                    data-toggle="tooltip" data-placement="right"
+                                                    data-original-title="Delete" title="Change transition speed">
+                                                    <i class="fas fa-tachometer-alt"> <span id="speedValue">2</span>
+                                                    </i>
+                                                    <input type="range" min="1" max="10" value="2" step="0.1"
+                                                        class="form-control-range" id="formControlRange"></button>
+                                                </button>
+                                            </div>
+                                            <div class="btn-group" role="group" aria-label="...">
+                                                <button type="button" id="alignY" data-toggle="tooltip"
+                                                    data-placement="right" title="Align vertically"
+                                                    class="btn btn-info rounded"><i
+                                                        class="fas fa-arrows-alt-v"></i></button>
+                                                <button type="button" id="alignX" data-toggle="tooltip"
+                                                    data-placement="right" title="Align horizontal"
+                                                    class="btn btn-primary rounded"><i
+                                                        class="fas fa-arrows-alt-h"></i></button>
+                                            </div>
+
+                                            <div class="btn-group" role="group" aria-label="...">
+                                                <button type="button" id="spaceY" data-toggle="tooltip"
+                                                    data-placement="right" title="Space vertically"
+                                                    class="btn btn-large btn-success rounded"><i
+                                                        class="fas fa-align-justify"></i></button>
+                                                <button type="button" data-toggle="tooltip" data-placement="right"
+                                                    title="Space horizontally" id="spaceX"
+                                                    class="btn rounded btn-danger"><i
+                                                        class="fas fa-exchange-alt"></i></button>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="btn-group" role="group">
-                                        <button type="button" id="speedBtn" class="btn btn-warning rounded"
-                                            data-toggle="tooltip" data-placement="right" data-original-title="Delete"
-                                            title="Change transition speed">
-                                            <i class="fas fa-tachometer-alt"> <span  id="speedValue"
-                                                >2</span> </i>   
-                                            <input type="range" min="1" max="10" value="2" step="0.1"
-                                            class="form-control-range" id="formControlRange"></button>                                  </button>
-                                    </div>
-                                    <div class="btn-group" role="group" aria-label="...">
-                                        <button type="button" id="alignY" data-toggle="tooltip" data-placement="right"
-                                            title="Align vertically" class="btn btn-info rounded"><i
-                                                class="fas fa-arrows-alt-v"></i></button>
-                                        <button type="button" id="alignX" data-toggle="tooltip" data-placement="right"
-                                            title="Align horizontal" class="btn btn-primary rounded"><i
-                                                class="fas fa-arrows-alt-h"></i></button>
-                                    </div>
-        
-                                    <div class="btn-group" role="group" aria-label="...">
-                                        <button type="button" id="spaceY" data-toggle="tooltip" data-placement="right"
-                                            title="Space vertically" class="btn btn-large btn-success rounded"><i
-                                                class="fas fa-align-justify"></i></button>
-                                        <button type="button" data-toggle="tooltip" data-placement="right"
-                                            title="Space horizontally" id="spaceX" class="btn rounded btn-danger"><i
-                                                class="fas fa-exchange-alt"></i></button>
-                                    </div>
-                                </div>
                                 </div>
                             </div>
-                        </div>
                         </div>
                     </div>
 
                 </div>
-                  
+
             </div>
         </div>
 
 
         <div class="container">
             <div class="row">
-                <table class="table sceneTable border">
+                <table class="table sceneTable border shadow-lg mt-3">
                     <thead></thead>
                     <tbody>
                         <tr id="sceneInfo" class=" dnd-moved topRow">
@@ -261,18 +241,20 @@
                 <!-- a div where the div will be placed -->
 
             </div>
-        <div class="container" id="extraContent">
-            <div class="row">
-                <div class="col">
-                    <div class="row">
-                        <div class="col-xl-12 col-lg-6 col-md-6">
-                            
-       
-                            <div class="form-group mt-2 text-dark">
-                                <label for="exampleFormControlTextarea1">Formation Notes</label>
-                                <textarea class="form-control" id="formationNotes" rows="3"></textarea>
-                            </div>
-                            <!----   <h6 class="mt-3 text-dark">Group Select</h6>
+            <div class="container" id="extraContent">
+                <div class="row">
+                    <div class="col">
+                        <div class="row">
+                            <div class="col-xl-12 col-lg-6 col-md-6">
+                                <div class="form">
+
+                                </div>
+
+                                <div class="form-group mt-2 text-dark form">
+                                    <textarea class="form__input" id="formationNotes" placeholder="Take some notes..."
+                                        rows="3"></textarea>
+                                </div>
+                                <!----   <h6 class="mt-3 text-dark">Group Select</h6>
                             <div class="card bg-secondary mt-2" style="width: 18rem;">
                                 <ul class="list-group list-group-flush">
                                     <li class="list-group-item initialLi">
@@ -285,43 +267,44 @@
 
                                 </ul>
                             </div>  ---->
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div>
-            <div class="container">
-                <div class="row justify-content-center">
-                    <h6>Audio</h6>
+                <div>
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <h6>Audio</h6>
+                        </div>
+
+                    </div>
+                    <div id="audio-spectrum"></div>
                 </div>
 
+
             </div>
-            <div id="audio-spectrum"></div>
         </div>
-
-
-        </div>
-    </div>
     </div>
     <!-- Modal -->
-<div class="modal fade" id="mymodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Formation Notes</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body" id="modalBody">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
+    <div class="modal fade" id="mymodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Formation Notes</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="modalBody">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-</div>
     </div>
     <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-firestore.js"></script>
