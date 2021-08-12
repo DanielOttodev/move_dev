@@ -41,7 +41,9 @@ gridtoggle.onclick = () => {
     gridtoggle.value = "unchecked";
   }
 };
-
+function toggleSplash(){
+  
+}
 const splashToggle = document.getElementById("splashtoggle")
 splashToggle.onclick = () =>{
   let extra = document.getElementById("extraContent")
@@ -69,3 +71,4 @@ function findRoutines(event) {
     })
   }, noResult)
 }
+

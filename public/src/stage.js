@@ -3,10 +3,58 @@
 const newProjectBtn = document.getElementById('newProjectBtn')
 const newProjectContent = document.getElementById('newProjectContent');
 const loadScreen = document.getElementById('loadScreen');
+const plusP = document.getElementById('plusPBtn')
+const subP = document.getElementById('subP');
+const countP = document.getElementById('countP');
+const goBtn = document.getElementById("goBtn");
+const cubeAnim = document.getElementById("cubeBoxContainer");
+
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function goMain() {
+  cubeAnim.style.display = "flex";
+  newProjectContent.style.display ="none";
+  console.log('Taking a break...');
+  await sleep(2000);
+  console.log('Two seconds later, showing sleep in a loop...');
+
+  // Sleep in loop
+  for (let i = 0; i < 5; i++) {
+    if (i === 3)
+      await sleep(2000);
+    console.log(i);
+  }
+  let extra = document.getElementById("extraContent")
+  let splash = document.getElementById("splashScreen")
+  let main = document.getElementById("mainContent")
+
+  main.style.display = "block"
+  main.classList.add("mainTran")
+  extra.style.display = "block"
+  splash.style.display = "none"
+}
+function plusPerson(){
+  var x = parseInt(countP.textContent);
+  x = x + 1;
+  countP.textContent = x.toString();
+
+}
+
+function subPerson(){
+  var x = parseInt(countP.textContent)
+  if(x > 0){
+    x = x - 1;
+  }
+  countP.textContent = x.toString();
+}
+
 newProjectBtn.onclick = (e) => {
  loadScreen.style.display = 'none';
  newProjectContent.style.display = 'block';
 }
+
 
 // Globals
 //// Main Application 
