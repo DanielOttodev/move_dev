@@ -25,31 +25,32 @@
         </a>
 
         <div class="dropleft show">
-            <a class="btn dropdown-toggle" id="currentUser" href="#" role="button" id="dropdownMenuLink"
-                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+  <!-- currentUser pulls in user from email-->
+            <a class="btn-nav dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-cog"></i>
             </a>
 
             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <a class="dropdown-item" id="saveAll" href="#">Save</a>
-                <a class="dropdown-item" href="#">Load Routine</a>
-                <a class="dropdown-item" id="signOut" href="#">Sign Out</a>
+                <a class="dropdown-item" id="saveAll" href="#"><i class="fas fa-save mr-2"></i>Save</a>
+                <a class="dropdown-item" href="#"> <i class="fas fa-folder-open mr-2"></i>Load Routine</a>
+                <a class="dropdown-item" id="signOut" href="#"> <i class="fas fa-sign-out-alt mr-2"></i>Sign Out</a>
                 <div class="custom-control custom-switch switch">
-                    <input value="" type="checkbox" class="custom-control-input " id="bgtoggle">
+                    <input value="" type="checkbox" class="custom-control-input mr-2 " id="bgtoggle">
                     <label class="custom-control-label" for="bgtoggle">Basketball Court</label>
                 </div>
                 <div class="custom-control custom-switch">
-                    <input value="" type="checkbox" class="custom-control-input switch " id="gridtoggle">
+                    <input value="" type="checkbox" class="custom-control-input switch mr-2" id="gridtoggle">
                     <label class="custom-control-label" for="gridtoggle">Grid</label>
                 </div>
                 <div class="custom-control custom-switch switch">
-                    <input value="" type="checkbox" class="custom-control-input switch " id="splashtoggle">
+                    <input value="" type="checkbox" class="custom-control-input switch mr-2" id="splashtoggle">
                     <label class="custom-control-label" for="splashtoggle">SplashScreen</label>
                 </div>
 
             </div>
         </div>
     </nav>
-    <div id="splashScreen">
+    <div id="splashScreen"> <!--Splash Menu ; New Project or Load existing ----------------------------------------------------------->
         <div class="container">
 
             <div class="row justify-content-center vertical-center">
@@ -88,6 +89,22 @@
                 </div  -->
             </div> 
         </div> 
+         <!-- ; New Project ----------------------------------------------------------->
+         <div class="container">
+             <div class="row">
+                <p>Current volume: <span id="volumeValue" class="current-value">0%
+                <div class="knob-surround">
+
+                    <div id="knob" class="knob"></div>
+              
+                    <span class="min">Min</span>
+                    <span class="max">Max</span>
+              
+                    <div id="tickContainer" class="ticks"></div>
+              
+                  </div>
+             </div>
+         </div>
     </div> 
 </div> 
             <div id="mainContent">
@@ -359,6 +376,7 @@
         <script src="../src/draggable.js"></script>
         <script src="stage.js"></script>
         <script src="ui.js"></script>
+        <script src="../src/vol.js"></script>
 
 </body>
 

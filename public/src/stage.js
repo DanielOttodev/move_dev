@@ -61,10 +61,10 @@ newBtn.onclick = function () {
   var circle = new createjs.Shape();
   //VARIABLES
   //Drag Object Size
-  dragRadius = 60;
+  dragRadius = 80;
 
   //Circle Create
-  circle.graphics.beginFill(getRandomColor()).drawCircle(0, 0, 20);
+  circle.graphics.beginFill(getRandomColor()).drawCircle(0, 0, 23);
   circle.x = 7;
   circle.y = 7;
 
