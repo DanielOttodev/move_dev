@@ -15,16 +15,18 @@ function sleep(ms) {
 
 async function goMain() {
   cubeAnim.style.display = "flex";
+  const cubeTxt = document.getElementById('cubetext');
+
+cubeTxt.textContent = loadingMessage();
   newProjectContent.style.display ="none";
   console.log('Taking a break...');
-  await sleep(2000);
+  await sleep(3000);
   console.log('Two seconds later, showing sleep in a loop...');
 
   // Sleep in loop
   for (let i = 0; i < 5; i++) {
     if (i === 3)
-      await sleep(2000);
-    console.log(i);
+      await sleep(3000);
   }
   let extra = document.getElementById("extraContent")
   let splash = document.getElementById("splashScreen")
@@ -35,6 +37,32 @@ async function goMain() {
   splash.style.display = "none"
   start();
 }
+
+let myMessages = [
+  'SETTING THE STAGE',
+  'JUST TIDYING UP',
+  'GETTING COFFEE! ALMOST THERE',
+  'POLISHING THE FLOOR',
+  'I FEEL LIKE I SHOULD BE LOADING SOMETHING? OH HERE WE GO',
+  'BAKING A COOKIE FOR YOU',
+  'TYING SHOE LACES...',
+  'AND 5, 6 , 7 , 8!',
+  'AM I MEANT TO BE ON STAGE?',
+  'TAKE IT FROM THE TOP!',
+  'FORGOT MY COSTUME, HOLD ON',
+  'ENTERING FROM STAGE RIGHT',
+  'GIVE ME A BEAT',
+  'GRABBING EXTRA MINIONS',
+  'STILL STRETCHING...',
+  'YOU ARE 1293283 IN QUEUE...',
+  'WHATS A BALLERINAS FAVORITE NUMBER? TWO-TWO!',
+  'ROCK - PAPER - STAGE!'
+]
+function loadingMessage(){
+let msg =  myMessages[Math.floor(Math.random()*myMessages.length)];
+return msg;
+}
+
 function plusPerson(){
   var x = parseInt(countP.textContent);
   x = x + 1;
@@ -118,7 +146,7 @@ function getRandomColor() {
 
 
 // Add New Shape Button
-const newBtn = document.getElementById("new");
+
 function addNodes () {
   var circle = new createjs.Shape();
   //VARIABLES
@@ -292,7 +320,6 @@ saveBtn.onclick = function () {
     };
     console.log(i);
     savedPositions.push(this.formation);
-
     console.log(savedPositions[i]);
   }
 
