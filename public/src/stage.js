@@ -1,9 +1,11 @@
 /// Splash screen
 
-const newProjectBtn = document.getElementById('newProject')
-
+const newProjectBtn = document.getElementById('newProjectBtn')
+const newProjectContent = document.getElementById('newProjectContent');
+const loadScreen = document.getElementById('loadScreen');
 newProjectBtn.onclick = (e) => {
- alert("lets go!")
+ loadScreen.style.display = 'none';
+ newProjectContent.style.display = 'block';
 }
 
 // Globals
