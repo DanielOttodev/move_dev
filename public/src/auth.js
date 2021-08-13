@@ -64,3 +64,6 @@ signOutBtn.onclick = () => {
     });
 }
 
+function testFunc(){
+   console.log(firebase.auth().currentUser.uid);
+}

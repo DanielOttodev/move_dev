@@ -17,8 +17,8 @@ async function goMain() {
   cubeAnim.style.display = "flex";
   const cubeTxt = document.getElementById('cubetext');
 
-cubeTxt.textContent = loadingMessage();
-  newProjectContent.style.display ="none";
+  cubeTxt.textContent = loadingMessage();
+  newProjectContent.style.display = "none";
   console.log('Taking a break...');
   await sleep(3000);
   console.log('Two seconds later, showing sleep in a loop...');
@@ -58,40 +58,43 @@ let myMessages = [
   'WHATS A BALLERINAS FAVORITE NUMBER? TWO-TWO!',
   'ROCK - PAPER - STAGE!'
 ]
-function loadingMessage(){
-let msg =  myMessages[Math.floor(Math.random()*myMessages.length)];
-return msg;
+
+function loadingMessage() {
+  let msg = myMessages[Math.floor(Math.random() * myMessages.length)];
+  return msg;
 }
 
-function plusPerson(){
+function plusPerson() {
   var x = parseInt(countP.textContent);
   x = x + 1;
   countP.textContent = x.toString();
 
 }
-function init(){}
-function subPerson(){
+
+function init() {}
+
+function subPerson() {
   var x = parseInt(countP.textContent)
-  if(x > 0){
+  if (x > 0) {
     x = x - 1;
   }
   countP.textContent = x.toString();
 }
 
 newProjectBtn.onclick = (e) => {
- loadScreen.style.display = 'none';
- newProjectContent.style.display = 'block';
+  loadScreen.style.display = 'none';
+  newProjectContent.style.display = 'block';
 }
 
 
 // Globals
 //// Main Application 
 
-function start(){
+function start() {
   console.log('Initialising');
   var x = parseInt(countP.textContent);
-  for(i=0; i<x; i++){
-  addNodes()
+  for (i = 0; i < x; i++) {
+    addNodes()
   }
 }
 
@@ -143,7 +146,7 @@ function getRandomColor() {
 
 // Add New Shape Button
 
-function addNodes () {
+function addNodes() {
   var circle = new createjs.Shape();
   //VARIABLES
   //Drag Object Size
@@ -176,13 +179,13 @@ function addNodes () {
     let match = selectedObjs.map(a => a.id) // Returns an array of all selectedObj id's in the correct index order.
     // console.log(evt.currentTarget.id)
 
-    
+
     evt.currentTarget.x = evt.stageX;
     evt.currentTarget.y = evt.stageY;
     if (selectedObjs.length > 0) {
       selectedNodeIndex = selectedObjs.findIndex(x => x.id === evt.currentTarget.id)
       console.log(evt.stageY)
-      selectedObjs[selectedNodeIndex].x = evt.stageX 
+      selectedObjs[selectedNodeIndex].x = evt.stageX
       selectedObjs[selectedNodeIndex].y = evt.stageY
       groupedOffset[selectedNodeIndex].x = evt.stageX - handler.x
       groupedOffset[selectedNodeIndex].y = evt.stageY - handler.y
@@ -431,43 +434,43 @@ function timeLine(notes) {
   rubbishButton.classList.add("fa-trash-alt");
   rubbishButton.classList.add("fas")
   rubbishButton.classList.add("rubbishBtn")
-  rubbishButton.setAttribute("id", canvasId+'-RmBtn')
+  rubbishButton.setAttribute("id", canvasId + '-RmBtn')
   let notesBtn = document.createElement("i")
-  notesBtn.setAttribute("id",canvasId+"-noteBtn")
+  notesBtn.setAttribute("id", canvasId + "-noteBtn")
   notesBtn.classList.add("fa-scroll");
   notesBtn.classList.add("fas")
   notesBtn.classList.add("notesBtn")
-  if(notes != ""){
+  if (notes != "") {
     notesBtn.classList.add("hasNotes");
   }
   notesBtn.onclick = (e) => {
     let id = e.target.id.substr(0, e.target.id.indexOf('_'));
     let index = allScenes.findIndex(x => x.id == id)
-    if(index > -1){
+    if (index > -1) {
       let notes = allScenes[index].notes;
       console.log(notes);
       buildNoteModal(notes);
     }
-    }
+  }
   newTd.appendChild(rubbishButton);
   newTd.appendChild(notesBtn);
-  rubbishButton.onclick = (e) => { 
-   // var houseIndex = street.houses.findIndex(h => h.rooms.some(r => r.id === roomId));
-    let id = e.target.id.substr(0, e.target.id.indexOf('_'));  // Id of the scene to remove;
+  rubbishButton.onclick = (e) => {
+    // var houseIndex = street.houses.findIndex(h => h.rooms.some(r => r.id === roomId));
+    let id = e.target.id.substr(0, e.target.id.indexOf('_')); // Id of the scene to remove;
     let index = allScenes.findIndex(x => x.id == id)
-    
+
     let rmCanvasId = e.target.id.substr(0, e.target.id.indexOf('-'));
     let rmCanvas = document.getElementById(rmCanvasId);
     if (index > -1) {
-       allScenes.splice(index, 1);    
+      allScenes.splice(index, 1);
       rmCanvas.parentElement.parentElement.remove()
       let tdinfos = document.getElementsByClassName("sceneTdInfo")
       e.target.parentElement.remove()
-      for(var x = 0; x < tdinfos.length; x ++){
-        tdinfos[x].innerHTML = x+1;
+      for (var x = 0; x < tdinfos.length; x++) {
+        tdinfos[x].innerHTML = x + 1;
       }
     }
-    
+
   };
   newTd.classList.add("border");
   newTd.classList.add("rounded");
@@ -478,7 +481,7 @@ function timeLine(notes) {
   newTd2.appendChild(canvasWrap);
   /*let notes = document.createElement("p");/// Notes
   notes.classList.add("text-dark");
-  notes.textContent = document.getElementById("formationNotes").value;*/ 
+  notes.textContent = document.getElementById("formationNotes").value;*/
   //newTd2.appendChild(notes);
   sceneTable.appendChild(newTd2);
 
@@ -609,7 +612,7 @@ function alignX() {
   for (i = 0; i < selectedObjs.length; i++) {
     selectedObjs[i].x = x;
     groupedOffset[i].x = x - handler.x
-  
+
     stage.update();
   }
 }
@@ -621,7 +624,7 @@ function spaceY() {
   let increment = maxY / countNodes;
 
   for (i = 0; i < selectedObjs.length; i++) {
-    let pos = increment * i+1
+    let pos = increment * i + 1
 
     selectedObjs[i].y = pos;
     groupedOffset[i].y = pos - handler.y
@@ -636,7 +639,7 @@ function spaceX() { //
   let increment = maxX / countNodes;
 
   for (i = 0; i < selectedObjs.length; i++) {
-    let pos = increment * i+1
+    let pos = increment * i + 1
     selectedObjs[i].x = pos
     groupedOffset[i].x = pos - handler.x
     stage.update();
@@ -681,33 +684,77 @@ function getNode(matchId) {
     }
   }
 }
-
+// Save Modal & Confirm + Form validation
 const saveAll = document.getElementById('saveAll')
-
+const projectName = document.getElementById('projectName');
 saveAll.addEventListener('click', (e) => {
-  
+
   e.preventDefault;
-  $('#saveModal').modal('toggle')/*
-  let allSceneObj = Object.assign({}, allScenes); // {0:"a", 1:"b", 2:"c"}
-  console.log(allSceneObj)
-  db.collection('UserRoutines').add(allSceneObj);*/
+  $('#saveModal').modal('toggle')
+  /*
+    let allSceneObj = Object.assign({}, allScenes); // {0:"a", 1:"b", 2:"c"}
+    console.log(allSceneObj)
+    db.collection('UserRoutines').add(allSceneObj);*/
 })
+// Check form, check DB for same ID routine, then save.
+function saveConfirm() {
+  let uid = firebase.auth().currentUser.uid
+  let pjname = projectName.value
+  // Check form has input atleast 3 chars
+  console.log(pjname)
+  if (pjname != '') {
+
+    if (pjname.length > 3) {
+      // Check DB for same project name for User
+      pjname = pjname.replace(/ /s,'');
+      var docRef = db.collection(uid).doc("SavedRoutines").collection(pjname).doc(pjname)
+      docRef.get().then((doc) => {
+        if (doc.exists) {
+          console.log("Document data:", doc.data());
+          alert('A routine already exists with this name')
+        } else {
+         
+          // Add a new document in collection "cities"
+             pjname = pjname.replace(/ /s,'');
+              let allSceneObj = Object.assign({}, allScenes);
+              allSceneObj.name =
+              db.collection(uid).doc("SavedRoutines").collection(pjname).doc(pjname).set(allSceneObj)
+            .then(() => {
+              console.log("Document successfully written!");
+            })
+            .catch((error) => {
+              console.error("Error writing document: ", error);
+            });
+          console.log("No such document!");
+        }
+      }).catch((error) => {
+        console.log("Error getting document:", error);
+      });
+    } else {
+      alert('Project name must be atleast 3 characters');
+    }
+
+  } else {
+    alert('Project name must be atleast 3 characters')
+  }
+}
 
 function groupSelect() {
   let container = new createjs.Container();
 
 }
-function buildNoteModal(notes){
+
+function buildNoteModal(notes) {
   let modalBody = document.getElementById("modalBody")
   modalBody.textContent = notes;
   $('#mymodal').modal('toggle');
 }
 
-function drawCentre(){
-var canvas = document.getElementById("demoCanvas");
-var ctx = canvas.getContext("2d");
-ctx.fillStyle = "#9baacf";
-ctx.fillText("Centre",600, 300);
+function drawCentre() {
+  var canvas = document.getElementById("demoCanvas");
+  var ctx = canvas.getContext("2d");
+  ctx.fillStyle = "#9baacf";
+  ctx.fillText("Centre", 600, 300);
 }
 /*
 new DragSelect({

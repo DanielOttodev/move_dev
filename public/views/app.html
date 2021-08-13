@@ -34,6 +34,7 @@
                 <a class="dropdown-item" id="saveAll" href="#"><i class="fas fa-save mr-2"></i>Save</a>
                 <a class="dropdown-item" href="#"> <i class="fas fa-folder-open mr-2"></i>Load Routine</a>
                 <a class="dropdown-item" id="signOut" href="#"> <i class="fas fa-sign-out-alt mr-2"></i>Sign Out</a>
+                <a class="dropdown-item" id="testFunc" onclick="testFunc()" href="#"> <i class="fas fa-hammer mr-2"></i></i>Test Function</a>
                 <div class="custom-control custom-switch switch">
                     <input value="" type="checkbox" class="custom-control-input mr-2 " id="bgtoggle">
                     <label class="custom-control-label" for="bgtoggle">Basketball Court</label>
@@ -349,10 +350,10 @@
                 </button>
             </div>
             <div class="modal-body" id="modalBody">
-           <input id="projectName" class="form-control" type="text" placeholder="Project name..."> 
+           <input id="projectName" class="form-control" type="text" placeholder="Project name...">
             </div>
             <div class="modal-footer">
-                <button id="confirmSaveBtn" class="btn">Confirm</button>
+                <button id="confirmSaveBtn" onclick="saveConfirm()" class="btn">Confirm</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
             </div>
         </div>
