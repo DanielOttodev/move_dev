@@ -10,15 +10,18 @@ var firebaseConfig = {
     appId: "1:273327942126:web:9db2bc0bbdfb60715fc6ff",
     measurementId: "G-BTYEY2J0SH"
 };
+console.log("uishown")
 var uiConfig = {
     callbacks: {
         signInSuccessWithAuthResult: function (authResult, redirectUrl) {
+            console.log("uishown")
             // User successfully signed in.
             // Return type determines whether we continue the redirect automatically
             // or whether we leave that to developer to handle.
             return true;
         },
         uiShown: function () {
+            console.log("uishown")
             // The widget is rendered.
             // Hide the loader.
             document.getElementById('loader').style.display = 'none';
