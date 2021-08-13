@@ -91,14 +91,10 @@ function start(){
   console.log('Initialising');
   var x = parseInt(countP.textContent);
   for(i=0; i<x; i++){
-  
   addNodes()
-
   }
-  
 }
 
-console.log(DragSelect)
 const db = firebase.firestore();
 createjs.MotionGuidePlugin.install();
 var stage = new createjs.Stage("demoCanvas");
@@ -687,11 +683,14 @@ function getNode(matchId) {
 }
 
 const saveAll = document.getElementById('saveAll')
+
 saveAll.addEventListener('click', (e) => {
+  
   e.preventDefault;
+  $('#saveModal').modal('toggle')/*
   let allSceneObj = Object.assign({}, allScenes); // {0:"a", 1:"b", 2:"c"}
   console.log(allSceneObj)
-  db.collection('UserRoutines').add(allSceneObj);
+  db.collection('UserRoutines').add(allSceneObj);*/
 })
 
 function groupSelect() {
@@ -700,13 +699,8 @@ function groupSelect() {
 }
 function buildNoteModal(notes){
   let modalBody = document.getElementById("modalBody")
-  
-  
   modalBody.textContent = notes;
-  
-
   $('#mymodal').modal('toggle');
-
 }
 
 function drawCentre(){

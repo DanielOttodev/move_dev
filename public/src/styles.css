@@ -97,6 +97,11 @@ body {
   background-image: linear-gradient(to right, rgba(61, 122, 255, 0.418), transparent 1px), linear-gradient(to bottom, rgba(61, 122, 255, 0.541), transparent 1px);
 }
 
+#confirmSaveBtn {
+  background-color: #00af09;
+  color: white;
+}
+
 .rubbishBtn {
   margin-left: 7px;
   margin-right: 7px;
