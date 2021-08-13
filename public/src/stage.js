@@ -714,12 +714,15 @@ function saveConfirm() {
           alert('A routine already exists with this name')
         } else {
          
-          // Add a new document in collection "cities"
              pjname = pjname.replace(/ /s,'');
               let allSceneObj = Object.assign({}, allScenes);
               allSceneObj.name =
               db.collection(uid).doc("SavedRoutines").collection(pjname).doc(pjname).set(allSceneObj)
             .then(() => {
+              let modalsave = document.getElementById("saveModalContent")
+              modalsave.classList.add("successMsg");
+              $('#saveModal').modal('toggle')
+             
               console.log("Document successfully written!");
             })
             .catch((error) => {
