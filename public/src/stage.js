@@ -435,14 +435,15 @@ function timeLine(notes) {
   rubbishButton.classList.add("fas")
   rubbishButton.classList.add("rubbishBtn")
   rubbishButton.setAttribute("id", canvasId + '-RmBtn')
-  let notesBtn = document.createElement("i")
+  newTd.appendChild(rubbishButton);
+  if (notes != "") {
+    let notesBtn = document.createElement("i")
+    notesBtn.classList.add("hasNotes");
+   
   notesBtn.setAttribute("id", canvasId + "-noteBtn")
   notesBtn.classList.add("fa-scroll");
   notesBtn.classList.add("fas")
   notesBtn.classList.add("notesBtn")
-  if (notes != "") {
-    notesBtn.classList.add("hasNotes");
-  }
   notesBtn.onclick = (e) => {
     let id = e.target.id.substr(0, e.target.id.indexOf('_'));
     let index = allScenes.findIndex(x => x.id == id)
@@ -452,8 +453,11 @@ function timeLine(notes) {
       buildNoteModal(notes);
     }
   }
-  newTd.appendChild(rubbishButton);
   newTd.appendChild(notesBtn);
+  }
+
+
+ 
   rubbishButton.onclick = (e) => {
     // var houseIndex = street.houses.findIndex(h => h.rooms.some(r => r.id === roomId));
     let id = e.target.id.substr(0, e.target.id.indexOf('_')); // Id of the scene to remove;
