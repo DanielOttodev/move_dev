@@ -1,5 +1,6 @@
 /// Splash screen
 
+
 const newProjectBtn = document.getElementById('newProjectBtn')
 const newProjectContent = document.getElementById('newProjectContent');
 const loadScreen = document.getElementById('loadScreen');
@@ -775,8 +776,32 @@ new DragSelect({
 });*/
 
 
-function testFunc(){
-  let allSceneObj = Object.assign({}, allScenes);
-  console.log(allScenes);
-  console.log(allSceneObj);
+ function testFunc(){
+  console.log("Getting docs..")
+  let uid = firebase.auth().currentUser.uid
+  console.log(uid);
+  const docRef =  db.doc(uid+"/SavedRoutines");
+  docRef.get().then((querySnapshot) => {
+  console.log(querySnapshot);
+});
+
+}
+
+
+function loadProject(pjname){ // Load a specified(pjname) project
+  console.log("Getting docs..")
+  let uid = firebase.auth().currentUser.uid
+  console.log(uid);
+  var docRef = db.collection(uid).doc("SavedRoutines").collection(pjname).doc(pjname)
+
+ docRef.get().then((doc) => {
+     if (doc.exists) {
+         console.log("Document data:", doc.data());
+     } else {
+         // doc.data() will be undefined in this case
+         console.log("No such document!");
+     }
+ }).catch((error) => {
+     console.log("Error getting document:", error);
+ });
 }
