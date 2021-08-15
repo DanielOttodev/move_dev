@@ -315,13 +315,18 @@ saveBtn.onclick = function () {
       name: stage.children[i].name,
       x: stage.children[i].x,
       y: stage.children[i].y,
-      id: stage.children[i].id
+      id: stage.children[i].id,
+      
     };
     console.log(i);
     savedPositions.push(this.formation);
     console.log(savedPositions[i]);
   }
-
+  let savedPosNotes = {  // Need to store this as an object for Firestore - Doesn't have any other interaction with front end
+    notes:notes,
+    id:allScenes.length
+  }
+  savedPositions.push(savedPosNotes); 
   savedPositions.notes = notes;
   savedPositions.id = allScenes.length
   //savedPositions.push(details)
@@ -720,7 +725,7 @@ function saveConfirm() {
          
              pjname = pjname.replace(/ /s,'');
               let allSceneObj = Object.assign({}, allScenes);
-              allSceneObj.name =
+              allSceneObj.name = 'hello'
               db.collection(uid).doc("SavedRoutines").collection(pjname).doc(pjname).set(allSceneObj)
             .then(() => {
               let modalsave = document.getElementById("saveModalContent")
@@ -768,3 +773,10 @@ new DragSelect({
   selectables: document.getElementsByClassName('mStage'),
   //area: document.getElementsByClassName('mStage')
 });*/
+
+
+function testFunc(){
+  let allSceneObj = Object.assign({}, allScenes);
+  console.log(allScenes);
+  console.log(allSceneObj);
+}
