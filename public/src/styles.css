@@ -86,7 +86,7 @@ body {
 .mStage {
   touch-action: none;
   border-style: solid;
-  border: 3px deepskyblue solid;
+  border: 3px #ECEFF1 solid;
   border-radius: 7px;
   background-color: white;
   /*rgba(0, 0, 0, 0.322);*/

@@ -158,10 +158,10 @@ function addNodes() {
   circle.y = 7;
 
   var dragger = new createjs.Container();
-  dragger.name = `New${stage.children.length + 1}`;
+  dragger.name =  stage.children.length + 1   //`New${stage.children.length + 1}`;
   circle.name = dragger.name;
   // Label
-  var label = new createjs.Text(circle.name, "Bold 18px ", "#fff");
+  var label = new createjs.Text(circle.name, "Bold 28px ", "#fff");
 
   label.textAlign = "center";
   label.y -= 0;
