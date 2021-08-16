@@ -760,12 +760,6 @@ function saveConfirm() {
     alert('Project name must be atleast 3 characters')
   }
 }
-
-function groupSelect() {
-  let container = new createjs.Container();
-
-}
-
 function buildNoteModal(notes) {
   let modalBody = document.getElementById("modalBody")
   modalBody.textContent = notes;
@@ -800,16 +794,44 @@ new DragSelect({
 }
 
 
-function loadProject(){ // Load a specified(pjname) project
+function loadProject(){ // Load a specified(pjname) project -- 
+  console.log('clicked');
+  let pjname = "Dance2"
   console.log("Getting docs..")
   let uid = firebase.auth().currentUser.uid
   console.log(uid);
-  var docRef = db.collection(uid).doc("RoutinesList").collection("UserRoutinesList").doc("NewProject")
+  var docRef = db.collection(uid).doc("SavedRoutines").collection(pjname).doc(pjname)
 
-  db.collection(uid).doc("RoutinesList").collection("UserRoutinesList").get().then((querySnapshot) => {
-    querySnapshot.forEach((doc) => {
-        // doc.data() is never undefined for query doc snapshots
-        console.log(doc.id, " => ", doc.data());
-    });
-});
+  docRef.get().then((doc) => {
+      if (doc.exists) {
+        let loadedData = doc.data();
+       console.log(doc.data())
+       allScenes.push[loadedData]
+       console.log(allScenes)
+        for (i=0;i<loadedData.length;i++){
+        console.log(loadedData[i]);
+        loadedData[i] = loadedData[i].splice(-1,1);
+         console.log(loadedData[i]);
+        }
+        importScene(loadedData);
+      } else {
+          // doc.data() will be undefined in this case
+          console.log("No such document!");
+      }
+  }).catch((error) => {
+      console.log("Error getting document:", error);
+  });
+}
+
+function importScene(scenes){ // Pass in scenes from Firestore, Add nodes , Redraw the canvases.
+  let myArr = []
+  myArr.push(scenes);
+  var size = Object.keys(myArr[0]).length;
+  size = size - 1 // for array iteration
+  for(x=0;x<size;x++){
+  myArr[0][x].splice(-1,1);
+  addNodes();
+  allScenes = myArr[0]
+  }
+  console.log(myArr);
 }
