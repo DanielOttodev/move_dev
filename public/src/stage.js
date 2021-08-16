@@ -644,12 +644,14 @@ function spaceY() {
 
 function spaceX() { // 
   let maxX = stage.canvas.clientWidth;
+  console.log(maxX);
   let countNodes = selectedObjs.length;
   countNodes = countNodes + 1;
   let increment = maxX / countNodes;
 
   for (i = 0; i < selectedObjs.length; i++) {
     let pos = increment * i + 1
+    console.log(pos);
     selectedObjs[i].x = pos
     groupedOffset[i].x = pos - handler.x
     stage.update();
@@ -727,18 +729,25 @@ function saveConfirm() {
              pjname = pjname.replace(/ /s,'');
               let allSceneObj = Object.assign({}, allScenes);
               allSceneObj.name = 'hello'
-              db.collection(uid).doc("SavedRoutines").collection(pjname).doc(pjname).set(allSceneObj)
-            .then(() => {
-              let modalsave = document.getElementById("saveModalContent")
-              modalsave.classList.add("successMsg");
-              $('#saveModal').modal('toggle')
-             
+              db.collection(uid).doc("SavedRoutines").collection(pjname).doc(pjname).set(allSceneObj)  // Write the object to SaveRoutines collection
+            .then(() => {          
               console.log("Document successfully written!");
             })
             .catch((error) => {
               console.error("Error writing document: ", error);
             });
-          console.log("No such document!");
+            db.collection(uid).doc("RoutinesList").collection("UserRoutinesList").doc(pjname).set({"routineName": pjname})  // Write the item to AllRoutines collection for listing
+            .then(() => {
+              let modalsave = document.getElementById("saveModalContent")
+              modalsave.classList.add("successMsg");
+              $('#saveModal').modal('toggle')
+             
+              console.log("Listing successfully written!");
+            })
+            .catch((error) => {
+              console.error("Error writing listing: ", error);
+            });
+            
         }
       }).catch((error) => {
         console.log("Error getting document:", error);
