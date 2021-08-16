@@ -789,28 +789,27 @@ new DragSelect({
   console.log("Getting docs..")
   let uid = firebase.auth().currentUser.uid
   console.log(uid);
-  const docRef =  db.doc(uid+"/SavedRoutines");
-  docRef.get().then((querySnapshot) => {
-  console.log(querySnapshot);
-});
+  var docRef = db.collection(uid).doc("RoutinesList").collection("UserRoutinesList").doc("NewProject")
 
+  db.collection(uid).doc("RoutinesList").collection("UserRoutinesList").get().then((querySnapshot) => {
+    querySnapshot.forEach((doc) => {
+        // doc.data() is never undefined for query doc snapshots
+        console.log(doc.id, " => ", doc.data());
+    });
+});
 }
 
 
-function loadProject(pjname){ // Load a specified(pjname) project
+function loadProject(){ // Load a specified(pjname) project
   console.log("Getting docs..")
   let uid = firebase.auth().currentUser.uid
   console.log(uid);
-  var docRef = db.collection(uid).doc("SavedRoutines").collection(pjname).doc(pjname)
+  var docRef = db.collection(uid).doc("RoutinesList").collection("UserRoutinesList").doc("NewProject")
 
- docRef.get().then((doc) => {
-     if (doc.exists) {
-         console.log("Document data:", doc.data());
-     } else {
-         // doc.data() will be undefined in this case
-         console.log("No such document!");
-     }
- }).catch((error) => {
-     console.log("Error getting document:", error);
- });
+  db.collection(uid).doc("RoutinesList").collection("UserRoutinesList").get().then((querySnapshot) => {
+    querySnapshot.forEach((doc) => {
+        // doc.data() is never undefined for query doc snapshots
+        console.log(doc.id, " => ", doc.data());
+    });
+});
 }
