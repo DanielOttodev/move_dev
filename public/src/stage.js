@@ -806,15 +806,10 @@ function loadProject(){ // Load a specified(pjname) project --
   docRef.get().then((doc) => {
       if (doc.exists) {
         let loadedData = doc.data();
-        console.log('docdata');
-       console.log(doc.data())
-      // allScenes.push[loadedData]
-       console.log('allscenes');
-       console.log(allScenes)
+
         for (i=0;i<loadedData.length;i++){
-        console.log(loadedData[i]);
         loadedData[i] = loadedData[i].splice(-1,1);
-         console.log(loadedData[i]);
+
         }
         importScene(loadedData);
       } else {
@@ -829,29 +824,37 @@ function loadProject(){ // Load a specified(pjname) project --
 function importScene(scenes){ // Pass in scenes from Firestore, Add nodes , Redraw the canvases.
   let myArr = []
   let noteArr = []
-
+  let myscenes = []
   myArr.push(scenes);
 
   var size = Object.keys(myArr[0]).length;
   size = size - 1 // for array iteration
   for(x=0;x<size;x++){
+  noteArr.push(myArr[0][x][myArr[0][x].length - 1])
   myArr[0][x].splice(-1,1);
   addNodes();
-  allScenes = myArr[0]
+  myscenes = myArr[0]
   }
   console.log('all scenes');
-  console.log(allScenes);
+  console.log(scenes);
+  console.log('all notes');
+  console.log(noteArr);
+  for(x=0;x<noteArr.length;x++){ // note arr length will always be the same as routine array
+    buildScene(scenes[x],notes[x])
+    }
+    
 }
 
-function buildScene(arr)  {
-  let notes = document.getElementById("formationNotes").value;
+function buildScene(arr,sceneNotes)  {
+  console.log('here')
+  let notes = sceneNotes
   let savedPositions = [];
-  for (i = 0; i < stage.children.length; i++) {
+  for (i = 0; i < arr.length; i++) {
     formation = {
-      name: stage.children[i].name,
-      x: stage.children[i].x,
-      y: stage.children[i].y,
-      id: stage.children[i].id,
+      name: arr[i].name,
+      x: arr[i].x,
+      y: arr[i].y,
+      id: arr[i].id,
       
     };
     console.log(i);
