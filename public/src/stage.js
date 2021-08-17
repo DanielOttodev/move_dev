@@ -840,14 +840,14 @@ function importScene(scenes){ // Pass in scenes from Firestore, Add nodes , Redr
   console.log('all notes');
   console.log(noteArr);
   for(x=0;x<noteArr.length;x++){ // note arr length will always be the same as routine array
-    buildScene(scenes[x],notes[x])
+    buildScene(myscenes[x],noteArr[x])
     }
     
 }
 
 function buildScene(arr,sceneNotes)  {
   console.log('here')
-  let notes = sceneNotes
+  let mynotes = sceneNotes
   let savedPositions = [];
   for (i = 0; i < arr.length; i++) {
     formation = {
@@ -862,15 +862,15 @@ function buildScene(arr,sceneNotes)  {
     console.log(savedPositions[i]);
   }
   let savedPosNotes = {  // Need to store this as an object for Firestore - Doesn't have any other interaction with front end
-    notes:notes,
+    notes:mynotes,
     id:allScenes.length
   }
   savedPositions.push(savedPosNotes); 
-  savedPositions.notes = notes;
+  savedPositions.notes = mynotes;
   savedPositions.id = allScenes.length
   //savedPositions.push(details)
   allScenes.push(savedPositions);
   console.log(allScenes);
-  timeLine(notes);
+  timeLine(mynotes);
   document.getElementById("formationNotes").value = "";
 };

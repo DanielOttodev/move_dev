@@ -42,8 +42,8 @@ gridtoggle.onclick = () => {
   }
 };
 function toggleSplash(){
-  
 }
+
 const splashToggle = document.getElementById("splashtoggle")
 splashToggle.onclick = () =>{
   let extra = document.getElementById("extraContent")
@@ -52,7 +52,6 @@ splashToggle.onclick = () =>{
   main.style.display = "block"
   extra.style.display = "block"
   splash.style.display = "none"
-
 }
 
 function findRoutines(event) {
