@@ -343,6 +343,7 @@ playBtn.onclick = () => {
   createjs.Ticker.addEventListener("tick", stage);
   let allIds = getIds();
   for (c = 0; c < allIds.length; c++) {
+    console.log(allIds);
     let id = allIds[c];
     let thisVal = findPositions(id);
     let myTween = getElement();
@@ -350,8 +351,8 @@ playBtn.onclick = () => {
     function getElement() {
       console.log(c);
       for (i = 0; i < stage.children.length; i++) {
-        console.log(stage.children[c]);  
-        if ((stage.children[c].id = id)) { // This was ==
+        console.log(stage.children[i]);  
+        if ((stage.children[i].id == id)) { // This was = & stage.children[i] was children[c]
           let myTween = createjs.Tween.get(stage.children[c]);
           return myTween;
         }
@@ -592,6 +593,7 @@ function findPositions(id) {
 
 function getIds() {
   let myArray = allScenes[0];
+  console.log(myArray);
   let result = myArray.map(a => a.id);
 
   return result;
@@ -797,11 +799,8 @@ function loadProject(){ // Load a specified(pjname) project --
 
         for (i=0;i<loadedData.length;i++){
         loadedData[i] = loadedData[i].splice(-1,1);
-
         }
         importScene(loadedData);
-        console.log(allScenes);
-        console.log(stage.children)
       } else {
           // doc.data() will be undefined in this case
           console.log("No such document!");
@@ -854,11 +853,13 @@ function buildScene(arr,sceneNotes)  {
     notes:mynotes,
     id:allScenes.length
   }
-  savedPositions.push(savedPosNotes); 
-  savedPositions.notes = mynotes;
+ // savedPositions.push(savedPosNotes); 
+ savedPositions.notes = mynotes;
   savedPositions.id = allScenes.length
   //savedPositions.push(details)
   allScenes.push(savedPositions);
+  console.log('logging all scenes');
+  console.log(allScenes)
   timeLine(mynotes);
   document.getElementById("formationNotes").value = "";
 };
