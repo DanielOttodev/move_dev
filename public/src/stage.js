@@ -332,6 +332,7 @@ saveBtn.onclick = function () {
   savedPositions.id = allScenes.length
   //savedPositions.push(details)
   allScenes.push(savedPositions);
+  console.log('allscenes- save');
   console.log(allScenes);
   timeLine(notes);
   document.getElementById("formationNotes").value = "";
@@ -805,8 +806,10 @@ function loadProject(){ // Load a specified(pjname) project --
   docRef.get().then((doc) => {
       if (doc.exists) {
         let loadedData = doc.data();
+        console.log('docdata');
        console.log(doc.data())
-       allScenes.push[loadedData]
+      // allScenes.push[loadedData]
+       console.log('allscenes');
        console.log(allScenes)
         for (i=0;i<loadedData.length;i++){
         console.log(loadedData[i]);
@@ -825,7 +828,10 @@ function loadProject(){ // Load a specified(pjname) project --
 
 function importScene(scenes){ // Pass in scenes from Firestore, Add nodes , Redraw the canvases.
   let myArr = []
+  let noteArr = []
+
   myArr.push(scenes);
+
   var size = Object.keys(myArr[0]).length;
   size = size - 1 // for array iteration
   for(x=0;x<size;x++){
@@ -833,5 +839,35 @@ function importScene(scenes){ // Pass in scenes from Firestore, Add nodes , Redr
   addNodes();
   allScenes = myArr[0]
   }
-  console.log(myArr);
+  console.log('all scenes');
+  console.log(allScenes);
 }
+
+function buildScene(arr)  {
+  let notes = document.getElementById("formationNotes").value;
+  let savedPositions = [];
+  for (i = 0; i < stage.children.length; i++) {
+    formation = {
+      name: stage.children[i].name,
+      x: stage.children[i].x,
+      y: stage.children[i].y,
+      id: stage.children[i].id,
+      
+    };
+    console.log(i);
+    savedPositions.push(formation);
+    console.log(savedPositions[i]);
+  }
+  let savedPosNotes = {  // Need to store this as an object for Firestore - Doesn't have any other interaction with front end
+    notes:notes,
+    id:allScenes.length
+  }
+  savedPositions.push(savedPosNotes); 
+  savedPositions.notes = notes;
+  savedPositions.id = allScenes.length
+  //savedPositions.push(details)
+  allScenes.push(savedPositions);
+  console.log(allScenes);
+  timeLine(notes);
+  document.getElementById("formationNotes").value = "";
+};
