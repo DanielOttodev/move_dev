@@ -787,7 +787,7 @@ new DragSelect({
 
 function loadProject(){ // Load a specified(pjname) project -- 
   console.log('clicked');
-  let pjname = "Dance2"
+  let pjname = "NewProject"
   console.log("Getting docs..")
   let uid = firebase.auth().currentUser.uid
   console.log(uid);
@@ -821,22 +821,26 @@ function importScene(scenes){ // Pass in scenes from Firestore, Add nodes , Redr
   for(x=0;x<size;x++){
   noteArr.push(myArr[0][x][myArr[0][x].length - 1])
   myArr[0][x].splice(-1,1);
+  console.log('myarr');
+  console.log(myArr);
+  console.log(myArr[0][x]);
+  myscenes.push(myArr[0][x])
+
   addNodes();
-  myscenes = myArr[0]
   }
   for(x=0;x<noteArr.length;x++){ // note arr length will always be the same as routine array
-    console.log(stage.children[x])
-    console.log(myscenes[x])
     stage.children[x].x = myscenes[x].x
     stage.children[x].x= myscenes[x].y  
-    buildScene(myscenes[x],noteArr[x])
+    stage.update();
+    buildScene(myscenes[x],noteArr[x])  
     }
     
 }
 
-function buildScene(arr,sceneNotes)  {
+function buildScene(arr,sceneNotes)  { // Wrong thing beind passed in here?
   console.log('here')
   let mynotes = sceneNotes.notes
+  console.log(arr);
   let savedPositions = [];
   for (i = 0; i < arr.length; i++) {
     formation = {
@@ -849,7 +853,7 @@ function buildScene(arr,sceneNotes)  {
     console.log(formation);
     savedPositions.push(formation);
   }
-  let savedPosNotes = {  // Need to store this as an object for Firestore - Doesn't have any other interaction with front end
+  let savedPosNotes = {  // Need to store this as an object for Firestore - Doesn't have any other interaction with front end -- Not needed for loading
     notes:mynotes,
     id:allScenes.length
   }
