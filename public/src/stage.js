@@ -345,13 +345,13 @@ playBtn.onclick = () => {
   for (c = 0; c < allIds.length; c++) {
     let id = allIds[c];
     let thisVal = findPositions(id);
-
     let myTween = getElement();
-    console.log(myTween)
 
     function getElement() {
+      console.log(c);
       for (i = 0; i < stage.children.length; i++) {
-        if ((stage.children[c].id = id)) {
+        console.log(stage.children[c]);  
+        if ((stage.children[c].id = id)) { // This was ==
           let myTween = createjs.Tween.get(stage.children[c]);
           return myTween;
         }
@@ -496,7 +496,6 @@ function timeLine(notes) {
   //newTd2.appendChild(notes);
   sceneTable.appendChild(newTd2);
 
-  console.log("clicked it");
 }
 
 
@@ -547,7 +546,6 @@ selectBtn.onclick = () => {
       stage.addChild(selectedObjs[i])
 
     }
-    console.log(stage.children)
     if (hasHandle) {
       stage.removeChild(handler);
       hasHandle = false;
@@ -594,7 +592,6 @@ function findPositions(id) {
 
 function getIds() {
   let myArray = allScenes[0];
-
   let result = myArray.map(a => a.id);
 
   return result;
@@ -781,17 +778,8 @@ new DragSelect({
 
 
  function testFunc(){
-  console.log("Getting docs..")
-  let uid = firebase.auth().currentUser.uid
-  console.log(uid);
-  var docRef = db.collection(uid).doc("RoutinesList").collection("UserRoutinesList").doc("NewProject")
+  console.log(stage.children)
 
-  db.collection(uid).doc("RoutinesList").collection("UserRoutinesList").get().then((querySnapshot) => {
-    querySnapshot.forEach((doc) => {
-        // doc.data() is never undefined for query doc snapshots
-        console.log(doc.id, " => ", doc.data());
-    });
-});
 }
 
 
@@ -812,6 +800,8 @@ function loadProject(){ // Load a specified(pjname) project --
 
         }
         importScene(loadedData);
+        console.log(allScenes);
+        console.log(stage.children)
       } else {
           // doc.data() will be undefined in this case
           console.log("No such document!");
@@ -835,11 +825,11 @@ function importScene(scenes){ // Pass in scenes from Firestore, Add nodes , Redr
   addNodes();
   myscenes = myArr[0]
   }
-  console.log('all scenes');
-  console.log(scenes);
-  console.log('all notes');
-  console.log(noteArr);
   for(x=0;x<noteArr.length;x++){ // note arr length will always be the same as routine array
+    console.log(stage.children[x])
+    console.log(myscenes[x])
+    stage.children[x].x = myscenes[x].x
+    stage.children[x].x= myscenes[x].y  
     buildScene(myscenes[x],noteArr[x])
     }
     
@@ -847,7 +837,7 @@ function importScene(scenes){ // Pass in scenes from Firestore, Add nodes , Redr
 
 function buildScene(arr,sceneNotes)  {
   console.log('here')
-  let mynotes = sceneNotes
+  let mynotes = sceneNotes.notes
   let savedPositions = [];
   for (i = 0; i < arr.length; i++) {
     formation = {
@@ -857,9 +847,8 @@ function buildScene(arr,sceneNotes)  {
       id: arr[i].id,
       
     };
-    console.log(i);
+    console.log(formation);
     savedPositions.push(formation);
-    console.log(savedPositions[i]);
   }
   let savedPosNotes = {  // Need to store this as an object for Firestore - Doesn't have any other interaction with front end
     notes:mynotes,
@@ -870,7 +859,6 @@ function buildScene(arr,sceneNotes)  {
   savedPositions.id = allScenes.length
   //savedPositions.push(details)
   allScenes.push(savedPositions);
-  console.log(allScenes);
   timeLine(mynotes);
   document.getElementById("formationNotes").value = "";
 };
