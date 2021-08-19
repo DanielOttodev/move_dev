@@ -327,7 +327,7 @@ saveBtn.onclick = function () {
     notes:notes,
     id:allScenes.length
   }
-  savedPositions.push(savedPosNotes); 
+ // savedPositions.push(savedPosNotes); 
   savedPositions.notes = notes;
   savedPositions.id = allScenes.length
   //savedPositions.push(details)
@@ -670,8 +670,7 @@ document.body.onclick = (e) => {
     createjs.Ticker.addEventListener("tick", stage);
     let posIndex = id.substring(0, id.indexOf('_'))
     for (i = 0; i < allScenes[posIndex].length; i++) {
-      console.log(i)
-      console.log(allScenes[posIndex][i].x)
+      console.log(allScenes[posIndex])
       let nodeId = allScenes[posIndex][i].id
       console.log("NodeID:" + nodeId)
       let myTween = getNode(nodeId)
@@ -786,11 +785,8 @@ new DragSelect({
 
 
 function loadProject(){ // Load a specified(pjname) project -- 
-  console.log('clicked');
-  let pjname = "NewProject"
-  console.log("Getting docs..")
+  let pjname = "testing"
   let uid = firebase.auth().currentUser.uid
-  console.log(uid);
   var docRef = db.collection(uid).doc("SavedRoutines").collection(pjname).doc(pjname)
 
   docRef.get().then((doc) => {
@@ -825,14 +821,16 @@ function importScene(scenes){ // Pass in scenes from Firestore, Add nodes , Redr
   console.log(myArr);
   console.log(myArr[0][x]);
   myscenes.push(myArr[0][x])
-
+console.log('adding nodes')
   addNodes();
   }
   for(x=0;x<noteArr.length;x++){ // note arr length will always be the same as routine array
+    console.log(noteArr.length);
     stage.children[x].x = myscenes[x].x
     stage.children[x].x= myscenes[x].y  
     stage.update();
     buildScene(myscenes[x],noteArr[x])  
+    stage.update();
     }
     
 }
