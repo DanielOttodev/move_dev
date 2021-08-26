@@ -20,9 +20,7 @@ async function goMain() {
 
   cubeTxt.textContent = loadingMessage();
   newProjectContent.style.display = "none";
-  console.log('Taking a break...');
   await sleep(3000);
-  console.log('Two seconds later, showing sleep in a loop...');
 
   // Sleep in loop
   for (let i = 0; i < 5; i++) {
@@ -103,13 +101,11 @@ const db = firebase.firestore();
 createjs.MotionGuidePlugin.install();
 var stage = new createjs.Stage("demoCanvas");
 createjs.Touch.enable(stage)
-console.log(stage);
 let primSelect;
 //Unselect
 var stageElem = document.getElementById("demoCanvas");
 stageElem.addEventListener("click", e => {
   if (typeof selectedObjs !== undefined && e.altKey) {
-    console.log("here");
     selectedObjs = [];
     let padlock = document.getElementById("padlock");
     document.getElementById("selectedName2").innerHTML = "";
@@ -178,14 +174,12 @@ function addNodes() {
 
   dragger.on("pressmove", function (evt) {
     let match = selectedObjs.map(a => a.id) // Returns an array of all selectedObj id's in the correct index order.
-    // console.log(evt.currentTarget.id)
 
 
     evt.currentTarget.x = evt.stageX;
     evt.currentTarget.y = evt.stageY;
     if (selectedObjs.length > 0) {
       selectedNodeIndex = selectedObjs.findIndex(x => x.id === evt.currentTarget.id)
-      console.log(evt.stageY)
       selectedObjs[selectedNodeIndex].x = evt.stageX
       selectedObjs[selectedNodeIndex].y = evt.stageY
       groupedOffset[selectedNodeIndex].x = evt.stageX - handler.x
@@ -195,8 +189,7 @@ function addNodes() {
     evt.currentTarget.alpha = 1;
   });
   dragger.on("pointerdown", function (evt) {
-    console.log('in function')
-    console.log(evt);
+ 
     evt.currentTarget.x = evt.stageX;
     evt.currentTarget.y = evt.stageY;
     stage.update(); //much smoother because it refreshes the screen every pixel movement instead of the FPS set on the Ticker
@@ -223,7 +216,7 @@ function addNodes() {
           cross.hitArea = new createjs.Shape(new createjs.Graphics().f("green").dc(0, 0, 30));
           //Circle Create
           //  circle.graphics.beginFill("#ff0000").drawRect(0, 0, 20, 20);
-          console.log("Firing!")
+         
           handler = new createjs.Container()
           handler.id = "handle"
           handler.addChild(cross)
@@ -319,21 +312,19 @@ saveBtn.onclick = function () {
       id: stage.children[i].id,
       
     };
-    console.log(i);
+
     savedPositions.push(this.formation);
-    console.log(savedPositions[i]);
+ 
   }
   let savedPosNotes = {  // Need to store this as an object for Firestore - Doesn't have any other interaction with front end
     notes:notes,
     id:allScenes.length
   }
- // savedPositions.push(savedPosNotes); 
+ // savedPositions.push(savedPosNotes);  Causing error on tween - need to seperate from scenes array into its own and match on id
   savedPositions.notes = notes;
   savedPositions.id = allScenes.length
   //savedPositions.push(details)
   allScenes.push(savedPositions);
-  console.log('allscenes- save');
-  console.log(allScenes);
   timeLine(notes);
   document.getElementById("formationNotes").value = "";
 };
@@ -343,15 +334,12 @@ playBtn.onclick = () => {
   createjs.Ticker.addEventListener("tick", stage);
   let allIds = getIds();
   for (c = 0; c < allIds.length; c++) {
-    console.log(allIds);
     let id = allIds[c];
     let thisVal = findPositions(id);
     let myTween = getElement();
 
     function getElement() {
-      console.log(c);
       for (i = 0; i < stage.children.length; i++) {
-        console.log(stage.children[i]);  
         if ((stage.children[i].id == id)) { // This was = & stage.children[i] was children[c]
           let myTween = createjs.Tween.get(stage.children[c]);
           return myTween;
@@ -360,7 +348,6 @@ playBtn.onclick = () => {
     }
 
     for (z = 0; z < thisVal.length; z++) {
-      console.log(id);
       if (z <= 0) {
         myTween.to({
             x: thisVal[z].x,
@@ -371,11 +358,9 @@ playBtn.onclick = () => {
         );
       } else {
         goTween(myTween, thisVal[z]);
-        console.log("in other positions");
       }
 
       function goTween(myTween, positions) {
-        console.log(myTween)
         myTween.to({
             x: positions.x,
             y: positions.y
@@ -407,7 +392,6 @@ function timeLine(notes) {
   let copyCanvas = document.createElement("canvas");
   let sourceCanvas = document.getElementById("demoCanvas");
   let canvasId = allScenes.length - 1 + "_scene";
-  console.log(canvasId);
   copyCanvas.setAttribute("id", canvasId);
   copyCanvas.classList.add("savedScene");
   copyCanvas.height = 100
@@ -457,7 +441,6 @@ function timeLine(notes) {
     let index = allScenes.findIndex(x => x.id == id)
     if (index > -1) {
       let notes = allScenes[index].notes;
-      console.log(notes);
       buildNoteModal(notes);
     }
   }
@@ -540,7 +523,6 @@ selectBtn.onclick = () => {
     selBtn.classList.add("text-danger");
     document.getElementById("demoCanvas").style.cursor = "pointer";
   } else {
-    console.log("here");
 
     for (let i = 0; i < selectedObjs.length; i++) {
       selectedObjs[i].children[0].graphics._fill.style = '#212121'
@@ -593,7 +575,6 @@ function findPositions(id) {
 
 function getIds() {
   let myArray = allScenes[0];
-  console.log(myArray);
   let result = myArray.map(a => a.id);
 
   return result;
@@ -644,14 +625,12 @@ function spaceY() {
 
 function spaceX() { // 
   let maxX = stage.canvas.clientWidth;
-  console.log(maxX);
   let countNodes = selectedObjs.length;
   countNodes = countNodes + 1;
   let increment = maxX / countNodes;
 
   for (i = 0; i < selectedObjs.length; i++) {
     let pos = increment * i + 1
-    console.log(pos);
     selectedObjs[i].x = pos
     groupedOffset[i].x = pos - handler.x
     stage.update();
@@ -670,11 +649,8 @@ document.body.onclick = (e) => {
     createjs.Ticker.addEventListener("tick", stage);
     let posIndex = id.substring(0, id.indexOf('_'))
     for (i = 0; i < allScenes[posIndex].length; i++) {
-      console.log(allScenes[posIndex])
       let nodeId = allScenes[posIndex][i].id
-      console.log("NodeID:" + nodeId)
       let myTween = getNode(nodeId)
-      console.log(myTween)
       myTween.to({
           x: allScenes[posIndex][i].x,
           y: allScenes[posIndex][i].y
@@ -689,7 +665,6 @@ function getNode(matchId) {
   for (b = 0; b < stage.children.length; b++) {
 
     if (stage.children[b].id == matchId) {
-      console.log(stage.children[b])
       let myTween = createjs.Tween.get(stage.children[b]);
       return myTween;
     }
@@ -712,7 +687,6 @@ function saveConfirm() {
   let uid = firebase.auth().currentUser.uid
   let pjname = projectName.value
   // Check form has input atleast 3 chars
-  console.log(pjname)
   if (pjname != '') {
 
     if (pjname.length > 3) {
@@ -796,7 +770,7 @@ function loadProject(){ // Load a specified(pjname) project --
         for (i=0;i<loadedData.length;i++){
         loadedData[i] = loadedData[i].splice(-1,1);
         }
-        importScene(loadedData);
+        importScene(loadedData);  // Data GOOD
       } else {
           // doc.data() will be undefined in this case
           console.log("No such document!");
@@ -806,7 +780,7 @@ function loadProject(){ // Load a specified(pjname) project --
   });
 }
 
-function importScene(scenes){ // Pass in scenes from Firestore, Add nodes , Redraw the canvases.
+function importScene(scenes){ // 
   let myArr = []
   let noteArr = []
   let myscenes = []
@@ -817,28 +791,23 @@ function importScene(scenes){ // Pass in scenes from Firestore, Add nodes , Redr
   for(x=0;x<size;x++){
   noteArr.push(myArr[0][x][myArr[0][x].length - 1])
   myArr[0][x].splice(-1,1);
-  console.log('myarr');
-  console.log(myArr);
-  console.log(myArr[0][x]);
   myscenes.push(myArr[0][x])
-console.log('adding nodes')
   addNodes();
   }
   for(x=0;x<noteArr.length;x++){ // note arr length will always be the same as routine array
-    console.log(noteArr.length);
-    stage.children[x].x = myscenes[x].x
-    stage.children[x].x= myscenes[x].y  
+    for(y=0 ;y<stage.children.length;y++){
+    stage.children[y].x = myscenes[x][y].x
+    stage.children[y].y= myscenes[x][y].y  
+    }
+    console.log(stage.children);
     stage.update();
     buildScene(myscenes[x],noteArr[x])  
-    stage.update();
-    }
+     }
     
 }
 
 function buildScene(arr,sceneNotes)  { // Wrong thing beind passed in here?
-  console.log('here')
   let mynotes = sceneNotes.notes
-  console.log(arr);
   let savedPositions = [];
   for (i = 0; i < arr.length; i++) {
     formation = {
@@ -848,7 +817,6 @@ function buildScene(arr,sceneNotes)  { // Wrong thing beind passed in here?
       id: arr[i].id,
       
     };
-    console.log(formation);
     savedPositions.push(formation);
   }
   let savedPosNotes = {  // Need to store this as an object for Firestore - Doesn't have any other interaction with front end -- Not needed for loading
@@ -860,8 +828,6 @@ function buildScene(arr,sceneNotes)  { // Wrong thing beind passed in here?
   savedPositions.id = allScenes.length
   //savedPositions.push(details)
   allScenes.push(savedPositions);
-  console.log('logging all scenes');
-  console.log(allScenes)
   timeLine(mynotes);
   document.getElementById("formationNotes").value = "";
 };
