@@ -320,7 +320,7 @@ saveBtn.onclick = function () {
     notes:notes,
     id:allScenes.length
   }
- // savedPositions.push(savedPosNotes);  Causing error on tween - need to seperate from scenes array into its own and match on id
+  //savedPositions.push(savedPosNotes); // Causing error on tween - need to seperate from scenes array into its own and match on id
   savedPositions.notes = notes;
   savedPositions.id = allScenes.length
   //savedPositions.push(details)
@@ -437,8 +437,11 @@ function timeLine(notes) {
   notesBtn.classList.add("fas")
   notesBtn.classList.add("notesBtn")
   notesBtn.onclick = (e) => {
+    console.log('you clicked me');
     let id = e.target.id.substr(0, e.target.id.indexOf('_'));
     let index = allScenes.findIndex(x => x.id == id)
+    console.log(allScenes);
+    console.log(index);
     if (index > -1) {
       let notes = allScenes[index].notes;
       buildNoteModal(notes);
@@ -759,7 +762,7 @@ new DragSelect({
 
 
 function loadProject(){ // Load a specified(pjname) project -- 
-  let pjname = "testing"
+  let pjname = "testing4"
   let uid = firebase.auth().currentUser.uid
   var docRef = db.collection(uid).doc("SavedRoutines").collection(pjname).doc(pjname)
 
@@ -829,5 +832,6 @@ function buildScene(arr,sceneNotes)  { // Wrong thing beind passed in here?
   //savedPositions.push(details)
   allScenes.push(savedPositions);
   timeLine(mynotes);
+  console.log(mynotes)
   document.getElementById("formationNotes").value = "";
 };
