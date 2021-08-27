@@ -37,7 +37,7 @@ async function goMain() {
   splash.style.display = "none"
   start();
 }
-
+// Loading messages
 let myMessages = [
   'SETTING THE STAGE',
   'JUST TIDYING UP',
@@ -316,15 +316,16 @@ saveBtn.onclick = function () {
     savedPositions.push(this.formation);
  
   }
-  let savedPosNotes = {  // Need to store this as an object for Firestore - Doesn't have any other interaction with front end
-    notes:notes,
-    id:allScenes.length
-  }
+
   //savedPositions.push(savedPosNotes); // Causing error on tween - need to seperate from scenes array into its own and match on id
   savedPositions.notes = notes;
   savedPositions.id = uuid();//allScenes.length
   //savedPositions.push(details)
   allScenes.push(savedPositions);
+  let savedPosNotes = {  // Need to store this as an object for Firestore - Doesn't have any other interaction with front end
+    notes:notes,
+    id:savedPositions.id
+  }
   allNotes.push(savedPosNotes);
   timeLine(notes,savedPositions.id);
   document.getElementById("formationNotes").value = "";
@@ -694,6 +695,12 @@ saveAll.addEventListener('click', (e) => {
 function saveConfirm() {
   let uid = firebase.auth().currentUser.uid
   let pjname = projectName.value
+  
+  let sendScene = allScenes;
+  for(y=0;y<allNotes.length;y++){
+    sendScene[y].push(allNotes[y]);
+    console.log(sendScene[y]);
+  }
   // Check form has input atleast 3 chars
   if (pjname != '') {
 
@@ -708,8 +715,8 @@ function saveConfirm() {
         } else {
          
              pjname = pjname.replace(/ /s,'');
-              let allSceneObj = Object.assign({}, allScenes);
-              allSceneObj.name = 'hello'
+              let allSceneObj = Object.assign({}, sendScene);
+              allSceneObj.name = 'new'
               db.collection(uid).doc("SavedRoutines").collection(pjname).doc(pjname).set(allSceneObj)  // Write the object to SaveRoutines collection
             .then(() => {          
               console.log("Document successfully written!");
@@ -771,7 +778,7 @@ function testFunc(){
 }
 
 function loadProject(){ // Load a specified(pjname) project -- 
-  let pjname = "testing4"
+  let pjname = "her1"
   let uid = firebase.auth().currentUser.uid
   var docRef = db.collection(uid).doc("SavedRoutines").collection(pjname).doc(pjname)
 
