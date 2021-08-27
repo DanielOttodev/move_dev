@@ -91,8 +91,31 @@ newProjectBtn.onclick = (e) => {
 loadProjectBtn.onclick = (e) => {
   loadScreen.style.display = 'none';
   loadProjectScreen.style.display = 'block';
-}
+  const projectList = document.getElementById("loadedProjects")
 
+  //<li class="list-group-item">An active item</li>
+  let uid = firebase.auth().currentUser.uid
+  db.collection(uid).doc("RoutinesList").collection("UserRoutinesList").get().then((querySnapshot) => {
+   
+    querySnapshot.forEach((doc) => {
+        // doc.data() is never undefined for query doc snapshots
+        const listItem = document.createElement("li");
+        listItem.classList.add("list-group-item")
+        listItem.setAttribute('onclick','load();')
+        listItem.textContent = doc.data().routineName
+        listItem.onclick = (e) => {
+          var elems = document.querySelectorAll(".selectedProject");
+
+          [].forEach.call(elems, function(el) {
+              el.classList.remove("selectedProject");
+          });
+          e.target.classList.add("selectedProject");
+        }
+        projectList.appendChild(listItem);
+        console.log(doc.id, " => ", doc.data());
+    });
+});
+}
 
 // Globals
 //// Main Application 
@@ -785,7 +808,11 @@ function testFunc(){
 }
 
 function loadProject(){ // Load a specified(pjname) project -- 
-  let pjname = "her1"
+
+  document.get
+  let pjname = document.getElementsByClassName('selectedProject')[0].textContent;
+  console.log(pjname);
+  goMain();
   let uid = firebase.auth().currentUser.uid
   var docRef = db.collection(uid).doc("SavedRoutines").collection(pjname).doc(pjname)
 

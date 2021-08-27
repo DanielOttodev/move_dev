@@ -116,15 +116,13 @@
              
                 <div class="card-body">
                     <h5 class="text-center">Load Project</h5>
-                    <ul class="list-group mb-3 mt-3"  id="loadedProjects">
-                        <li class="list-group-item">An active item</li>
-                        <li class="list-group-item">A second item</li>
-                        <li class="list-group-item">A third item</li>
-                        <li class="list-group-item">A fourth item</li>
-                        <li class="list-group-item">And a fifth one</li>
+                    <div role="tabpanel">
+                    <ul class="list-group mb-3 mt-3"  id="loadedProjects" role="tablist">
+                        <!-- Injected list via Firebase load -->
                       </ul>
+                    </div>
                   <div>
-                     <button class="goBtn" onclick="goMain()" style="background-color: green;"><i class="fas fa-arrow-circle-right"></i></button>
+                     <button class="goBtn" onclick="loadProject()" style="background-color: green;"><i class="fas fa-arrow-circle-right"></i></button>
                   </div>
                 </div>
               </div>

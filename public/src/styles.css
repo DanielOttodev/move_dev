@@ -740,4 +740,19 @@ path.two {
   background-color: rgba(223, 223, 223, 0.863);
 }
 
+.list-group {
+  max-height: 300px;
+  margin-bottom: 10px;
+  overflow: scroll;
+  -webkit-overflow-scrolling: touch;
+}
+
+#loadProjectScreen {
+  display: none;
+}
+
+.selectedProject {
+  background-color: rgba(223, 223, 223, 0.863);
+}
+
 /*# sourceMappingURL=styles.css.map */
