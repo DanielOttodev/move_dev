@@ -808,9 +808,10 @@ function testFunc(){
 }
 
 function loadProject(){ // Load a specified(pjname) project -- 
-
-  document.get
+elemExists = elemCheck();
+  if(elemExists){
   let pjname = document.getElementsByClassName('selectedProject')[0].textContent;
+ 
   console.log(pjname);
   goMain();
   let uid = firebase.auth().currentUser.uid
@@ -829,7 +830,10 @@ function loadProject(){ // Load a specified(pjname) project --
       }
   }).catch((error) => {
       console.log("Error getting document:", error);
-  });
+  });}
+  else{
+    alert('Invalid option - please select a project')
+  }
 }
 
 function importScene(scenes){ // 
@@ -884,3 +888,12 @@ function buildScene(arr,sceneNotes)  { // Wrong thing beind passed in here?
   console.log(mynotes)
   document.getElementById("formationNotes").value = "";
 };
+
+function elemCheck(){
+  try {
+    let elem = document.getElementsByClassName('selectedProject')[0].textContent;
+    return true;
+  } catch (error) {
+    return false;
+  }
+}
