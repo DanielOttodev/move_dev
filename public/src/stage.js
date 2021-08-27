@@ -4,6 +4,8 @@
 
 const newProjectBtn = document.getElementById('newProjectBtn')
 const newProjectContent = document.getElementById('newProjectContent');
+const loadProjectBtn = document.getElementById('loadProjectBtn');
+const loadProjectScreen = document.getElementById('loadProjectScreen')
 const loadScreen = document.getElementById('loadScreen');
 const plusP = document.getElementById('plusPBtn')
 const subP = document.getElementById('subP');
@@ -84,6 +86,11 @@ function subPerson() {
 newProjectBtn.onclick = (e) => {
   loadScreen.style.display = 'none';
   newProjectContent.style.display = 'block';
+}
+
+loadProjectBtn.onclick = (e) => {
+  loadScreen.style.display = 'none';
+  loadProjectScreen.style.display = 'block';
 }
 
 
@@ -791,7 +798,6 @@ function loadProject(){ // Load a specified(pjname) project --
         }
         importScene(loadedData);  // Data GOOD
       } else {
-          // doc.data() will be undefined in this case
           console.log("No such document!");
       }
   }).catch((error) => {

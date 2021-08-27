@@ -736,4 +736,8 @@ path.two {
   text-align: center;
 }
 
+.list-group-item:hover {
+  background-color: rgba(223, 223, 223, 0.863);
+}
+
 /*# sourceMappingURL=styles.css.map */
