@@ -1,6 +1,7 @@
 /// Splash screen
 
 
+
 const newProjectBtn = document.getElementById('newProjectBtn')
 const newProjectContent = document.getElementById('newProjectContent');
 const loadScreen = document.getElementById('loadScreen');
@@ -321,11 +322,11 @@ saveBtn.onclick = function () {
   }
   //savedPositions.push(savedPosNotes); // Causing error on tween - need to seperate from scenes array into its own and match on id
   savedPositions.notes = notes;
-  savedPositions.id = allScenes.length
+  savedPositions.id = uuid();//allScenes.length
   //savedPositions.push(details)
   allScenes.push(savedPositions);
   allNotes.push(savedPosNotes);
-  timeLine(notes);
+  timeLine(notes,savedPositions.id);
   document.getElementById("formationNotes").value = "";
 };
 
@@ -388,10 +389,11 @@ scrapBtn.onclick = () => {
 };
 
 // Create the Timeline of scenes
-function timeLine(notes) {
+function timeLine(notes,id) {
+  console.log(id);
   let copyCanvas = document.createElement("canvas");
   let sourceCanvas = document.getElementById("demoCanvas");
-  let canvasId = allScenes.length - 1 + "_scene";
+  let canvasId =   id + "_scene"; //allScenes.length - 1 + "_scene";
   copyCanvas.setAttribute("id", canvasId);
   copyCanvas.classList.add("savedScene");
   copyCanvas.height = 100
@@ -454,8 +456,12 @@ function timeLine(notes) {
   rubbishButton.onclick = (e) => {
     // var houseIndex = street.houses.findIndex(h => h.rooms.some(r => r.id === roomId));
     let id = e.target.id.substr(0, e.target.id.indexOf('_')); // Id of the scene to remove;
+    console.log(id);
+    console.log(allScenes);
     let index = allScenes.findIndex(x => x.id == id)
-    let rmCanvasId = e.target.id.substr(0, e.target.id.indexOf('-'));
+    let rmCanvasId = e.target.id.substr(0, e.target.id.indexOf('_'));
+    rmCanvasId = rmCanvasId + "_scene"
+    console.log(rmCanvasId);
     let rmCanvas = document.getElementById(rmCanvasId);
     if (index > -1) {
       allScenes.splice(index, 1);
@@ -754,11 +760,15 @@ new DragSelect({
 });*/
 
 
- function testFunc(){
-  console.log(stage.children)
-
+function uuid() {
+  return ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c =>
+    (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
+  );
 }
 
+function testFunc(){
+  console.log(uuid());
+}
 
 function loadProject(){ // Load a specified(pjname) project -- 
   let pjname = "testing4"
@@ -827,10 +837,10 @@ function buildScene(arr,sceneNotes)  { // Wrong thing beind passed in here?
   }
  // savedPositions.push(savedPosNotes); 
  savedPositions.notes = mynotes;
-  savedPositions.id = allScenes.length
+  savedPositions.id =  uuid(); //allScenes.length
   //savedPositions.push(details)
   allScenes.push(savedPositions);
-  timeLine(mynotes);
+  timeLine(mynotes,savedPositions.id);
   console.log(mynotes)
   document.getElementById("formationNotes").value = "";
 };
