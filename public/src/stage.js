@@ -300,6 +300,7 @@ const selectBtn = document.getElementById("selectBtn");
 // Init the array of positions
 let savedPositions = [];
 let allScenes = [];
+let allNotes = [];
 // Populate when save button clicked
 saveBtn.onclick = function () {
   let notes = document.getElementById("formationNotes").value;
@@ -310,9 +311,7 @@ saveBtn.onclick = function () {
       x: stage.children[i].x,
       y: stage.children[i].y,
       id: stage.children[i].id,
-      
     };
-
     savedPositions.push(this.formation);
  
   }
@@ -325,6 +324,7 @@ saveBtn.onclick = function () {
   savedPositions.id = allScenes.length
   //savedPositions.push(details)
   allScenes.push(savedPositions);
+  allNotes.push(savedPosNotes);
   timeLine(notes);
   document.getElementById("formationNotes").value = "";
 };
@@ -437,7 +437,6 @@ function timeLine(notes) {
   notesBtn.classList.add("fas")
   notesBtn.classList.add("notesBtn")
   notesBtn.onclick = (e) => {
-    console.log('you clicked me');
     let id = e.target.id.substr(0, e.target.id.indexOf('_'));
     let index = allScenes.findIndex(x => x.id == id)
     console.log(allScenes);
@@ -456,11 +455,11 @@ function timeLine(notes) {
     // var houseIndex = street.houses.findIndex(h => h.rooms.some(r => r.id === roomId));
     let id = e.target.id.substr(0, e.target.id.indexOf('_')); // Id of the scene to remove;
     let index = allScenes.findIndex(x => x.id == id)
-
     let rmCanvasId = e.target.id.substr(0, e.target.id.indexOf('-'));
     let rmCanvas = document.getElementById(rmCanvasId);
     if (index > -1) {
       allScenes.splice(index, 1);
+      allNotes.splice(index,1); 
       rmCanvas.parentElement.parentElement.remove()
       let tdinfos = document.getElementsByClassName("sceneTdInfo")
       e.target.parentElement.remove()
