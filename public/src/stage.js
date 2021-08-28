@@ -686,7 +686,12 @@ document.body.onclick = (e) => {
   if (e.className && e.className.indexOf('savedScene') != -1) {
     createjs.Ticker.setFPS(60);
     createjs.Ticker.addEventListener("tick", stage);
-    let posIndex = id.substring(0, id.indexOf('_'))
+    console.log(allScenes);
+   id = id.substring(0, id.indexOf('_'))
+
+    let posIndex = allScenes.findIndex(x => x.id == id)
+    console.log(id);
+    console.log(posIndex);
     for (i = 0; i < allScenes[posIndex].length; i++) {
       let nodeId = allScenes[posIndex][i].id
       let myTween = getNode(nodeId)
