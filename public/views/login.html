@@ -23,34 +23,32 @@
 </head>
 
 <body>
-    <header id="header" class="fixed-top  header-transparent ">
+    <header id="header" class="bg-light  ">
         <div class="container d-flex align-items-center">
 
-            <div class="logo mr-auto">
+            <div class="logo mr-auto ">
                 <h1 class="text-light"><a href="index.html">Moves</a></h1>
                 <!-- Uncomment below if you prefer to use an image logo -->
                 <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
             </div>
 
-            <nav class="nav-menu d-none d-lg-block">
-                <ul>
-                    <li class="active"><a href="index.html">Home</a></li>
-                    <li><a href="#features">App Features</a></li>
-                    <li><a href="#pricing">Pricing</a></li>
-                    <li><a href="#faq">Tutorials</a></li>
-                    <li><a href="#contact">Contact Us</a></li>
-
-                    <li class="get-started"><a href="./login.html">Login</a></li>
-                </ul>
-            </nav><!-- .nav-menu -->
+          
+            
 
         </div>
     </header><!-- End Header -->
-
-         <div class="mt-5" id="firebaseui-auth-container"></div>
-    
-   
+    <div class="container mt-5 p-3">
+<div class="row align-items-center  rounded border border-5 border-light">
+    <div class="col  ">
+        <h2>Welcome!</h2>
+        <h5>Sign-in or sign up with the provided options.</h5>
+    </div>
+<div class="col bg-light">
+    <div class="p-3" id="firebaseui-auth-container"></div>
     <div id="loader">Loading...</div>
+</div>
+</div>
+</div>
     <!----</div>  -->
 
     <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-app.js"></script>
