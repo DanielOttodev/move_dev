@@ -741,8 +741,10 @@ function saveConfirm() {
 
     if (pjname.length > 3) {
       // Check DB for same project name for User
+
       pjname = pjname.replace(/ /s,'');
-      var docRef = db.collection(uid).doc("SavedRoutines").collection(pjname).doc(pjname)
+      console.log(pjname);
+      var docRef =db.collection('Users').doc(uid).collection('UserRoutineData').doc("SavedRoutines").collection(pjname).doc(pjname)
       docRef.get().then((doc) => {
         if (doc.exists) {
           console.log("Document data:", doc.data());
@@ -752,14 +754,14 @@ function saveConfirm() {
              pjname = pjname.replace(/ /s,'');
               let allSceneObj = Object.assign({}, sendScene);
               allSceneObj.name = 'new'
-              db.collection(uid).doc("SavedRoutines").collection(pjname).doc(pjname).set(allSceneObj)  // Write the object to SaveRoutines collection
+              db.collection('Users').doc(uid).collection('UserRoutineData').doc("SavedRoutines").collection(pjname).doc(pjname).set(allSceneObj)  // Write the object to SaveRoutines collection
             .then(() => {          
               console.log("Document successfully written!");
             })
             .catch((error) => {
               console.error("Error writing document: ", error);
             });
-            db.collection(uid).doc("RoutinesList").collection("UserRoutinesList").doc(pjname).set({"routineName": pjname})  // Write the item to AllRoutines collection for listing
+            db.collection('Users').doc(uid).collection('UserRoutineData').doc("RoutinesList").collection("UserRoutinesList").doc(pjname).set({"routineName": pjname})  // Write the item to AllRoutines collection for listing
             .then(() => {
               let modalsave = document.getElementById("saveModalContent")
               modalsave.classList.add("successMsg");
@@ -816,11 +818,11 @@ function loadProject(){ // Load a specified(pjname) project --
 elemExists = elemCheck();
   if(elemExists){
   let pjname = document.getElementsByClassName('selectedProject')[0].textContent;
- 
+  
   console.log(pjname);
   goMain();
   let uid = firebase.auth().currentUser.uid
-  var docRef = db.collection(uid).doc("SavedRoutines").collection(pjname).doc(pjname)
+  var docRef = db.collection('Users').doc(uid).collection('UserRoutineData').doc("SavedRoutines").collection(pjname).doc(pjname)
 
   docRef.get().then((doc) => {
       if (doc.exists) {
