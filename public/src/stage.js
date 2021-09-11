@@ -95,8 +95,8 @@ loadProjectBtn.onclick = (e) => {
 
   //<li class="list-group-item">An active item</li>
   let uid = firebase.auth().currentUser.uid
-  db.collection(uid).doc("RoutinesList").collection("UserRoutinesList").get().then((querySnapshot) => {
-   
+  db.collection('Users').doc(uid).collection('UserRoutineData').doc("RoutinesList").collection("UserRoutinesList").get().then((querySnapshot) => {
+    db
     querySnapshot.forEach((doc) => {
         // doc.data() is never undefined for query doc snapshots
         const listItem = document.createElement("li");
@@ -819,9 +819,10 @@ elemExists = elemCheck();
   if(elemExists){
   let pjname = document.getElementsByClassName('selectedProject')[0].textContent;
   
-  console.log(pjname);
+  
   goMain();
   let uid = firebase.auth().currentUser.uid
+  console.log(uid);
   var docRef = db.collection('Users').doc(uid).collection('UserRoutineData').doc("SavedRoutines").collection(pjname).doc(pjname)
 
   docRef.get().then((doc) => {
