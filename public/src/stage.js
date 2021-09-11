@@ -39,6 +39,28 @@ async function goMain() {
   splash.style.display = "none"
   start();
 }
+async function goMain2() { // Removed start function for load in
+  cubeAnim.style.display = "flex";
+  const cubeTxt = document.getElementById('cubetext');
+
+  cubeTxt.textContent = loadingMessage();
+  newProjectContent.style.display = "none";
+  await sleep(3000);
+
+  // Sleep in loop
+  for (let i = 0; i < 5; i++) {
+    if (i === 3)
+      await sleep(3000);
+  }
+  let extra = document.getElementById("extraContent")
+  let splash = document.getElementById("splashScreen")
+  let main = document.getElementById("mainContent")
+
+  main.style.display = "block"
+  extra.style.display = "block"
+  splash.style.display = "none"
+
+}
 // Loading messages
 let myMessages = [
   'SETTING THE STAGE',
@@ -112,7 +134,7 @@ loadProjectBtn.onclick = (e) => {
           e.target.classList.add("selectedProject");
         }
         projectList.appendChild(listItem);
-        console.log(doc.id, " => ", doc.data());
+ 
     });
 });
 }
@@ -124,7 +146,7 @@ function start() {
   console.log('Initialising');
   var x = parseInt(countP.textContent);
   for (i = 0; i < x; i++) {
-    addNodes()
+  addNodes()
   }
 }
 
@@ -421,7 +443,7 @@ scrapBtn.onclick = () => {
 
 // Create the Timeline of scenes
 function timeLine(notes,id) {
-  console.log(id);
+  stage.update();
   let copyCanvas = document.createElement("canvas");
   let sourceCanvas = document.getElementById("demoCanvas");
   let canvasId =   id + "_scene"; //allScenes.length - 1 + "_scene";
@@ -820,7 +842,7 @@ elemExists = elemCheck();
   let pjname = document.getElementsByClassName('selectedProject')[0].textContent;
   
   
-  goMain();
+  goMain2();
   let uid = firebase.auth().currentUser.uid
   console.log(uid);
   var docRef = db.collection('Users').doc(uid).collection('UserRoutineData').doc("SavedRoutines").collection(pjname).doc(pjname)
@@ -844,33 +866,39 @@ elemExists = elemCheck();
   }
 }
 
-function importScene(scenes){ // 
+ function importScene(scenes){ // 
   let myArr = []
   let noteArr = []
   let myscenes = []
   myArr.push(scenes);
 
   var size = Object.keys(myArr[0]).length;
+  console.log(myArr[0].length)
+  console.log(myArr[0])
   size = size - 1 // for array iteration
+  console.log(size)
   for(x=0;x<size;x++){
   noteArr.push(myArr[0][x][myArr[0][x].length - 1])
   myArr[0][x].splice(-1,1);
   myscenes.push(myArr[0][x])
-  addNodes();
+  }
+  for(i=0;i<myscenes[0].length;i++){
+    addNodes();
   }
   for(x=0;x<noteArr.length;x++){ // note arr length will always be the same as routine array
     for(y=0 ;y<stage.children.length;y++){
     stage.children[y].x = myscenes[x][y].x
     stage.children[y].y= myscenes[x][y].y  
     }
-    console.log(stage.children);
+    console.log('making the scene');
     stage.update();
-    buildScene(myscenes[x],noteArr[x])  
+  buildScene(myscenes[x],noteArr[x])  
      }
     
 }
 
-function buildScene(arr,sceneNotes)  { // Wrong thing beind passed in here?
+ function buildScene(arr,sceneNotes)  { // Wrong thing beind passed in here?
+  console.log(arr);
   let mynotes = sceneNotes.notes
   let savedPositions = [];
   for (i = 0; i < arr.length; i++) {
@@ -892,6 +920,7 @@ function buildScene(arr,sceneNotes)  { // Wrong thing beind passed in here?
   savedPositions.id =  uuid(); //allScenes.length
   //savedPositions.push(details)
   allScenes.push(savedPositions);
+  console.log('making the timeline');
   timeLine(mynotes,savedPositions.id);
   console.log(mynotes)
   document.getElementById("formationNotes").value = "";
