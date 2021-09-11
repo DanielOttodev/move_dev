@@ -339,8 +339,7 @@ const scrapBtn = document.getElementById("scrapBtn");
 const selectBtn = document.getElementById("selectBtn");
 /*workBtn.onclick = function () {
   for (i = 0; i < stage.children.length; i++) {
-    console.log(stage.children[i]);
-    console.log(stage.children[i].name);
+
     var infoNode = document.createElement("p");
     var text = document.createTextNode(
       `Name: ${stage.children[i].name} x: ${stage.children[i].x} y: ${stage.children[i].y} id: ${stage.children[i].id} `
@@ -494,8 +493,7 @@ function timeLine(notes,id) {
   notesBtn.onclick = (e) => {
     let id = e.target.id.substr(0, e.target.id.indexOf('_'));
     let index = allScenes.findIndex(x => x.id == id)
-    console.log(allScenes);
-    console.log(index);
+
     if (index > -1) {
       let notes = allScenes[index].notes;
       buildNoteModal(notes);
@@ -509,12 +507,9 @@ function timeLine(notes,id) {
   rubbishButton.onclick = (e) => {
     // var houseIndex = street.houses.findIndex(h => h.rooms.some(r => r.id === roomId));
     let id = e.target.id.substr(0, e.target.id.indexOf('_')); // Id of the scene to remove;
-    console.log(id);
-    console.log(allScenes);
     let index = allScenes.findIndex(x => x.id == id)
     let rmCanvasId = e.target.id.substr(0, e.target.id.indexOf('_'));
     rmCanvasId = rmCanvasId + "_scene"
-    console.log(rmCanvasId);
     let rmCanvas = document.getElementById(rmCanvasId);
     if (index > -1) {
       allScenes.splice(index, 1);
@@ -708,12 +703,9 @@ document.body.onclick = (e) => {
   if (e.className && e.className.indexOf('savedScene') != -1) {
     createjs.Ticker.setFPS(60);
     createjs.Ticker.addEventListener("tick", stage);
-    console.log(allScenes);
-   id = id.substring(0, id.indexOf('_'))
 
+   id = id.substring(0, id.indexOf('_'))
     let posIndex = allScenes.findIndex(x => x.id == id)
-    console.log(id);
-    console.log(posIndex);
     for (i = 0; i < allScenes[posIndex].length; i++) {
       let nodeId = allScenes[posIndex][i].id
       let myTween = getNode(nodeId)
@@ -756,7 +748,7 @@ function saveConfirm() {
   let sendScene = allScenes;
   for(y=0;y<allNotes.length;y++){
     sendScene[y].push(allNotes[y]);
-    console.log(sendScene[y]);
+  
   }
   // Check form has input atleast 3 chars
   if (pjname != '') {
@@ -765,11 +757,11 @@ function saveConfirm() {
       // Check DB for same project name for User
 
       pjname = pjname.replace(/ /s,'');
-      console.log(pjname);
+
       var docRef =db.collection('Users').doc(uid).collection('UserRoutineData').doc("SavedRoutines").collection(pjname).doc(pjname)
       docRef.get().then((doc) => {
         if (doc.exists) {
-          console.log("Document data:", doc.data());
+     
           alert('A routine already exists with this name')
         } else {
          
@@ -778,7 +770,7 @@ function saveConfirm() {
               allSceneObj.name = 'new'
               db.collection('Users').doc(uid).collection('UserRoutineData').doc("SavedRoutines").collection(pjname).doc(pjname).set(allSceneObj)  // Write the object to SaveRoutines collection
             .then(() => {          
-              console.log("Document successfully written!");
+             
             })
             .catch((error) => {
               console.error("Error writing document: ", error);
@@ -789,7 +781,7 @@ function saveConfirm() {
               modalsave.classList.add("successMsg");
               $('#saveModal').modal('toggle')
              
-              console.log("Listing successfully written!");
+              
             })
             .catch((error) => {
               console.error("Error writing listing: ", error);
@@ -832,9 +824,6 @@ function uuid() {
   );
 }
 
-function testFunc(){
-  console.log(uuid());
-}
 
 function loadProject(){ // Load a specified(pjname) project -- 
 elemExists = elemCheck();
@@ -844,7 +833,7 @@ elemExists = elemCheck();
   
   goMain2();
   let uid = firebase.auth().currentUser.uid
-  console.log(uid);
+ 
   var docRef = db.collection('Users').doc(uid).collection('UserRoutineData').doc("SavedRoutines").collection(pjname).doc(pjname)
 
   docRef.get().then((doc) => {
@@ -871,12 +860,8 @@ elemExists = elemCheck();
   let noteArr = []
   let myscenes = []
   myArr.push(scenes);
-
   var size = Object.keys(myArr[0]).length;
-  console.log(myArr[0].length)
-  console.log(myArr[0])
   size = size - 1 // for array iteration
-  console.log(size)
   for(x=0;x<size;x++){
   noteArr.push(myArr[0][x][myArr[0][x].length - 1])
   myArr[0][x].splice(-1,1);
@@ -890,7 +875,7 @@ elemExists = elemCheck();
     stage.children[y].x = myscenes[x][y].x
     stage.children[y].y= myscenes[x][y].y  
     }
-    console.log('making the scene');
+
     stage.update();
   buildScene(myscenes[x],noteArr[x])  
      }
@@ -898,7 +883,7 @@ elemExists = elemCheck();
 }
 
  function buildScene(arr,sceneNotes)  { // Wrong thing beind passed in here?
-  console.log(arr);
+
   let mynotes = sceneNotes.notes
   let savedPositions = [];
   for (i = 0; i < arr.length; i++) {
@@ -920,9 +905,9 @@ elemExists = elemCheck();
   savedPositions.id =  uuid(); //allScenes.length
   //savedPositions.push(details)
   allScenes.push(savedPositions);
-  console.log('making the timeline');
+
   timeLine(mynotes,savedPositions.id);
-  console.log(mynotes)
+
   document.getElementById("formationNotes").value = "";
 };
 
