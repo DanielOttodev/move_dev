@@ -32,7 +32,6 @@ app.use(express.static("public/views"));
 app.use(express.static("public/imgs"));
 
 
-
 app.get("/login", function (req, res) {
   res.sendFile(__dirname + "/public/views/login.html");
 });
