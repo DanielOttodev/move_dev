@@ -23,8 +23,29 @@
             <img src="../imgs/mLogo3.png" width="40" height="30" class="d-inline-block align-top" alt="" />
             Moves
         </a>
+     <button type="button" id="tutBtn" data-toggle="modal" data-target="#tutModal"> <a href="#" id="tutVid"  style="float:right;">Tutorial  <i class=" ml-2 fas fa-tv"></i></a> </button>
+     <!-- Tutorial Modal -->
+<div class="modal fade" id="tutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content ">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Learn the basics</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body ">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/pmF5DC2NSd0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 
+        </div>
+      </div>
+    </div>
+  </div>
         <div class="dropleft show">
+      
             <!-- currentUser pulls in user from email-->
             <a class="btn-nav dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false"><i class="fas fa-cog"></i>

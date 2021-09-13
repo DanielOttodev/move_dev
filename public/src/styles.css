@@ -755,4 +755,22 @@ path.two {
   background-color: rgba(223, 223, 223, 0.863);
 }
 
+#tutVid {
+  color: white;
+}
+
+#tutVid:hover {
+  color: #e2e2e2;
+  transition: 0.3s;
+}
+
+#tutModal {
+  width: 100%;
+}
+
+#tutBtn {
+  border-radius: 10px;
+  background-color: #2b2b2b;
+}
+
 /*# sourceMappingURL=styles.css.map */
