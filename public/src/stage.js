@@ -671,8 +671,8 @@ function spaceY() {
   let increment = maxY / countNodes;
 
   for (i = 0; i < selectedObjs.length; i++) {
-    let pos = increment * i + 1
-
+    let j = i + 1
+    let pos = increment * j
     selectedObjs[i].y = pos;
     groupedOffset[i].y = pos - handler.y
     stage.update();
@@ -684,9 +684,12 @@ function spaceX() { //
   let countNodes = selectedObjs.length;
   countNodes = countNodes + 1;
   let increment = maxX / countNodes;
-
+  console.log(maxX);
+  
   for (i = 0; i < selectedObjs.length; i++) {
-    let pos = increment * i + 1
+    let j = i + 1
+    let pos = increment * j
+    console.log(pos);
     selectedObjs[i].x = pos
     groupedOffset[i].x = pos - handler.x
     stage.update();
